@@ -56,9 +56,8 @@ app.use("/public", express.static("public"));
 
 const server = http.createServer(app);
 const allowedOrigins = [
-  "https://astrotalk-front-end.vercel.app",
   "http://72.60.101.71:3000",
-  "https://astro.weddingbyte.com",
+  "http://astromani.com",
   "http://localhost:3000",
 ];
 
@@ -83,7 +82,7 @@ app.options("*", cors());
 // === SOCKET.IO ===
 const io = new Server(server, {
   path: "/api/socket.io",
-  cors: { origin: ["https://astro.weddingbyte.com", "http://localhost:3000"], credentials: true },
+  cors: { origin: ["http://localhost:3000", "http://astromani.com",], credentials: true },
   transports: ["websocket", "polling"],
   pingInterval: 25000,
   pingTimeout: 60000
