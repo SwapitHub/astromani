@@ -108,8 +108,9 @@ app.use(express.json());
 // connectMongoDb("mongodb://localhost:27017/chatting");
 
 connectMongoDb(
-  "mongodb+srv://swapitshamsher:Eb25QUq9aEt27aSQ@astrologer.euynurr.mongodb.net/astrotalk?retryWrites=true&w=majority&appName=astrologer"
+  "mongodb+srv://swapitshamsher:Eb25QUq9aEt27aSQ@astrologer.euynurr.mongodb.net/astromani?retryWrites=true&w=majority"
 );
+
 
 // app.use(express.json());
 // user connect chatting socket.io
