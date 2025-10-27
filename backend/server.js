@@ -50,16 +50,16 @@ const path = require("path");
 const app = express();
 // secure API use helmet call
 app.use(helmet());
-// Public folder serve
+// Public folder serve 
 app.use("/public", express.static("public"));
 
+
 const server = http.createServer(app);
-const allowedOrigins = [
-  "http://72.60.101.71:3000",
+const allowedOrigins = [  
+  "http://72.60.101.71:3001",
   "http://astromani.com",
-  "http://localhost:3000",
   "https://astromani.com",
-  "https://www.astromani.com",
+  "http://localhost:3001",
 ];
 
 app.use(
@@ -83,14 +83,13 @@ app.options("*", cors());
 // === SOCKET.IO ===
 const io = new Server(server, {
   path: "/api/socket.io",
-  cors: {
-    origin: ["http://localhost:3000", "http://astromani.com"],
-    credentials: true,
-  },
+  cors: { origin: ["https://astromani.com", "http://localhost:3001", "http://astromani.com"], credentials: true },
   transports: ["websocket", "polling"],
   pingInterval: 25000,
-  pingTimeout: 60000,
+  pingTimeout: 60000
 });
+
+
 
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
@@ -98,7 +97,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => console.log("Client disconnected:", socket.id));
 });
 
-const PORT = process.env.PORT || 5100;
+
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 // app.use(cors());
@@ -152,6 +152,8 @@ socketIoMessageMain(io);
 socketUserIdToAstrologerMsg(io);
 socketVoiceCall(io);
 
+
 server.listen(PORT, "0.0.0.0", () =>
   console.log(`Server running on port ${PORT}`)
 );
+
