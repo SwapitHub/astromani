@@ -152,9 +152,8 @@ const AstrologyBlog = () => {
                     className="inner-list"
                   >
                     <div className="post-img">
-                      <Image
-                        width={100}
-                        height={100}
+                      <img
+                       
                         src={
                           blog?.coverImage
                             ? process.env.NEXT_PUBLIC_WEBSITE_URL +

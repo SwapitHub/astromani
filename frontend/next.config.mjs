@@ -2,7 +2,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["astro.weddingbyte.com", "localhost"],
+    domains: ["astromani.com", "localhost"],
   },
 };
 
