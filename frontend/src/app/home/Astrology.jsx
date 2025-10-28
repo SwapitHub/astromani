@@ -82,16 +82,16 @@ const Astrology = () => {
           <h2>Our Growing Community</h2>
           <div className="row">
             <div className="col">
-              <h3>47,000+ Verified Astrologers</h3>
-              <p>Total Astrologers</p>
+              <h3>47,000+ </h3>
+              <p>Verified Astrologers</p>
             </div>
             <div className="col">
-              <h3>1.3 Billion+ Minutes of Consultation</h3>
-              <p>Total Chat/Call minutes</p>
+              <h3>1.3 Billion+ </h3>
+              <p>Minutes of Consultation</p>
             </div>
             <div className="col">
-              <h3>Over 100 Million Happy Users</h3>
-              <p>Total Customers</p>
+              <h3>Over 100 </h3>
+              <p>Million Happy Users</p>
             </div>
           </div>
         </div>

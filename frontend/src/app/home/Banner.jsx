@@ -23,7 +23,7 @@ const Banner = ({ homeBannerData }) => {
       <section
         className="banner-main"
         style={{
-          backgroundImage: "url('./ast-new-bg-2.jpg')",
+          backgroundImage: "url('./ast-new-bg-2.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -35,7 +35,7 @@ const Banner = ({ homeBannerData }) => {
               <div className="banner" key={item?._id}>
                 <div className="row">
                   <div className="right-col">
-                    <img src="/horoscope-circle-image.png" />
+                    <img src="/zodiac-circle.png" />
                   </div>
 
                   <div className="left-col">

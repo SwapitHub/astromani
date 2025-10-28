@@ -156,8 +156,8 @@ const AstrologyBlog = () => {
                   >
                     <div className="post-img">
                       <Image
-                        width={100}
-                        height={100}
+                        width={370}
+                        height={208}
                         src={
                           blog?.coverImage
                             ? process.env.NEXT_PUBLIC_WEBSITE_URL +
@@ -170,9 +170,9 @@ const AstrologyBlog = () => {
                     <div className="post-content">
                       <p>{blog?.shortDescription}</p>
                       <div className="name-date">
-                        <p>{blog?.title}</p>
-                        <p>{blog?.author}</p>
-                        <p>{new Date(blog.createdAt).toLocaleString()}</p>
+                        <h2>{blog?.title}</h2>
+                        <p className="author">{blog?.author}</p>
+                        <p className="date">{new Date(blog.createdAt).toLocaleString()}</p>
                       </div>
                     </div>
                   </Link>
