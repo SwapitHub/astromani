@@ -1098,7 +1098,7 @@ span.required {color: red;}
 .astro-inner {position: relative;}
 .astrology_seciton .col {background: #ffffff; position: relative; padding: 80px 30px 30px; transition: all 0.3s;}
 .astrology_seciton .col:hover, .single-slide a:hover {background-color: var(--primary_color); color: #ffffff;}
-.astrology_seciton .row .col::before {counter-increment: my-sec-counter; content: counter(my-sec-counter); position: absolute; width: 90px; height: 90px; background: var(--primary_color); border-radius: 50%; display: flex; justify-content: center; align-items: center; top: -41px; left: 50%; transform: translateX(-50%); font-size: 45px; color: #ffffff;}
+.astrology_seciton .row .col::before {counter-increment: my-sec-counter; content: counter(my-sec-counter); position: absolute; width: 90px; height: 90px; background: var(--primary_color); border-radius: 50%; display: flex; justify-content: center; align-items: center; top: -41px; left: 50%; transform: translateX(-50%); font-size: 45px; color: #ffffff; transition: all 0.3s;}
 .astrology_seciton .row .col:hover::before {background-color: #ffffff; color: var(--primary_color);}
 .astrology_seciton .col a {text-decoration: none; color: var(--body_content_color);}
 .astrology_seciton .content-wrap h3 { margin: 0 0 16px; font-size: 24px; color: var(--body_content_color); line-height: 30px;}
@@ -1207,7 +1207,7 @@ body.astro-detail-admin-popup .astro-detail-main-view {display: block; z-index: 
 .common-profile > *:last-child {padding: 10px 30px; border-bottom: 1px solid #f2f2f2; flex-grow: 1;}
 .astro-detail-main .skills, .astrologer-profile-edit-table.skills {justify-content: flex-start;}
 .astro-detail-main .skills span, .astrologer-profile-edit-table .skills span {font-size: 14px;}
-.input-outer img {border-radius: 5px; margin-right: 10px; object-fit: cover;}
+.input-outer img {border-radius: 5px; margin-right: 10px; object-fit: cover; max-width: 100px; aspect-ratio: 1/1;}
 .profile-table + button {margin: 30px 0px;}
 .parent-recharge-popups, .change-password-popup {width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: 99; background-color: rgba(0, 0, 0, .6); display: flex; align-items: center; justify-content: center;}
 .wallet-edit-popup .astrologer-registration-form {margin: 0;}

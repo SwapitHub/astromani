@@ -19,11 +19,11 @@ const Astrology = () => {
                   target="_blank"
                 >
                   <div className="content-wrap">
-                    <h3>Daily Zodiac Insights</h3>
+                    <h3>Daily Horoscope Insights</h3>
                     <p>
                       {" "}
-                      Get free daily predictions covering love, career, health, and opportunities.
-
+                      Discover your daily predictions for love, finance, career,
+                      and wellness — powered by authentic Vedic astrology.
                     </p>
                   </div>
                 </Link>
@@ -31,10 +31,12 @@ const Astrology = () => {
               <div className="col">
                 <Link href="https://weddingbyte.com/kundli" target="_blank">
                   <div className="content-wrap">
-                    <h3>Personalized Birth Chart (Kundli) Report</h3>
+                    <h3>Personalized Birth Chart (Kundli)</h3>
                     <p>
                       {" "}
-                      Create your free Kundli in seconds and gain clarity about your future.{" "}
+                      Generate your free Kundli instantly and unlock deep
+                      insights about your destiny, personality, and planetary
+                      positions.{" "}
                     </p>
                   </div>
                 </Link>
@@ -43,10 +45,12 @@ const Astrology = () => {
               <div className="col">
                 <Link href="https://weddingbyte.com/e-invites" target="_blank">
                   <div className="content-wrap">
-                    <h3>Digital Invitation Cards</h3>
+                    <h3>Compatibility & Matchmaking</h3>
                     <p>
                       {" "}
-                      Stylish, eco-friendly e-invites ,  easy to design, share, and customize.{" "}
+                      Find your perfect match with precise horoscope matching
+                      and detailed compatibility analysis for relationships and
+                      marriage.{" "}
                     </p>
                   </div>
                 </Link>
@@ -57,10 +61,11 @@ const Astrology = () => {
                   target="_blank"
                 >
                   <div className="content-wrap">
-                    <h3>Compatibility & Match Making</h3>
+                    <h3>Digital Invitation Cards</h3>
                     <p>
                       {" "}
-                     Check love and marriage compatibility through detailed horoscope matching.{" "}
+                      Create elegant and eco-friendly e-invites for weddings,
+                      poojas, or family functions — easy to design and share.{" "}
                     </p>
                   </div>
                 </Link>
@@ -74,17 +79,18 @@ const Astrology = () => {
       {/* <!---- Counter section start here---> */}
       <section className="counter_seciton">
         <div className="container">
+          <h2>Our Growing Community</h2>
           <div className="row">
             <div className="col">
-              <h3>45,835+</h3>
+              <h3>47,000+ Verified Astrologers</h3>
               <p>Total Astrologers</p>
             </div>
             <div className="col">
-              <h3>1326 Million Minutes</h3>
+              <h3>1.3 Billion+ Minutes of Consultation</h3>
               <p>Total Chat/Call minutes</p>
             </div>
             <div className="col">
-              <h3>99.5 Million</h3>
+              <h3>Over 100 Million Happy Users</h3>
               <p>Total Customers</p>
             </div>
           </div>

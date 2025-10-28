@@ -24,6 +24,9 @@ const AstrologyBlog = () => {
     totalBlogs: 0,
   });
 
+
+  console.log(blogs);
+  
   //   const debouncedSearch = useDebounce(search, 500);
 
   const fetchCategories = async () => {
@@ -152,8 +155,9 @@ const AstrologyBlog = () => {
                     className="inner-list"
                   >
                     <div className="post-img">
-                      <img
-                       
+                      <Image
+                        width={100}
+                        height={100}
                         src={
                           blog?.coverImage
                             ? process.env.NEXT_PUBLIC_WEBSITE_URL +
@@ -167,6 +171,7 @@ const AstrologyBlog = () => {
                       <p>{blog?.shortDescription}</p>
                       <div className="name-date">
                         <p>{blog?.title}</p>
+                        <p>{blog?.author}</p>
                         <p>{new Date(blog.createdAt).toLocaleString()}</p>
                       </div>
                     </div>

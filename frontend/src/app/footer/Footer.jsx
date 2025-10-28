@@ -38,14 +38,14 @@ const Footer = () => {
           <div className="container">
             {/* <!---- Footer Top Content ---> */}
             <div className="top-content">
-              <h2>About Astrowb</h2>
+              <h2>About Astromani</h2>
               <p>
-                Astrowb is your trusted platform for accurate, personalized
-                astrology guidance. Connect with expert astrologers through call
-                or chat for insights on love, marriage, career, finances, or
-                health. Whether you prefer instant consultations, detailed
-                reports, or practical remedies, Astrowb provides reliable and
-                confidential support for every life decision.
+                Astromani is your trusted astrology companion — offering expert
+                insights, practical remedies, and spiritual support for every
+                stage of life. From personalized Kundli readings to live chats
+                with India’s top astrologers, we combine traditional wisdom with
+                modern convenience. Let the stars guide your next step — with
+                Astromani by your side.
               </p>
             </div>
 
@@ -74,7 +74,7 @@ const Footer = () => {
                 <div className="email-wrapper">
                   <Link href="mailto:contact@astrotalk.com">
                     <HiOutlineMail />
-                    <span>Email ID:</span>contact@astrowb.com
+                    <span>Email ID:</span>contact@astromani.com
                   </Link>
                 </div>
                 {/* <div className="footer-social">
@@ -98,7 +98,7 @@ const Footer = () => {
                   <h3>Important Links</h3>
                   <ul>
                     <li>
-                      <Link href="/shop">Astrowb Shop</Link>
+                      <Link href="/shop">Astromani Shop</Link>
                     </li>
                     <li>
                       <Link href="/chat-with-astrologer">chat now</Link>

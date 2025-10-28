@@ -8,30 +8,30 @@ const FaqHome = () => {
   const faqs = [
     {
       id: 1,
-      question: "Q1. How can I consult an astrologer on Astrowb?",
+      question: "Q1. How can I consult an astrologer on Astromani?",
       answer:
-        " You can choose your preferred astrologer from our verified list and connect instantly through chat or call.",
+        " Simply sign up, choose your preferred astrologer, and start a chat or call instantly.",
     },
     {
       id: 2,
-      question: "Q2. Are the astrologers on your platform certified?",
+      question: "Q2. Are your astrologers certified?",
       answer:
-        " Yes, all our astrologers are carefully verified and have years of professional experience in astrology, tarot, numerology, or Vastu.",
+        "Yes — every astrologer on Astromani is verified for credentials, experience, and client reviews.",
     },
     {
       id: 3,
-      question: "Q3. What kind of questions can I ask during a consultation?",
-      answer: " You can ask about love, marriage, career, finances, health, education, family, or any area of life where you seek clarity.",
+      question: "Q3. What questions can I ask?",
+      answer: " Anything about love, career, marriage, health, or personal challenges — no topic is too big or small.",
     },
      {
       id: 4,
-      question: "Q4. Will my conversation remain private?",
-      answer: "  Absolutely. We maintain 100% confidentiality for all chats, calls, and reports shared on our platform.",
+      question: "Q4. Is my conversation private?",
+      answer: "  Absolutely. All consultations are 100% confidential and securely encrypted.",
     },
      {
       id: 5,
-      question: "Q5. Can I get a Kundli or horoscope report?",
-      answer: "  Yes, our astrologers provide detailed Kundli analysis and customized reports with remedies and future predictions.",
+      question: "Q5. Can I get a Kundli or Horoscope report?",
+      answer: " Yes — you can download a detailed Kundli or request a personalized report after your consultation.",
     },
   ];
 
