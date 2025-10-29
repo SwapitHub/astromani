@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const WalletView = ({
-  mobileNumber = "8578554445",
+  mobileNumber,
   setAddActiveClass,
   setLoading,
 }) => {

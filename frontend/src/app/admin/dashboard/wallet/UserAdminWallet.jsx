@@ -18,12 +18,13 @@ function UserAdminWallet() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [addActiveClass, setAddActiveClass] = useState();
+  const [addActiveClass, setAddActiveClass] = useState(false);
   const [addActiveClassEdit, setAddActiveClassEdit] = useState(false);
   const [mobileNumber, setMobileNumber] = useState();
   const [showDelete, setShowDelete] = useState(false);
   const [userToDelete, setUserToDelete] = useState();
   const [deletePermanently, setDeletePermanently] = useState(false);
+  console.log(addActiveClass);
 
   // Debounce search input
   const debounceSearch = useCallback(
@@ -66,40 +67,43 @@ function UserAdminWallet() {
     }
   };
 
- const updateBlockUnblockUser = async (phone) => {
-  try {
-    setLoading(true); 
+  const updateBlockUnblockUser = async (phone) => {
+    try {
+      setLoading(true);
 
-    const response = await axios.put(
-      `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/update-user/${phone}`,
-      {
-        blockUser: true, 
-        deleteUser: true 
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/update-user/${phone}`,
+        {
+          blockUser: true,
+          deleteUser: true,
+        }
+      );
+
+      if (response?.data.message === "success") {
+        fetchTransactions(); // Refresh the data after the action
+        setDeletePermanently(false);
+
+        console.log(`User ${phone} has been blocked and deleted successfully.`);
+      } else {
+        console.error("Failed to block and delete user.");
       }
-    );
-
-    if (response?.data.message === "success") {
-      fetchTransactions(); // Refresh the data after the action
-    setDeletePermanently(false)
-
-      console.log(`User ${phone} has been blocked and deleted successfully.`);
-    } else {
-      console.error("Failed to block and delete user.");
+    } catch (error) {
+      console.error(
+        "Error blocking and deleting user:",
+        error.response?.data?.error || error.message
+      );
+    } finally {
+      setLoading(false); // Set loading state to false when done
     }
-  } catch (error) {
-    console.error("Error blocking and deleting user:", error.response?.data?.error || error.message);
-  } finally {
-    setLoading(false); // Set loading state to false when done
-  }
-};
+  };
 
-console.log(userToDelete , deletePermanently,"ewewew");
+  console.log(userToDelete, deletePermanently, "ewewew");
 
   useEffect(() => {
-   if (userToDelete && deletePermanently) {
-    updateBlockUnblockUser(userToDelete);  
-  }
-  }, [deletePermanently,userToDelete]);
+    if (userToDelete && deletePermanently) {
+      updateBlockUnblockUser(userToDelete);
+    }
+  }, [deletePermanently, userToDelete]);
 
   useEffect(() => {
     fetchTransactions();
@@ -141,17 +145,23 @@ console.log(userToDelete , deletePermanently,"ewewew");
           showNameData={showNameData}
         />
       )}
-      <WalletEdit
-        userMobile={mobileNumber}
-        setAddActiveClassEdit={setAddActiveClassEdit}
-        fetchTransactions={fetchTransactions}
-        setLoading={setLoading}
-      />
-      <WalletView
-        mobileNumber={mobileNumber}
-        setAddActiveClass={setAddActiveClass}
-        setLoading={setLoading}
-      />
+      {addActiveClassEdit && (
+        <WalletEdit
+          userMobile={mobileNumber}
+          setAddActiveClassEdit={setAddActiveClassEdit}
+          fetchTransactions={fetchTransactions}
+          setLoading={setLoading}
+        />
+      )}
+
+      {addActiveClass && (
+        <WalletView
+          mobileNumber={mobileNumber}
+          setAddActiveClass={setAddActiveClass}
+          setLoading={setLoading}
+        />
+      )}
+
       <div className="admin-wallet-main">
         <h1>User Wallet List</h1>
         <div className="search-box-top-btn">
