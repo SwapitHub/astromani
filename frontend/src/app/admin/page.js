@@ -66,7 +66,7 @@ const Admin = () => {
                 <img src="/logo-main.png" alt="" />
               </div>
               <div className="admin-login-left-content">
-                <h1>Welcome to Astrowb</h1>
+                <h1>Welcome to Astromani</h1>
                 <p>Lorem Ipsum content here</p>
               </div>
             </div>

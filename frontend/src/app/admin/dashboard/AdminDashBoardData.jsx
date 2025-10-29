@@ -24,7 +24,7 @@ const AdminDashBoardData = ({ setUpdateButton }) => {
       <div className="inner-home-dashboard">
         <div className="home-dashboard-heading">
           <h2>Dashboard</h2>
-          <p>Astrotalk Admin Panel</p>
+          <p>Astromani Admin Panel</p>
         </div>
         <ul>
           <li onClick={() => setUpdateButton("changePassword")}>
