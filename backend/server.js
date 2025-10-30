@@ -50,16 +50,15 @@ const path = require("path");
 const app = express();
 // secure API use helmet call
 app.use(helmet());
-// Public folder serve 
+// Public folder serve
 app.use("/public", express.static("public"));
 
-
 const server = http.createServer(app);
-const allowedOrigins = [  
-  "http://72.60.101.71:3001",
-  "http://astromani.com",
+const allowedOrigins = [
+  "http://72.60.101.71:3001",  
   "https://astromani.com",
   "http://localhost:3001",
+  "http://localhost:3000",
 ];
 
 app.use(
@@ -83,20 +82,20 @@ app.options("*", cors());
 // === SOCKET.IO ===
 const io = new Server(server, {
   path: "/api/socket.io",
-  cors: { origin: ["https://astromani.com", "http://localhost:3001", "http://astromani.com"], credentials: true },
+  cors: {
+    origin: allowedOrigins,
+    credentials: true,
+  },
   transports: ["websocket", "polling"],
   pingInterval: 25000,
-  pingTimeout: 60000
+  pingTimeout: 60000,
 });
-
-
 
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
   socket.on("message", (data) => console.log("Message received:", data));
   socket.on("disconnect", () => console.log("Client disconnected:", socket.id));
 });
-
 
 const PORT = process.env.PORT || 8000;
 
@@ -110,7 +109,6 @@ app.use(express.json());
 connectMongoDb(
   "mongodb+srv://swapitshamsher:Eb25QUq9aEt27aSQ@astrologer.euynurr.mongodb.net/astromani?retryWrites=true&w=majority"
 );
-
 
 // app.use(express.json());
 // user connect chatting socket.io
@@ -153,8 +151,6 @@ socketIoMessageMain(io);
 socketUserIdToAstrologerMsg(io);
 socketVoiceCall(io);
 
-
 server.listen(PORT, "0.0.0.0", () =>
   console.log(`Server running on port ${PORT}`)
 );
-

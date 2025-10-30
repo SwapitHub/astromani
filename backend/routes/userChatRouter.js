@@ -33,7 +33,7 @@ async function socketIoMessage(io) {
     console.log("A user connected:", socket.id);
 
     socket.on("chat-timeLeft-update", async (chatTimeLeftData) => {
-      // console.log("chatTimeLeftDatass", chatTimeLeftData);
+      console.log("chatTimeLeftDatass", chatTimeLeftData);
 
       if (chatTimeLeftData.totalChatTime > 0) {
         const totalMinutes = Math.ceil(chatTimeLeftData.totalChatTime / 60);
