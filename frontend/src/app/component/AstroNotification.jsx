@@ -6,9 +6,14 @@ import { useEffect, useState } from "react";
 import secureLocalStorage from "react-secure-storage";
 import io from "socket.io-client";
 
+
+const baseURL = process.env.NEXT_PUBLIC_WEBSITE_URL;
+
+const socketPath = baseURL.includes("localhost") ? undefined : "/socket.io";
+
 // Initialize socket connection
-const socket = io(process.env.NEXT_PUBLIC_BASE_URL, {
-  path: "/api/socket.io",
+const socket = io(baseURL, {
+  path: socketPath,
   transports: ["websocket"],
   withCredentials: true,
 });
