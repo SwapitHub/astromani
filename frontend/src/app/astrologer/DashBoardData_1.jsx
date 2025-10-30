@@ -113,7 +113,7 @@ const DashBoardData_1 = ({ astrologerData = {}, setUpdateButton }) => {
       <div className="astro-dashboard-heading-btns-outer">
         <div className="home-dashboard-heading">
           <h2>Dashboard</h2>
-          <p>Astrowb Panel</p>
+          <p>Astromani Astrologer Panel</p>
         </div>
 
         <div className="inner-astrologer-registration">

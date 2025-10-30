@@ -371,16 +371,19 @@ const AstrologerProfile = ({
               <div className="user-profile-pick">
                 {" "}
                 <a href="#" title="">
-                  <Image
-                    width={100}
-                    height={100}
-                    src={
-                      process.env.NEXT_PUBLIC_WEBSITE_URL +
-                      registrationDetail?.aadhaarCard
-                    }
-                    alt="user-icon"
-                  />
-
+                  {registrationDetail?.aadhaarCard ? (
+                    <Image
+                      width={100}
+                      height={100}
+                      src={
+                        process.env.NEXT_PUBLIC_WEBSITE_URL +
+                        registrationDetail?.aadhaarCard
+                      }
+                      alt="user-icon"
+                    />
+                  ) : (
+                    <img src="./user-icon-image.png"></img>
+                  )}
                   <span>
                     <i className="fa-solid fa-ellipsis-vertical"></i>
                   </span>
@@ -440,15 +443,19 @@ const AstrologerProfile = ({
             <div className="user-profile-picture-sec-single">
               <div className="user-profile-pick">
                 <a href="#" title="">
-                  <Image
-                    width={100}
-                    height={100}
-                    src={
-                      process.env.NEXT_PUBLIC_WEBSITE_URL +
-                      registrationDetail?.certificate
-                    }
-                    alt="user-icon"
-                  />
+                  {registrationDetail?.certificate ? (
+                    <Image
+                      width={100}
+                      height={100}
+                      src={
+                        process.env.NEXT_PUBLIC_WEBSITE_URL +
+                        registrationDetail?.certificate
+                      }
+                      alt="user-icon"
+                    />
+                  ) : (
+                    <img src="./user-icon-image.png"></img>
+                  )}
 
                   <span>
                     <i className="fa-solid fa-ellipsis-vertical"></i>
