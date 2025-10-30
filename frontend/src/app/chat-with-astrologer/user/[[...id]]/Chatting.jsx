@@ -16,7 +16,7 @@ const apiURL = process.env.NEXT_PUBLIC_WEBSITE_URL || "";
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "";
 const isLocal = apiURL.includes("localhost");
 const socket = io(isLocal ? apiURL : baseURL, {
- path: isLocal ? undefined : "/api/socket.io",
+  path: isLocal ? undefined : "/api/socket.io",
   transports: ["websocket"],
   withCredentials: true,
 });
@@ -529,9 +529,11 @@ export default function Chatting(AdminCommissionData) {
                   <h2>{astrologerData.name}</h2>
                 </div>
               </div>
-              <div className="chat-right-end-btn">
-                <button onClick={handleEndChatClick}>End</button>
-              </div>
+              {userParam !== "order-history" && (
+                <div className="chat-right-end-btn">
+                  <button onClick={handleEndChatClick}>End</button>
+                </div>
+              )}
             </div>
 
             <div
