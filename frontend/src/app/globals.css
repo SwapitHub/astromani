@@ -1,11 +1,11 @@
 /* Import Links  */
-@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 /* Global CSS  */
 
-:root {--primary_color: #ff7043; --secondary_color: #000000; --secondary_dark: #000000; --secondary_hover: #542875; --body_bg: #ffffff; --light_bg: #ededed; --body_content_color: #000000; --heading_color: #121212; --primary_font: "Poppins", serif; --secondary_font: "El Messiri", serif;}
-body {font-family: var(--primary_font); color: var(--body_content_color); font-size: 16px; background-color: var(--body_bg);}
+:root {--primary_color: #ff7043; --secondary_color: #202020; --secondary_dark: #202020; --secondary_hover: #542875; --body_bg: #ffffff; --light_bg: #ededed; --body_content_color: #000000; --heading_color: #121212; --primary_font: "Open Sans", serif; --secondary_font: "Epunda Slab", serif;}
+body {font-family: var(--primary_font); color: var(--body_content_color); font-size: 16px; background-color: var(--body_bg); line-height: 1.5;}
 * {box-sizing: border-box; margin: 0; padding: 0;}
-h1, h2, h3 {font-family: var(--secondary_font);}
+h1, h2, h3 {font-family: var(--secondary_font); font-weight: 500;}
 h2 {font-size: 42px;}
 h3 {font-size: 36px;}
 .container {max-width: 1180px; padding: 0 20px; margin: 0 auto;}
@@ -46,6 +46,22 @@ nav.navbar ul li a:hover, nav.navbar ul li span:hover {color: var(--primary_colo
 .header-user {padding: 40px 0px 40px 40px;}
 .header-user-drop-down, .submenu {position: absolute; z-index: 1; background-color: #ffffff; padding: 20px; left: 50%; transform: translateX(-50%); transition: all 0.3s; width: max-content; top: 100%; box-shadow: 0px 5px 25px rgba(0, 0, 0, .1);}
 .header-user-drop-down {right: 0; left: auto; transform: none;}
+.inner-admin-wallet {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.Account-detail {
+    margin: 30px 0px 0px;
+}
+.form-actions {
+    margin: 30px 0px 0px;
+}
+.aadhar-card img {
+    width: 100%;
+    height: auto;
+}
 @media (min-width: 992px) {
  .header-user-drop-down, .submenu {opacity: 0; visibility: hidden;}
 .header-user:hover .header-user-drop-down, li.has-submenu:hover .submenu { opacity: 1; visibility: visible;}
@@ -239,7 +255,7 @@ ul.check-box-drop-worn {display: none; background-color: #fff; padding: 10px; po
 .dashboard-left-dashboard::-webkit-scrollbar {width: 6px;}
 .dashboard-left-dashboard::-webkit-scrollbar-thumb {background-color: rgba(255, 76, 59, 0); -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out;}
 .left-sidebar-logo {padding: 20px 0px;}
-.left-sidebar-logo img {max-width: 130px; margin: 0 auto; display: block;}
+.left-sidebar-logo img {max-width: 180px; margin: 0 auto; display: block;}
 .dashboard-list ul {width: 100%;max-width: 100%; display: block;}
 .dashboard-list > ul > li {display: block; border-bottom: 1px solid rgba(255, 255, 255, .08);}
 .dashboard-list > ul > li > span > label {position: relative;}
@@ -490,7 +506,7 @@ span.banner-heading, .footer-product-name {font-weight: 600; font-size: 18px; ma
 .profile_with_contact_slider .slick-slide img {width: 100%;}
 .slick-arrow.slick-next {right: 0px;}
 .slick-arrow.slick-prev {left: 0px;}
-button.slick-arrow {z-index: 1; width: 50px; height: 50px; border-radius: 0; background-color: var(--primary_color) !important;}
+button.slick-arrow {z-index: 9; width: 50px; height: 50px; border-radius:50%; background-color: var(--primary_color) !important;}
 button.slick-arrow::before {content: ""; width: 10px; height: 10px; border-top: 2px solid #fff; border-left: 2px solid #fff; display: inline-block; transform: rotate(-45deg); margin: 0 0 0 4px; opacity: 1;}
 button.slick-arrow.slick-next::before {transform: rotate(135deg); margin: 0 4px 0px 0px;}
 /* about us */
@@ -1060,11 +1076,11 @@ span.required {color: red;}
 .footer .secure_col ul li + li {margin-top: 15px;}
 .copyright {background: var(--secondary_dark); text-align: center; color: #fff; font-size: 14px; padding: 20px; border-top: 1px solid rgba(255, 255, 255, .2);}
 /* home page start */
-.banner-main {position: relative;}
-.banner-main::after {content: ""; position: absolute; width: 100%; height: 250px; background-image: url("../../public/shape.svg"); background-repeat: no-repeat; bottom: 0; transform: scale(-1);}
+.banner-main {position: relative; overflow: hidden;}
+.banner-main .slick-slider {z-index: 9;}
 .banner-main h1 {font-size: 56px;}
 .home-heading {text-align: center; margin: 0 0 30px;}
-.banner {padding: 50px 0 100px; position: relative; color: #ffffff;}
+.banner {padding: 50px 0; position: relative; color: #ffffff;  display: flex !important; min-height: 600px; justify-content: center;}
 .banner .row {display: flex; justify-content: space-between; align-items: center; padding: 60px 0px; margin: 0px 10px;}
 .banner .right-col {flex: 0 0 100%; max-width: 40%;}
 .banner .right-col img {width: 100%; display: block; animation: rotation 20s; animation-timing-function: linear; animation-iteration-count: infinite;}
@@ -1072,11 +1088,10 @@ span.required {color: red;}
   0% {transform: rotate(0deg);}
   100% {transform: rotate(359deg);}
 }
-.banner .left-col {flex: 0 0 49%; max-width: 49%;}
+.banner .left-col {flex: 0 0 100%; max-width: 900px; text-align: center; margin: 0 auto;}
 .banner .btn-wrapper {margin-top: 30px;}
 .banner .btn-wrapper .btn {background-color: var(--primary_color); border: 1px solid var(--primary_color); color: #fff; border-radius: 50px; padding: 12px 40px 10px; font-size: 16px; display: inline-block; text-align: center; text-decoration: none; text-transform: capitalize; font-family: var(--secondary_font);}
 .banner .btn-wrapper .btn:hover {background-color: #fff; color: var(--primary_color); border-color: #ffffff;}
-.banner-main .slick-slider {position: static;}
 .banner-main .slick-slider > .slick-list {position: relative; z-index: 1;}
 .faq-answer.active {display: block;}
 .four-col {position: relative;}
@@ -1092,18 +1107,27 @@ span.required {color: red;}
 .four-col .row > a .col::after {border-width: 0 0 1px 1px; bottom: -1px; left: -1px;}
 .four-col .row > a:hover::before, .four-col .row > a:hover::after, .four-col .row > a:hover .col::before, .four-col .row > a:hover .col::after {width: 30px; height: 30px;}
 .four-col .row .col .icon svg {font-size: 36px; color: var(--primary_color);}
-.astrology_seciton {background-image: url("../../public//bg-section-forecast.jpg"); position: relative; background-size: cover; background-position: bottom;}
-.astrology_seciton::before {content: ""; position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; background-color: var(--primary_color); opacity: .6;}
-.astrology_seciton h2 {color: #ffffff;}
 .astro-inner {position: relative;}
-.astrology_seciton .col {background: #ffffff; position: relative; padding: 80px 30px 30px; transition: all 0.3s;}
+.astrology_seciton .col {background: #f2f2f2; position: relative; padding: 0px 30px 40px; transition: all 0.3s;}
 .astrology_seciton .col:hover, .single-slide a:hover {background-color: var(--primary_color); color: #ffffff;}
-.astrology_seciton .row .col::before {counter-increment: my-sec-counter; content: counter(my-sec-counter); position: absolute; width: 90px; height: 90px; background: var(--primary_color); border-radius: 50%; display: flex; justify-content: center; align-items: center; top: -41px; left: 50%; transform: translateX(-50%); font-size: 45px; color: #ffffff; transition: all 0.3s;}
+.astrology_seciton .row .col::before {
+    counter-increment: my-sec-counter;
+    content: counter(my-sec-counter);
+    font-size: 45px;
+    background-color: var(--primary_color);
+    transition: all 0.3s;
+    font-family: var(--secondary_font);
+    color: #fff;
+    padding: 10px 15px;
+    display: inline-block;
+    line-height: 1;
+    margin: 0 0 20px;
+}
 .astrology_seciton .row .col:hover::before {background-color: #ffffff; color: var(--primary_color);}
 .astrology_seciton .col a {text-decoration: none; color: var(--body_content_color);}
 .astrology_seciton .content-wrap h3 { margin: 0 0 16px; font-size: 24px; color: var(--body_content_color); line-height: 30px;}
 .astrology_seciton .col:hover .content-wrap h3, .astrology_seciton .col:hover .content-wrap p {color: #ffffff;}
-.astrology_seciton .row {display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; counter-reset: my-sec-counter; margin: 80px 0px 0px;}
+.astrology_seciton .row {display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; counter-reset: my-sec-counter; margin: 40px 0px 0px;}
 .counter_seciton {padding: 70px 0; text-align: center; background-color: var(--light_bg);}
 .counter_seciton .row {display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 40px;}
 .counter_seciton h3 {font-size: 30px; margin: 0 0 10px;}
@@ -1115,12 +1139,15 @@ span.required {color: red;}
 .faq-answer {padding: 10px 0;}
 .faq-item.active .faq-answer {display: block;}
 .faq-question {cursor: pointer; font-weight: 600; padding: 10px 0; font-size: 18px;}
-.faq-item {background: var(--primary_color); padding: 17px 50px 17px 30px; position: relative; transition: all 0.3s; color: #ffffff;}
-.faq-item:hover,  .faq-item.open {background: var(--secondary_color);}
-.faq-section .faq-item + .faq-item {margin-top: 12px;}
-.faq-section .icon {display: block; position: absolute; width: 25px; height: 25px; top: 27px; right: 30px;}
-.faq-section .icon::after {content: ""; position: absolute; width: 100%; height: 3px; background: #ffffff; top: 50%; transform: translateY(-50%);}
-.faq-section .icon::before {content: ""; height: 100%; width: 3px; background: #ffffff; position: absolute; left: 50%; transform: translateX(-50%); transition: all 0.3s;}
+.faq-item {
+    padding: 17px 40px 17px 0px;
+    position: relative;
+    transition: all 0.3s;
+    border-bottom: 1px solid #ccc;
+}
+.faq-section .icon {display: block; position: absolute; width: 20px; height: 20px; top: 27px; right: 0px;}
+.faq-section .icon::after {content: ""; position: absolute; width: 100%; height: 2px; background: var(--body_content_color); top: 50%; transform: translateY(-50%);}
+.faq-section .icon::before {content: ""; height: 100%; width: 2px; background: var(--body_content_color); position: absolute; left: 50%; transform: translateX(-50%); transition: all 0.3s;}
 .faq-section .open .icon::before {transform: translateX(-50%) rotate(90deg);}
 .faq-item.active .icon::before {opacity: 0;}
 p.data-not-found {margin: 30px 0px 0px; text-align: center;}
@@ -1240,6 +1267,199 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .blogs-detail-top {text-align: center;}
 .author {margin: 0 0 5px;}
 .name-date h2 {font-size: 24px; line-height: 30px; margin: 0 0 10px;}
+
+
+.starfield {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0;
+}
+.starfield > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  background-image: -webkit-radial-gradient(2px 2px at 40px 60px, #cccccc, rgba(0, 0, 0, 0)), -webkit-radial-gradient(2px 2px at 20px 50px, #dddddd, rgba(0, 0, 0, 0)), -webkit-radial-gradient(2px 2px at 30px 100px, #eeeeee, rgba(0, 0, 0, 0)), -webkit-radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0, 0, 0, 0)), -webkit-radial-gradient(2px 2px at 110px 90px, #cccccc, rgba(0, 0, 0, 0)), -webkit-radial-gradient(2px 2px at 190px 150px, #dddddd, rgba(0, 0, 0, 0));
+  background-image: radial-gradient(2px 2px at 40px 60px, #cccccc, rgba(0, 0, 0, 0)), radial-gradient(2px 2px at 20px 50px, #dddddd, rgba(0, 0, 0, 0)), radial-gradient(2px 2px at 30px 100px, #eeeeee, rgba(0, 0, 0, 0)), radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0, 0, 0, 0)), radial-gradient(2px 2px at 110px 90px, #cccccc, rgba(0, 0, 0, 0)), radial-gradient(2px 2px at 190px 150px, #dddddd, rgba(0, 0, 0, 0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  -webkit-animation-name: starfieldRotate;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+.starfield > *:nth-child(1) {
+  -webkit-animation-duration: 18s;
+}
+.starfield > *:nth-child(2) {
+  -webkit-animation-duration: 22s;
+}
+.starfield > *:nth-child(3) {
+  -webkit-animation-duration: 36s;
+}
+.starfield > *:nth-child(4) {
+  -webkit-animation-duration: 40s;
+}
+@-webkit-keyframes starfieldRotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+/* code for waves on Banner */
+.ast_waves {
+	position: absolute;
+	width: 800px;
+	bottom: -75px;
+	left: 0%;
+	margin-left: -400px;
+	z-index: 2;
+}
+.ast_waves2 {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    right: 0px;
+    margin: 0px auto;
+    left: 0px;
+    z-index: 3;
+}
+.ast_waves3 {
+	position: absolute;
+	width: 900px;
+	bottom: 15px;
+	right: -400px;
+	z-index: 4;
+}
+.ast_wave {
+	width: 700px;
+	height: 700px;
+	background: rgba(0, 0, 0, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+	margin-left: 50%;
+	left: -350px;
+	position: absolute;
+	bottom: -350px;
+    z-index: -1;
+	-webkit-transform: scale(0.1, 0.1);
+	-moz-transform: scale(0.1, 0.1);
+	-ms-transform: scale(0.1, 0.1);
+	-o-transform: scale(0.1, 0.1);
+	transform: scale(0.1, 0.1);
+	opacity: 0;
+	-webkit-animation: pulse 3000ms ease-out infinite;
+	-moz-animation: pulse 3000ms ease-out infinite;
+	-ms-animation: pulse 3000ms ease-out infinite;
+	-o-animation: pulse 3000ms ease-out infinite;
+	animation: pulse 3000ms ease-out infinite;
+}
+.ast_wave:nth-of-type(2) {
+	-webkit-animation-delay: 600ms;
+	-moz-animation-delay: 600ms;
+	-ms-animation-delay: 600ms;
+	-o-animation-delay: 600ms;
+	animation-delay: 600ms;
+}
+.ast_wave:nth-of-type(3) {
+	-webkit-animation-delay: 1200ms;
+	-moz-animation-delay: 1200ms;
+	-ms-animation-delay: 1200ms;
+	-o-animation-delay: 1200ms;
+	animation-delay: 1200ms;
+}
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    -o-transform: scale(0.1, 0.1);
+	transform: scale(0.1, 0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+	transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+}
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    -moz-transform: scale(0.1, 0.1);
+    -ms-transform: scale(0.1, 0.1);
+    -o-transform: scale(0.1, 0.1);
+	transform: scale(0.1, 0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    -moz-transform: scale(1.2, 1.2);
+    -ms-transform: scale(1.2, 1.2);
+    -o-transform: scale(1.2, 1.2);
+	transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes pulse-text {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes pulse-text {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.home-banner-outer {
+    position: relative;
+    z-index: 6;
+}
+
+.banner-main::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, .6);
+    left: 0;
+    top: 0;
+}
+.astrology_seciton {padding-top: 0px;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
@@ -1273,7 +1493,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .AstroMallShops-admin .language-list {padding: 0px;}
   .product-add-ons-listing > * {padding: 15px;}
   .order-listing {grid-template-columns: repeat(3, 1fr);}
-  .banner .left-col {flex: 0 0 58%; max-width: 58%;}
   .Denomination .language-list ul {grid-template-columns: repeat(2, 1fr);}
   .main-doc {gap: 10px;}
   .astrology_seciton .row {grid-template-columns: repeat(2, 1fr); gap: 70px 25px;}
@@ -1339,6 +1558,11 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .user-profile-pick-main {flex-wrap: wrap; justify-content: center; gap: 20px;}
   .user-profile-picture-sec-single {order: 1;}
   .user-profile-picture-sec-single:first-child {order: 2;}
+  .inner-admin-wallet {
+		flex-direction: column-reverse;
+		align-items: flex-start;
+		margin: 0 0 20px;
+	}
 }
 @media (max-width: 767px) {
   body {font-size: 14px;}
@@ -1449,7 +1673,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .seminar-banner-row .left_col h1 strong {font-size: 63px;}
   .seminar_user_row .heading, .seminar_user_row .para {color: #fff;}
   .seminar_date_location {margin-top: 34px; position: relative; z-index: 1;}
-  .banner-main::after {background-size: cover; height: 110px;}
   .seminar_wrapper {padding: 60px 20px 30px;}
   .seminar_date_location .row {flex-wrap: wrap; padding: 20px 20px; gap: 10px 20px; justify-content: flex-start;}
   .four-col.section-spacing {padding: 0 0 50px;}

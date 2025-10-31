@@ -29,14 +29,30 @@ const Banner = ({ homeBannerData }) => {
           backgroundRepeat: "no-repeat",
         }}
       >
+        <div class="starfield">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+<div class="ast_waves">
+<div class="ast_wave"></div>
+<div class="ast_wave"></div>
+<div class="ast_wave"></div>
+</div>
+<div class="ast_waves2">
+<div class="ast_wave"></div>
+<div class="ast_wave"></div>
+<div class="ast_wave"></div>
+</div>
         <div className="container">
           <Slider {...sliderSettings}>
             {homeBannerData?.map((item) => (
               <div className="banner" key={item?._id}>
                 <div className="row">
-                  <div className="right-col">
+                  {/* <div className="right-col">
                     <img src="/zodiac-circle.png" />
-                  </div>
+                  </div> */}
 
                   <div className="left-col">
                     <h1>{item?.banner_heading}</h1>

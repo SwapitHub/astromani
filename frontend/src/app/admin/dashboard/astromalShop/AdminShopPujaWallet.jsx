@@ -187,7 +187,17 @@ function AdminShopWallet() {
                       </td> */}
                       <td>{new Date(item.createdAt).toLocaleString()}</td>
                       <td>
-                        {!item?.product_cancel_order ? (
+                        <button
+                            className="delete-btn"
+                              onClick={() => {
+                                setEditDetailOrder(item);
+                                setShowOrderViewPopUp(true);
+                              }}
+                              
+                            >
+                              <MdOutlineRemoveRedEye />
+                            </button>
+                        {/* {!item?.product_cancel_order ? (
                           <>
                             <span className="text-before-btn">
                               {item?.product_order_complete
@@ -218,7 +228,7 @@ function AdminShopWallet() {
                               />
                             </p>
                           </>
-                        )}
+                        )} */}
                       </td>
                     </tr>
                   ))
