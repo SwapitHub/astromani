@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -56,6 +56,7 @@ const ResetPassword = () => {
   };
 
   return (
+    <div className="container">
     <div className="reset-password-container">
       <div className="reset-password-box">
         <h1>Reset Password</h1>
@@ -85,7 +86,7 @@ const ResetPassword = () => {
 
         <button
           onClick={handleResetSubmit}
-          disabled={loading}
+          disabled={loading || newPassword !== confirmPassword || newPassword.length < 6}
           className="submit-btn"
         >
           {loading ? "Updating..." : "Reset Password"}
@@ -93,89 +94,15 @@ const ResetPassword = () => {
 
         {message && (
           <div
-            className={`message-box ${
-              message.includes("✅") ? "success" : "error"
-            }`}
+            className={`message-box ${message.includes("✅") ? "success" : "error"}`}
           >
             {message}
           </div>
         )}
       </div>
 
-      <style jsx>{`
-        .reset-password-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-          background: #f4f4f4;
-        }
-
-        .reset-password-box {
-          background: #fff;
-          padding: 30px;
-          border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          width: 100%;
-          max-width: 400px;
-          text-align: center;
-        }
-
-        h1 {
-          margin-bottom: 10px;
-          color: #222;
-        }
-
-        p {
-          color: #666;
-          font-size: 14px;
-          margin-bottom: 20px;
-        }
-
-        .form-field {
-          margin-bottom: 15px;
-        }
-
-        .common-input-filed {
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          font-size: 14px;
-        }
-
-        .submit-btn {
-          width: 100%;
-          background: #0070f3;
-          color: white;
-          border: none;
-          padding: 10px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
-        }
-
-        .submit-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-
-        .message-box {
-          margin-top: 15px;
-          padding: 10px;
-          border-radius: 5px;
-        }
-
-        .success {
-          background: #d4edda;
-          color: #155724;
-        }
-
-        .error {
-          background: #f8d7da;
-          color: #721c24;
-        }
-      `}</style>
+      
+    </div>
     </div>
   );
 };
