@@ -81,7 +81,7 @@ app.options("*", cors());
 
 // === SOCKET.IO ===
 const io = new Server(server, {
-  path: "/api/socket.io",
+  // path: "/api/socket.io",
   cors: {
     origin: allowedOrigins,
     credentials: true,

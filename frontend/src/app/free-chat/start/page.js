@@ -1,354 +1,338 @@
 "use client";
 
-import { validateAstrologerForm } from "@/app/component/FormValidation";
-import UserOtpLoginData from "@/app/component/UserOtpLoginData";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import UserOtpLoginData from "@/app/component/UserOtpLoginData";
+import useDebounce from "@/app/hook/useDebounce";
 
 const StartUserName = () => {
   const router = useRouter();
-  const [dateOfBirthAvailable, setDateOfBirthAvailable] = useState("no");
+
+  // 🔹 State management
   const [otpPopUpDisplays, setOtpPopUpDisplays] = useState(false);
-  const [datePhoneAvailable, setDatePhoneAvailable] = useState();
+  const [dateOfBirthAvailable, setDateOfBirthAvailable] = useState("no");
+  const [datePhoneAvailable, setDatePhoneAvailable] = useState(null);
   const [errors, setErrors] = useState({});
-  const [userMobile, setUserMobile] = useState();
-  const [editName, setEditName] = useState();
-  const [editGender, setEditGender] = useState();
-  const [editDateOfBirth, setEditDateOfBirth] = useState();
-  const [editLanguage, setEditLanguage] = useState();
-  const [editPob, setEditPob] = useState();
+  const [message, setMessage] = useState("");
 
-  console.log(datePhoneAvailable);
-const todayDate = new Date().toISOString().split('T')[0];
+  // 🔹 Controlled form fields
+  const [userMobile, setUserMobile] = useState("");
+  const debouncedSearch = useDebounce(userMobile, 1000);
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [editName, setEditName] = useState("");
+  const [editGender, setEditGender] = useState("");
+  const [editDateOfBirth, setEditDateOfBirth] = useState("");
+  const [editLanguage, setEditLanguage] = useState("");
+  const [editPob, setEditPob] = useState("");
 
+  const todayDate = new Date().toISOString().split("T")[0];
+
+  // 🔹 Fetch user details if phone exists
   useEffect(() => {
     const fetchUserDetail = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-login-detail/${userMobile}`
+          `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-login-detail/${debouncedSearch}`
         );
         setDatePhoneAvailable(response.data.data);
-        console.log("API response:", response);
       } catch (err) {
-        console.error("user detail api error:", err);
+        console.error("User detail API error:", err);
       }
     };
+    if (debouncedSearch) fetchUserDetail();
+  }, [debouncedSearch]);
 
-    if (userMobile) {
-      fetchUserDetail();
-    }
-  }, [userMobile]);
-
-  // Watch for userMobile updates
+  // 🔹 Watch for userMobile updates in cookies
   useEffect(() => {
     const storedMobile = Cookies.get("userMobile");
-    if (storedMobile) {
-      setUserMobile(Math.round(storedMobile));
-    }
+    if (storedMobile) setUserMobile(storedMobile);
 
     const handleStorageChange = () => {
       const updatedMobile = Cookies.get("userMobile");
-      if (updatedMobile) {
-        setUserMobile(updatedMobile);
-        // fetchUserDetail();
-      }
+      if (updatedMobile) setUserMobile(updatedMobile);
     };
 
     window.addEventListener("userMobileUpdated", handleStorageChange);
-
-    return () => {
+    return () =>
       window.removeEventListener("userMobileUpdated", handleStorageChange);
-    };
   }, []);
 
-  const handleUserSignUpData = async () => {
-    let validationErrors;
-    if (!userMobile) {
-      validationErrors = validateAstrologerForm("user");
+  // 🔹 Pre-fill when data available
+  useEffect(() => {
+    if (datePhoneAvailable) {
+      setEditName(datePhoneAvailable.name || "");
+      setEditGender(datePhoneAvailable.gender || "");
+      setEditDateOfBirth(datePhoneAvailable.dateOfBirth || "");
+      setEditLanguage(datePhoneAvailable.language || "");
+      setEditPob(datePhoneAvailable.placeOfBorn || "");
+      setUserEmail(datePhoneAvailable.userEmail || "");
+      setUserPassword(datePhoneAvailable.userPassword || "");
+      setUserMobile(datePhoneAvailable.phone || "");
     }
-    console.log(validationErrors);
+  }, [datePhoneAvailable]);
 
-    setErrors(validationErrors);
-    if (!userMobile) {
-      if (Object.keys(validationErrors).length > 0) {
-        return;
-      }
-    }
+  // ✅ Form validation
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!userEmail) newErrors.email = "Email is required.";
+    else if (!emailRegex.test(userEmail))
+      newErrors.email = "Please enter a valid email address.";
+
+    // Password
+    const passwordRegex = /^(?=.*[0-9]).{6,}$/;
+    if (!userPassword) newErrors.password = "Password is required.";
+    else if (!passwordRegex.test(userPassword))
+      newErrors.password =
+        "Password must be at least 6 characters and include a number.";
+
+    // Mobile
+    const mobileRegex = /^[0-9]{10}$/;
+    if (!userMobile) newErrors.mobile = "Mobile number is required.";
+    else if (!mobileRegex.test(userMobile))
+      newErrors.mobile = "Please enter a valid 10-digit mobile number.";
+
+    // Name
+    if (!editName.trim()) newErrors.firstName = "Name is required.";
+
+    // Gender
+    if (!editGender) newErrors.gender = "Please select a gender.";
+
+    // Language
+    if (!editLanguage || editLanguage === "select language")
+      newErrors.language = "Please select a language.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // ✅ Handle register or update
+  const handleUserSignUpData = async () => {
+    if (!validateForm()) return;
 
     const formData = {
-      first_name: document.getElementById("fname").value.trim(),
-      gender: document.querySelector('input[name="gender"]:checked')?.value,
-      date_of_birth: document.getElementById("birthdayany").value.trim(),
-      re_use_date_of_birth:
+      name: editName.trim(),
+      gender: editGender,
+      dateOfBirth: editDateOfBirth.trim(),
+      reUseDateOfBirth:
         document.getElementById("birthdayReUse")?.value.trim() || "",
-      placeOfBorn: document.getElementById("searchAddress").value.trim(),
-      languages: document.getElementById("language").value.trim(),
+      placeOfBorn: editPob.trim(),
+      language: editLanguage.trim(),
+      userEmail: userEmail.trim(),
+      userPassword: userPassword.trim(),
+      phone: userMobile?.trim(),
     };
-    console.log(formData);
 
-    if (!formData) return;
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-login`,
+        formData
+      );
 
-    const phone = userMobile ? userMobile : datePhoneAvailable?.phone;
+      if (
+        response.data.message === "success" ||
+        response.data.message === "User registered successfully"
+      )
+       {
+        // Cookies.set("userIds", response.data.user._id, {
+        //   expires: 3650,
+        //   secure: true,
+        //   sameSite: "Strict",
+        // });
+        // Cookies.set("userMobile", formData.phone, { expires: 3650 });
 
-    if (phone) {
-      try {
-        const response = await axios.put(
-          `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/update-user/${phone}`,
-          {
-            name: formData.first_name,
-            gender: formData.gender,
-            dateOfBirth: formData.date_of_birth,
-            reUseDateOfBirth: formData.re_use_date_of_birth || "",
-            placeOfBorn: formData.placeOfBorn,
-            language: formData.languages,
-            // totalAmount: 0, // if needed
-          }
-        );
-
-        console.log("response", response.data);
-
-        if (response.data.message === "success") {
-          Cookies.set("userIds", response.data.user._id , {
-             expires: 3650,
-              secure: true,
-              sameSite: "Strict",
-          });
-          window.dispatchEvent(new Event("userMobileUpdated"));
-          router.push("/chat-with-astrologer");
-        }
-
-        console.log("User Updated:", response.data);
-      } catch (err) {
-        console.error("Error updating user:", err);
+        // window.dispatchEvent(new Event("userMobileUpdated"));
+        router.push("/chat-with-astrologer");
       }
-    } else {
-      setOtpPopUpDisplays(true);
+    } catch (err) {
+      console.error("Error during user registration/update:", err);
+        setMessage(err?.response?.data?.error);
+
     }
   };
 
-  useEffect(() => {
-    setEditName(datePhoneAvailable?.name || "");
-    setEditGender(datePhoneAvailable?.gender || "");
-    setEditDateOfBirth(datePhoneAvailable?.dateOfBirth || "");
-    setEditLanguage(datePhoneAvailable?.language || "");
-    setEditPob(datePhoneAvailable?.placeOfBorn || "");
-  }, [datePhoneAvailable]);
   return (
     <main className="main-content">
       <section className="astrologer-registration-bg user-registration-bg">
         <div className="container">
-          <div className={otpPopUpDisplays == true && `outer-send-otp-main`}>
-            {otpPopUpDisplays && (
+          {otpPopUpDisplays && (
+            <div className="outer-send-otp-main">
               <UserOtpLoginData setOtpPopUpDisplay={setOtpPopUpDisplays} />
-            )}
-          </div>
+            </div>
+          )}
+
           <div className="user-login-and-uder-reg-bg">
             <div className="user-reg-ctm">
-              <div className="inner-astrologer-registration">
-                <div className="registration-heading">
-                  <h1 className="common-h1-heading">User Registration</h1>
-                </div>
+              <div className="registration-heading">
+                <h1 className="common-h1-heading">User Registration</h1>
               </div>
+
               <div className="user-registration-form">
-                <form action="">
+                <form>
                   <div className="form-filed-section-bg">
+                    {/* Name */}
                     <div className="inner-form-filed-sec">
-                      <div className="label-content">
-                        <label for="Name">
-                          Name <span>(नाम)</span>
-                        </label>
-                      </div>
+                      <label>
+                        Name <span>(नाम)</span>
+                      </label>
                       <input
                         type="text"
-                        id="fname"
-                        name="fname"
-                        className="common-input-filed"
-                        placeholder="What is your name?"
-                        required
                         value={editName}
                         onChange={(e) => setEditName(e.target.value)}
+                        className="common-input-filed"
+                        placeholder="Enter your name"
                       />
-                      {errors?.firstName && (
-                        <p className="error">{errors?.firstName}</p>
+                      {errors.firstName && (
+                        <p className="error">{errors.firstName}</p>
                       )}
                     </div>
+
+                    {/* Email */}
                     <div className="inner-form-filed-sec">
-                      <div className="label-content">
-                        <label for="Gender">
-                          Gender <span>(लिंग)</span>
-                        </label>
-                      </div>
-                      <div className="man-input-filed-sec input-gender-sec">
-                        <div className="inner-radio">
-                          <input
-                            type="radio"
-                            id="Male"
-                            name="gender"
-                            value="Male"
-                            checked={editGender == "Male"}                            
-                        onChange={(e) => setEditGender(e.target.value)}
-                          />
-                          <label for="html">Male</label>
-                        </div>
-
-                        <div className="inner-radio">
-                          <input
-                            type="radio"
-                            id="Female"
-                            name="gender"
-                            value="Female"
-                            checked={editGender == "Female"}
-                        onChange={(e) => setEditGender(e.target.value)}
-
-                          />
-                          <label for="css">Female</label>
-                        </div>
-
-                        <div className="inner-radio">
-                          <input
-                            type="radio"
-                            id="Other"
-                            name="gender"
-                            value="Other"
-                            checked={editGender == "Other"}
-                        onChange={(e) => setEditGender(e.target.value)}
-
-                          />
-                          <label for="css">Other</label>
-                        </div>
-                        {errors?.gender && (
-                          <p className="error">{errors?.gender}</p>
-                        )}
-                      </div>
+                      <label>
+                        Email <span>(ईमेल)</span>
+                      </label>
+                      <input
+                        type="email"
+                        value={userEmail}
+                        onChange={(e) => setUserEmail(e.target.value)}
+                        className="common-input-filed"
+                        placeholder="Enter your email"
+                      />
+                      {errors.email && <p className="error">{errors.email}</p>}
                     </div>
 
+                    {/* Password */}
                     <div className="inner-form-filed-sec">
-                      <div className="label-content">
-                        <label for="birthdayany">
-                          Date of Birth <span>(जन्मतिथि)</span>
-                        </label>
-                      </div>
+                      <label>
+                        Password <span>(पासवर्ड)</span>
+                      </label>
+                      <input
+                        type="password"
+                        value={userPassword}
+                        onChange={(e) => setUserPassword(e.target.value)}
+                        className="common-input-filed"
+                        placeholder="Enter password"
+                      />
+                      {errors.password && (
+                        <p className="error">{errors.password}</p>
+                      )}
+                    </div>
 
+                    {/* Mobile */}
+                    <div className="inner-form-filed-sec">
+                      <label>
+                        Mobile Number <span>(मोबाइल नंबर)</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={userMobile}
+                        onChange={(e) => setUserMobile(e.target.value)}
+                        className="common-input-filed"
+                        placeholder="Enter your 10-digit mobile number"
+                        onInput={(e) => {
+                          e.target.value = e.target.value
+                            .replace(/\D/g, "")
+                            .slice(0, 10);
+                        }}
+                      />
+                      {errors.mobile && (
+                        <p className="error">{errors.mobile}</p>
+                      )}
+                    </div>
+
+                    {/* Gender */}
+                    <div className="inner-form-filed-sec">
+                      <label>
+                        Gender <span>(लिंग)</span>
+                      </label>
+                      <div className="input-gender-sec">
+                        {["Male", "Female", "Other"].map((g) => (
+                          <label key={g}>
+                            <input
+                              type="radio"
+                              name="gender"
+                              value={g}
+                              checked={editGender === g}
+                              onChange={(e) => setEditGender(e.target.value)}
+                            />
+                            {g}
+                          </label>
+                        ))}
+                      </div>
+                      {errors.gender && (
+                        <p className="error">{errors.gender}</p>
+                      )}
+                    </div>
+
+                    {/* DOB */}
+                    <div className="inner-form-filed-sec">
+                      <label>
+                        Date of Birth <span>(जन्मतिथि)</span>
+                      </label>
                       <input
                         type="date"
                         id="birthdayany"
-                        name="birthdayany"
-                        className="common-input-filed"
-                        placeholder="Select your birth date"
-                        required
                         value={editDateOfBirth}
-                        onChange={(e) => setEditDateOfBirth(e.target.value)}                        
-                         max={todayDate} 
-                      />
-                      {errors?.dateOfBirthAnys && (
-                        <p className="error">{errors?.dateOfBirthAnys}</p>
-                      )}
-                    </div>
-                    <div className="inner-form-filed-sec">
-                      <div className="label-content remove-astrict">
-                        <label for="Gender">
-                          Do you know your time of birth?
-                          <span>(क्या आप अपना जन्म समय जानते हैं?)</span>
-                        </label>
-                      </div>
-                      <div className="man-input-filed-sec input-gender-sec">
-                        <div className="inner-radio">
-                          <input
-                            type="radio"
-                            id="yes"
-                            name="YesNO"
-                            value="yes"
-                            required
-                            onChange={() => setDateOfBirthAvailable("yes")}
-                          />
-                          <label for="html">Yes</label>
-                        </div>
-
-                        <div className="inner-radio">
-                          <input
-                            type="radio"
-                            id="no"
-                            name="YesNO"
-                            value="no"
-                            required
-                            onChange={() => setDateOfBirthAvailable("no")}
-                          />
-                          <label for="css">No</label>
-                        </div>
-                      </div>
-                      {dateOfBirthAvailable == "yes" && (
-                        <div className="man-input-filed-sec know-your-time">
-                          <input
-                            type="time"
-                            id="birthdayReUse"
-                            name="birthdaytime"
-                            className="common-input-filed"
-                            placeholder="Select your birth time"
-                          />
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="inner-form-filed-sec you-born-ctm-filed erch-input-filed">
-                      <div className="label-content remove-astrict">
-                        <label for="Languages ">
-                          Where were you born?
-                          <span>(आपका जन्म कहां हुआ था?)</span>
-                        </label>
-                      </div>
-
-                      <input
-                        type="search"
-                        id="searchAddress"
-                        name="gsearch"
-                        placeholder="Where were you born"
+                        onChange={(e) => setEditDateOfBirth(e.target.value)}
                         className="common-input-filed"
-                       value={editPob}
-                        onChange={(e) => setEditPob(e.target.value)}
-                      />
-                      {/* <button type="submit" className="ctm-white-color">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                      </button> */}
-                    </div>
-
-                    <div className="inner-form-filed-sec">
-                      <div className="label-content">
-                        <label for="Languages">
-                          Languages <span>(भाषाएँ)</span>
-                        </label>
-                      </div>
-
-                      <select
-                        name="language"
-                        id="language"
-                        className="common-input-filed"
+                        max={todayDate}
                         required
+                      />
+                    </div>
+
+                    {/* Birth Place */}
+                    <div className="inner-form-filed-sec">
+                      <label>
+                        Place of Birth <span>(जन्म स्थान)</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="searchAddress"
+                        value={editPob}
+                        onChange={(e) => setEditPob(e.target.value)}
+                        className="common-input-filed"
+                        placeholder="Where were you born?"
+                      />
+                    </div>
+
+                    {/* Language */}
+                    <div className="inner-form-filed-sec">
+                      <label>
+                        Languages <span>(भाषाएँ)</span>
+                      </label>
+                      <select
+                        id="language"
                         value={editLanguage}
                         onChange={(e) => setEditLanguage(e.target.value)}
+                        className="common-input-filed"
+                        required
                       >
-                        <option value="select language">
-                          Select all your languages?
-                        </option>
+                        <option value="">Select your language</option>
                         <option value="English">English</option>
                         <option value="Hindi">Hindi</option>
                         <option value="Bengali">Bengali</option>
                         <option value="Assamese">Assamese</option>
                         <option value="Punjabi">Punjabi</option>
                       </select>
-                      {errors?.languages && (
-                        <p className="error">{errors?.languages}</p>
+                      {errors.language && (
+                        <p className="error">{errors.language}</p>
                       )}
                     </div>
                   </div>
+
+                  {/* Submit */}
                   <div className="reg-sumbit-button">
                     <button type="button" onClick={handleUserSignUpData}>
-                      {userMobile
-                        ? "Update User Detail"
-                        : "Start Chat With Astrologer"}
+                      Register & Start Chat
                     </button>
                   </div>
+                  <span>{message}</span>
                 </form>
               </div>
             </div>

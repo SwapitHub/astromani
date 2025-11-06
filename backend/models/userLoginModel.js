@@ -11,6 +11,8 @@ const UserLoginSchema = new mongoose.Schema(
     totalAmount: { type: Number, required: false },
     phone: { type: Number, required: true },
     deleteUser: Boolean,
+    userEmail: { type: String, required: true, unique: true},
+    userPassword: { type: String, required: true },
     blockUser:Boolean,
     freeChatStatus: Boolean,
     chatStatus: Boolean,

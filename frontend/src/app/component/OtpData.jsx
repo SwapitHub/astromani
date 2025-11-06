@@ -171,7 +171,7 @@ const sendOtp = async () => {
               </span>
             )}
 
-            <h1>{otpSent == false ? `Continue with Phone` : `Verify Phone`}</h1>
+            <h1>{otpSent == false ? `Astrologer Login with Phone` : `Verify Phone`}</h1>
           </div>
           {otpSent == false ? (
             <div className="number--continious-popup">
