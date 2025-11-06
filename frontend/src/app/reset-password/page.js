@@ -1,10 +1,10 @@
 import React from 'react'
 import ResetPassword from './ResetPassword'
 
-const page = () => {
+const ResetPasswordServer = () => {
   return (
    <ResetPassword/>
   )
 }
 
-export default page
+export default ResetPasswordServer
