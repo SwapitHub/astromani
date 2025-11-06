@@ -1,6 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
+"use client"
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -9,10 +8,17 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(null); // Store token here
   const searchParams = useSearchParams();
   const router = useRouter();
-  // ✅ Get reset token from URL
-  const token = searchParams.get("token");
+
+  useEffect(() => {
+    // Client-side check to get token from URL
+    const resetToken = searchParams.get("token");
+    if (resetToken) {
+      setToken(resetToken);
+    }
+  }, [searchParams]); // Runs after searchParams is available
 
   const handleResetSubmit = async () => {
     if (!newPassword || !confirmPassword) {
@@ -56,6 +62,10 @@ const ResetPassword = () => {
       setLoading(false);
     }
   };
+
+  if (!token) {
+    return <div>Loading...</div>; // Render loading state until token is available
+  }
 
   return (
     <div className="container">
