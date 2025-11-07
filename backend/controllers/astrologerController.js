@@ -3,12 +3,15 @@ const fs = require("fs");
 const path = require("path");
 const businessProfileAstrologer = require("../models/businessProfileAstrologerModel");
 const WalletTransaction = require("../models/transactionsUserModel");
-// ✅ Get List of Astrologers (Filter by astroStatus)
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const getAllAstrologersWithWallet = async (req, res) => {
- try {
-    const page = parseInt(req.query.page) || 1; 
-    const limit = parseInt(req.query.limit) || 10; 
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     const search = req.query.search || "";
 
     const skip = (page - 1) * limit;
@@ -20,7 +23,7 @@ const getAllAstrologersWithWallet = async (req, res) => {
     });
 
     matchConditions.push({ deleteAstroLoger: false });
-    
+
     if (search) {
       matchConditions.push({
         $or: [
@@ -52,7 +55,9 @@ const getAllAstrologersWithWallet = async (req, res) => {
 
     // Clone pipeline for count
     const countPipeline = [...aggregatePipeline, { $count: "total" }];
-    const totalCountResult = await businessProfileAstrologer.aggregate(countPipeline);
+    const totalCountResult = await businessProfileAstrologer.aggregate(
+      countPipeline
+    );
     const totalUsers = totalCountResult[0]?.total || 0;
     const totalPages = Math.ceil(totalUsers / limit);
 
@@ -78,17 +83,18 @@ const getAllAstrologersWithWallet = async (req, res) => {
   }
 };
 
-
 const getAllAstrologersWithWalletDetail = async (req, res) => {
   try {
     const mobileNumber = req.params.mobileNumber;
-    const { page = 1, limit = 10, search = "" } = req.query; 
+    const { page = 1, limit = 10, search = "" } = req.query;
 
     if (!mobileNumber) {
       return res.status(400).json({ message: "Phone number is required" });
     }
 
-    const astrologer = await businessProfileAstrologer.findOne({ mobileNumber });
+    const astrologer = await businessProfileAstrologer.findOne({
+      mobileNumber,
+    });
 
     if (!astrologer) {
       return res.status(404).json({ message: "User not found" });
@@ -100,7 +106,7 @@ const getAllAstrologersWithWalletDetail = async (req, res) => {
       filter.$or = [
         { transactionId: { $regex: search, $options: "i" } }, // if transactionId field exists
         { type: { $regex: search, $options: "i" } }, // search by type (credit/debit/astro_product etc.)
-        { status: { $regex: search, $options: "i" } } // search by status (success/pending/failed)
+        { status: { $regex: search, $options: "i" } }, // search by status (success/pending/failed)
       ];
     }
 
@@ -112,7 +118,7 @@ const getAllAstrologersWithWalletDetail = async (req, res) => {
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(Number(limit)),
-      WalletTransaction.countDocuments(filter)
+      WalletTransaction.countDocuments(filter),
     ]);
 
     return res.status(200).json({
@@ -125,12 +131,14 @@ const getAllAstrologersWithWalletDetail = async (req, res) => {
         limit: Number(limit),
         totalPages: Math.ceil(totalCount / limit),
         hasNextPage: page * limit < totalCount,
-        hasPrevPage: page > 1
-      }
+        hasPrevPage: page > 1,
+      },
     });
   } catch (error) {
     console.error("Error fetching user wallet details:", error);
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
 
@@ -230,7 +238,138 @@ const getAstrologerDetail = async (req, res, next) => {
   }
 };
 
+
+
+
+
+
+// ===========
+const requestPasswordReset = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const astrologer = await AstrologerRegistration.findOne({ email });
+
+    if (!astrologer)
+      return res.status(404).json({ message: "Email not registered" });
+
+    const resetToken = jwt.sign({ id: astrologer._id }, JWT_SECRET, {
+      expiresIn: "15m",
+    });
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.hostinger.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "info@demoprojectwork.com",
+        pass: "bQ|4TcE+Py1",
+      },
+    });
+
+    const mailOptions = {
+      from: `"Astromani App" <info@demoprojectwork.com>`,
+      to: email,
+      subject: "Password Reset Request",
+      html: `
+        <p>Hello ${astrologer.name},</p>
+        <p>Click the link below to reset your password (valid for 15 minutes):</p>
+        <a href="http://localhost:3000/astro-reset-password?token=${resetToken}">Reset Password</a>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.json({ message: "Password reset link sent to email." });
+  } catch (error) {
+    console.error("Error in requestPasswordReset:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+const resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({
+        message: "Password must be at least 6 characters long.",
+      });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const astrologer = await AstrologerRegistration.findById(decoded.id);
+
+    if (!astrologer)
+      return res.status(404).json({ message: "Astrologer not found" });
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    astrologer.Password = hashedPassword;
+
+    await astrologer.save();
+    res.json({ message: "Password updated successfully." });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    res.status(400).json({ message: "Invalid or expired token." });
+  }
+};
+
+
+
+const postAstrologerLogin = async (req, res) => {
+  try {
+    const { email, Password } = req.body;
+
+    if (!email || !Password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    const astrologer = await AstrologerRegistration.findOne({ email });
+    if (!astrologer) {
+      return res.status(404).json({ message: "Astrologer not found" });
+    }
+
+    // Check approval, block, or delete status
+    if (astrologer.deleteAstroLoger === true) {
+      return res.status(403).json({ message: "Your account has been deleted." });
+    }
+    if (astrologer.blockUnblockAstro === true) {
+      return res.status(403).json({ message: "Your account is blocked by admin." });
+    }
+    if (astrologer.astroStatus === false) {
+      return res.status(403).json({
+        message: "You can log in after your registration is approved by the admin.",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(Password, astrologer.Password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+
+    const token = jwt.sign({ id: astrologer._id }, JWT_SECRET, { expiresIn: "1h" });
+
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token,
+      astrologer: {
+        id: astrologer._id,
+        name: astrologer.name,
+        email: astrologer.email,
+        mobileNumber: astrologer.mobileNumber,
+      },
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+// =============
 // ✅ Register New Astrologer
+
+
 const registerAstrologer = async (req, res, next) => {
   try {
     const {
@@ -241,6 +380,7 @@ const registerAstrologer = async (req, res, next) => {
       skills,
       deviceUse,
       email,
+      Password,
       astroStatus,
       mobileNumber,
     } = req.body;
@@ -253,6 +393,7 @@ const registerAstrologer = async (req, res, next) => {
       !skills ||
       !deviceUse ||
       !email ||
+      !Password ||
       astroStatus === undefined ||
       !mobileNumber
     ) {
@@ -279,6 +420,9 @@ const registerAstrologer = async (req, res, next) => {
       ? `/public/uploads/${req.files.certificate[0].filename}`
       : null;
 
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(Password, saltRounds);
+
     const newAstrologer = new AstrologerRegistration({
       name,
       dateOfBirth,
@@ -287,6 +431,7 @@ const registerAstrologer = async (req, res, next) => {
       skills,
       deviceUse,
       email,
+      Password: hashedPassword,
       astroStatus,
       mobileNumber,
       blockUnblockAstro: false,
@@ -433,5 +578,8 @@ module.exports = {
   deleteAstrologerList,
   updateAstroAnyField,
   getAllAstrologersWithWallet,
-  getAllAstrologersWithWalletDetail
+  getAllAstrologersWithWalletDetail,
+  postAstrologerLogin,
+  requestPasswordReset,
+  resetPassword,
 };
