@@ -36,6 +36,7 @@ const AstrologerRegistration = () => {
     const skills = document.getElementById("Skills").value;
     const deviceUse = document.getElementById("deviceUse").value;
     const email = document.getElementById("emails").value;
+    const Password = document.getElementById("Password").value;
     const mobileNumber = document.getElementById("mobileNumber").value;
 
     if (
@@ -46,6 +47,7 @@ const AstrologerRegistration = () => {
       !skills ||
       !deviceUse ||
       !email ||
+      !Password ||
       !mobileNumber ||
       !aadhaarFile ||
       !certificateFile
@@ -63,6 +65,7 @@ const AstrologerRegistration = () => {
       formData.append("skills", skills);
       formData.append("deviceUse", deviceUse);
       formData.append("email", email);
+      formData.append("Password", Password);
       formData.append("mobileNumber", mobileNumber);
       formData.append("astroStatus", false); // default
 
@@ -384,6 +387,25 @@ const AstrologerRegistration = () => {
                         required
                       />
                       {errors.email && <p className="error">{errors.email}</p>}
+                    </div>
+
+                    <div className="inner-form-filed-sec">
+                      <div className="label-content">
+                        <label for="birthday">
+                          Password <span> (पासवर्ड)</span>
+                        </label>
+                      </div>
+
+                      <input
+                        type="Password"
+                        id="Password"
+                        name="Password"
+                        multiple
+                        className="common-input-filed"
+                        placeholder="Password"
+                        required
+                      />
+                      {errors.Password && <p className="error">{errors.Password}</p>}
                     </div>
 
                     <div className="inner-form-filed-sec">

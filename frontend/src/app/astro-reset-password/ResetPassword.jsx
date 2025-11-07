@@ -33,7 +33,7 @@ const ResetPassword = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-reset-password`,
+        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/astrologer-reset-password`,
         { token, newPassword }
       );
 
