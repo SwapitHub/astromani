@@ -196,7 +196,7 @@ function ActiveList() {
               <div className="input-outer">
                 <div className="balance">Total active Astrologer : </div>
                 <div className="input-inner">
-                  ₹ {Math.round(totalCount) || 0}
+                   {Math.round(totalCount) || 0}
                 </div>
               </div>
             </div>

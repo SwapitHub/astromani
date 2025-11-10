@@ -231,7 +231,6 @@ const OtpData = ({ setOtpPopUpDisplayAstro, otpPopUpDisplayAstro }) => {
                         <span>
                           Enter your Registred Email to reset your password.
                         </span>
-                        
                       </div>
 
                       <div className="form-field">
@@ -369,14 +368,15 @@ const OtpData = ({ setOtpPopUpDisplayAstro, otpPopUpDisplayAstro }) => {
               </div>
             </div>
           )}
-
-          <div
-            className={`popup-btm-content ${
-              message == "OTP sent successfully" ? "green" : "red"
-            }`}
-          >
-            <p>{message}</p>
-          </div>
+          {message && (
+            <div
+              className={`popup-btm-content ${
+                message == "OTP sent successfully" ? "green" : "red"
+              }`}
+            >
+              <p>{message}</p>
+            </div>
+          )}
         </div>
       )}
     </div>

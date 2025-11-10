@@ -284,6 +284,7 @@ p.error {display: block; width: 100%; margin: 7px 0px 0px;}
 .popup-header {border-bottom: 1px solid #ccc; padding: 13px 20px;}
 .popup-header h1 {font-weight: 600; font-size: 20px; line-height: normal; margin: 0;}
 .send-otp .number--continious-popup, .enter-otp {padding: 20px 50px 50px;}
+.send-otp .number--continious-popup:not(:last-child), .enter-otp:not(:last-child) {padding-bottom: 0px;}
 .send-otp span.close-icon {position: absolute; right: 12px; top: 14px; font-size: 0; cursor: pointer; transition: 0.3s ease-in-out; z-index: 9; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;}
 .send-otp span.close-icon span {height: 18px; width: 2px; background-color: var(--body_content_color); display: inline-block; transform: rotate(45deg); position: absolute;}
 .send-otp span.close-icon span:last-child {transform: rotate(-45deg);}
@@ -299,9 +300,11 @@ p.error {display: block; width: 100%; margin: 7px 0px 0px;}
 .send-otp .left-col-resend p {padding: 0;}
 .send-otp .left-col-resend p button {margin: 0;}
 .send-otp .left-col-resend {display: flex; align-items: center; gap: 30px;}
-.user-login-email {display: flex; align-items: center; gap: 10px; justify-content: center; margin: 0 0 20px;}
+.user-login-email {display: flex; align-items: center; gap: 2px 10px; justify-content: center; margin: 0 0 20px; flex-wrap: wrap;}
 .form-field + button {margin-top: 0px !important;}
-.forget-and-login-with-mobile-btns {display: flex; margin: 20px 0px 0px; gap: 50px;}
+.forget-and-login-with-mobile-btns {display: flex; margin: 20px 0px 0px; gap: 50px; justify-content: space-between;}
+.send-otp .number--continious-popup + .popup-btm-content {padding: 20px 20px 50px;}
+.popup-btm-content p {font-size: 14px; padding: 0px;}
 /* 06-march-2025 */
 .ctm-underline-text {text-decoration: underline;}
 .ctm-span-define {font-weight: 500; font-size: 20px;}
@@ -875,9 +878,8 @@ td button + button {margin-left: 5px;}
 .astro-mall-btn {position: absolute; right: 10px; top: 10px; display: flex; gap: 5px;}
 .astro-mall-btn button {padding: 5px 0px 0px !important; width: 30px; height: 30px;}
 .AstroMallShops-admin {flex-wrap: unset;}
-.AstroMallShops-admin .details-cont {min-height: auto;}
 .AstroMallShops-admin .astromall-listing {margin: 20px 0px 0px;}
-.AstroMallShops-admin .astromall-listing > * {background-color: var(--primary_color); min-width: 0px;}
+.AstroMallShops-admin .astromall-listing > * {min-width: 0px;}
 .astromall-slider-outer .slider-sec {margin: 30px 0px 0px;}
 .astromall-slider-outer .slick-track {display: flex;}
 .astromall-slider-outer .slick-list {margin: 0px -10px;}
@@ -1266,6 +1268,14 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   100% {opacity: 1;}
 }
 .astrology_seciton {padding-top: 0px;}
+.reset-password-container {padding: 70px 0px 0px;}
+.reset-password-box {max-width: 450px; margin: 0 auto; text-align: center; background-color: #fff; box-shadow: 0px 6px 20px rgba(0, 0, 0, .1); padding: 50px;}
+.reset-password-box > p {margin: 0 0 20px;}
+.main-user-profile {padding: 70px 0px 0px;}
+.main-user-profile .user-profile {justify-content: center; display: flex; gap: 10px; flex-wrap: wrap;}
+.main-user-profile .wallet-edit-main + .user-profile {padding: 70px 0px 0px;}
+.main-user-profile .wallet-edit-main {position: fixed; width: 100%; left: 0px; top: 0px; z-index: 99; background-color: rgba(0, 0, 0, .6);}
+.wallet-edit-main-popup-inner {background-color: #ffffff; max-width: 700px; position: relative; left: 50%; top: 50%;  transform: translate(-50%, -50%); padding: 50px; max-height: 100vh; overflow-y: auto;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
@@ -1364,11 +1374,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .user-profile-pick-main {flex-wrap: wrap; justify-content: center; gap: 20px;}
   .user-profile-picture-sec-single {order: 1;}
   .user-profile-picture-sec-single:first-child {order: 2;}
-  .inner-admin-wallet {
-		flex-direction: column-reverse;
-		align-items: flex-start;
-		margin: 0 0 20px;
-	}
+  .inner-admin-wallet {flex-direction: column-reverse; align-items: flex-start; margin: 0 0 20px;}
 }
 @media (max-width: 767px) {
   body {font-size: 14px;}
@@ -1514,6 +1520,10 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .breadcrumb ul li > a::after {width: 5px; height: 5px; top: 7px;}
   .banner-main h1 {margin: 0 0 20px;}
   .banner .btn-wrapper {margin-top: 30px;}
+  .main-user-profile {padding: 40px 0px 0px;}
+  .wallet-edit-main-popup-inner {max-width: calc(100% - 30px); padding: 20px;}
+  .wallet-edit-main-popup-inner h1 {font-size: 24px;}
+  .wallet-edit-main .wallet-edit-main-popup-inner .close {right: 20px;}
 }
 @media (max-width: 639px) {
   .four-col .row {grid-template-columns: repeat(1, 1fr); gap: 20px;}
@@ -1551,6 +1561,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .call-link button {width: 100%; margin: 15px 0px 0px;}
   .banner-home .language-list ul li .banner-content {max-width: 100%;}
   .main-recharge-popup {max-width: calc(100% - 30px);}
+  .reset-password-box {padding: 30px 20px;}
 }
 @media (max-width: 370px) {
   .sort-right {gap: 5px;}

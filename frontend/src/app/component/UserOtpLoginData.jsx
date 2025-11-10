@@ -21,8 +21,6 @@ function UserOtpLoginData({ setOtpPopUpDisplay, editDetailOrder }) {
   const [password, setPassword] = useState("");
   const [resetEmail, setResetEmail] = useState("");
 
-
-
   // useEffect(() => {
   //   axios
   //     .get(
@@ -252,28 +250,28 @@ function UserOtpLoginData({ setOtpPopUpDisplay, editDetailOrder }) {
   };
 
   const handleResetPassword = async () => {
-  if (!resetEmail) {
-    setMessage("Please enter your registered email.");
-    return;
-  }
-
-  try {
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-request-Password-Reset`,
-      { userEmail: resetEmail }
-    );
-
-    if (res.status === 200) {
-      setMessage("Password reset link sent to your email.");
-      setResetEmail(" ")
-    } else {
-      setMessage(res.data.message || "Error sending email.");
+    if (!resetEmail) {
+      setMessage("Please enter your registered email.");
+      return;
     }
-  } catch (err) {
-    console.error("Reset email error:", err);
-    setMessage(err.response?.data?.message || "Server error.");
-  }
-};
+
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-request-Password-Reset`,
+        { userEmail: resetEmail }
+      );
+
+      if (res.status === 200) {
+        setMessage("Password reset link sent to your email.");
+        setResetEmail(" ");
+      } else {
+        setMessage(res.data.message || "Error sending email.");
+      }
+    } catch (err) {
+      console.error("Reset email error:", err);
+      setMessage(err.response?.data?.message || "Server error.");
+    }
+  };
 
   return (
     <div className="send-otp">
@@ -485,13 +483,16 @@ function UserOtpLoginData({ setOtpPopUpDisplay, editDetailOrder }) {
           </div>
         </div>
       )}
-      <div
-        className={`popup-btm-content ${
-          message == "OTP sent successfully" ? "green" : "red"
-        }`}
-      >
-        <p>{message}</p>
-      </div>
+
+      {message && (
+        <div
+          className={`popup-btm-content ${
+            message == "OTP sent successfully" ? "green" : "red"
+          }`}
+        >
+          <p>{message}</p>
+        </div>
+      )}
     </div>
   );
 }
