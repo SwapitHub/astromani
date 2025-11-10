@@ -209,52 +209,28 @@ const getUserLoginDetail = async (req, res) => {
 // 🟦 Update User by ID, Phone, or Email
 const updateUser = async (req, res) => {
   try {
-    const { phoneOrIdOrEmail } = req.params;
+    const { phoneOrId } = req.params;
     const updateFields = req.body;
 
     if (!Object.keys(updateFields).length) {
-      return res.status(400).json({
-        error: "At least one field is required to update.",
-      });
+      return res
+        .status(400)
+        .json({ error: "At least one field is required to update" });
     }
 
-    // ✅ Identify the type of identifier
-    const isObjectId = /^[0-9a-fA-F]{24}$/.test(phoneOrIdOrEmail);
-    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(phoneOrIdOrEmail);
+    // Determine if it's a valid MongoDB ObjectId
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(phoneOrId);
 
-    let query = {};
+    const query = isObjectId ? { _id: phoneOrId } : { phone: phoneOrId };
 
-    if (isObjectId) {
-      // Case 1: Update by MongoDB _id
-      query = { _id: phoneOrIdOrEmail };
-    } else if (isEmail) {
-      // Case 2: Update by email
-      query = { userEmail: phoneOrIdOrEmail };
-    } else {
-      // Case 3: Update by phone number
-      query = { phone: phoneOrIdOrEmail };
-    }
-
-    // ✅ Try to find by the first method
-    let updatedUser = await UserLogin.findOneAndUpdate(
+    const updatedUser = await UserLogin.findOneAndUpdate(
       query,
       { $set: updateFields },
       { new: true, runValidators: true }
     );
 
-    // ✅ If not found and it wasn’t ObjectId, try both email and phone as fallback
-    if (!updatedUser && !isObjectId) {
-      updatedUser = await UserLogin.findOneAndUpdate(
-        {
-          $or: [{ phone: phoneOrIdOrEmail }, { userEmail: phoneOrIdOrEmail }],
-        },
-        { $set: updateFields },
-        { new: true, runValidators: true }
-      );
-    }
-
     if (!updatedUser) {
-      return res.status(404).json({ error: "User not found." });
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.status(200).json({
@@ -263,10 +239,9 @@ const updateUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating user:", error);
-    res.status(500).json({
-      error: "Failed to update user",
-      details: error.message,
-    });
+    res
+      .status(500)
+      .json({ error: "Failed to update user", details: error.message });
   }
 };
 
