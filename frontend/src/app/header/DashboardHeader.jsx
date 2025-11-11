@@ -83,7 +83,7 @@ const DashboardHeader = ({ setToggleSlideMobile }) => {
 
   return (
     <div className="page-main-header">
-      <div className="main-header-right ">
+      <div className="main-header-right">
         {/* <div className="main-header-left d-lg-none w-auto">
           <div className="logo-wrapper">
             <Link href="">

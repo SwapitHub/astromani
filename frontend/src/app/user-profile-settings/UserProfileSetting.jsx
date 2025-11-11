@@ -18,7 +18,7 @@ const UserProfileSetting = () => {
   const [deletePermanently, setDeletePermanently] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const router = useRouter();
-  console.log(userDetailData);
+  console.log("userDetailData", userDetailData);
 
   // Get userMobile from cookies on initial render
   useEffect(() => {
@@ -39,6 +39,9 @@ const UserProfileSetting = () => {
         `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/user-login-detail/${userMobile}`
       );
       setUserDetailData(response.data.data);
+      if (response?.status == 200) {
+        window.location.reload();
+      }
       console.log("API response:", response);
     } catch (err) {
       console.error("user detail api error:", err);
@@ -47,16 +50,7 @@ const UserProfileSetting = () => {
     }
   }, [userMobile]);
 
-  useEffect(() => {
-    if (userMobile) {
-      fetchUserDetail();
-      window.addEventListener("userMobileUpdated", fetchUserDetail);
 
-      return () => {
-        window.removeEventListener("userMobileUpdated", fetchUserDetail);
-      };
-    }
-  }, [userMobile, fetchUserDetail]);
 
   const userLogout = () => {
     window.dispatchEvent(new Event("userMobileUpdatedRemoved"));
