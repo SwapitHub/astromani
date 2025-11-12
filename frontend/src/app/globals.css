@@ -303,7 +303,7 @@ p.error {display: block; width: 100%; margin: 7px 0px 0px;}
 .user-login-email {display: flex; align-items: center; gap: 2px 10px; justify-content: center; margin: 0 0 20px; flex-wrap: wrap;}
 .form-field + button {margin-top: 0px !important;}
 .forget-and-login-with-mobile-btns {display: flex; margin: 20px 0px 0px; gap: 50px; justify-content: space-between;}
-.send-otp .number--continious-popup + .popup-btm-content {padding: 20px 20px 50px;}
+.send-otp .number--continious-popup + .popup-btm-content, .send-otp .enter-otp + .popup-btm-content {padding: 20px 20px 50px;}
 .popup-btm-content p {font-size: 14px; padding: 0px;}
 /* 06-march-2025 */
 .ctm-underline-text {text-decoration: underline;}
@@ -1275,7 +1275,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .main-user-profile .user-profile {justify-content: center; display: flex; gap: 10px; flex-wrap: wrap;}
 .main-user-profile .wallet-edit-main + .user-profile {padding: 70px 0px 0px;}
 .main-user-profile .wallet-edit-main {position: fixed; width: 100%; left: 0px; top: 0px; z-index: 99; background-color: rgba(0, 0, 0, .6);}
-.wallet-edit-main-popup-inner {background-color: #ffffff; max-width: 700px; position: relative; left: 50%; top: 50%;  transform: translate(-50%, -50%); padding: 50px; max-height: 100vh; overflow-y: auto;}
+.main-user-profile .wallet-edit-main-popup-inner {background-color: #ffffff; max-width: 700px; position: relative; left: 50%; top: 50%;  transform: translate(-50%, -50%); padding: 50px; max-height: 100vh; overflow-y: auto;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}

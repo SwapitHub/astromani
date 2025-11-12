@@ -137,8 +137,7 @@ const StartUserName = () => {
       if (
         response.data.message === "success" ||
         response.data.message === "User registered successfully"
-      )
-       {
+      ) {
         // Cookies.set("userIds", response.data.user._id, {
         //   expires: 3650,
         //   secure: true,
@@ -151,8 +150,7 @@ const StartUserName = () => {
       }
     } catch (err) {
       console.error("Error during user registration/update:", err);
-        setMessage(err?.response?.data?.error);
-
+      setMessage(err?.response?.data?.error);
     }
   };
 
@@ -248,12 +246,15 @@ const StartUserName = () => {
 
                     {/* Gender */}
                     <div className="inner-form-filed-sec">
-                      <label>
-                        Gender <span>(लिंग)</span>
-                      </label>
-                      <div className="input-gender-sec">
+                      <div className="label-content">
+                        <label>
+                          Gender <span>(लिंग)</span>
+                        </label>
+                      </div>
+
+                      <div className="man-input-filed-sec input-gender-sec">
                         {["Male", "Female", "Other"].map((g) => (
-                          <label key={g}>
+                          <div className="inner-radio">
                             <input
                               type="radio"
                               name="gender"
@@ -261,8 +262,8 @@ const StartUserName = () => {
                               checked={editGender === g}
                               onChange={(e) => setEditGender(e.target.value)}
                             />
-                            {g}
-                          </label>
+                            <label key={g}>{g}</label>
+                          </div>
                         ))}
                       </div>
                       {errors.gender && (
