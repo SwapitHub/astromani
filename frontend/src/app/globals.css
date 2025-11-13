@@ -885,7 +885,7 @@ td button + button {margin-left: 5px;}
 .astromall-slider-outer .slick-list {margin: 0px -10px;}
 .astromall-slider-outer .slick-slide {height: inherit; margin: 0px 10px;}
 .astromall-slider-outer .slick-slide > *, .astromall-slider-outer .slick-slide .single-slide {height: 100%;}
-.AstroMallShops-admin .form-field img {max-width: 100px; border-radius: 8px; aspect-ratio: 1 / 1; object-fit: cover; margin: 10px 0px;}
+.AstroMallShops-admin .form-field img { border-radius: 8px; aspect-ratio: 1 / 1; object-fit: cover; margin: 10px 0px;}
 .tabbing-img {display: flex; gap: 10px; margin: 10px 0px 0px;}
 .tabbing-img > * {position: relative;}
 .tab-img span:has(svg) {position: absolute; right: 10px; top: 10px; background-color: var(--primary_color); width: 20px; height: 20px; display: inline-flex; justify-content: center; align-items: center; color: #fff; border-radius: 4px; cursor: pointer;}

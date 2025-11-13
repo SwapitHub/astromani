@@ -500,7 +500,7 @@ const ProductDetail = ({ productDetailData }) => {
               </div>
             </div>
             <div className="product-promises-right">
-              <h2>Astrotalk Promises</h2>
+              <h2>Astromani Promises</h2>
               <div className="promise-box-sec">
                 <p>
                   AstroMall is a one - stop shop for all your astrological

@@ -478,8 +478,8 @@ const AstroMallShopProduct = () => {
                 {showImage && (
                   <div className="banner-img">
                     <Image
-                      width={100}
-                      height={100}
+                      width={233}
+                      height={233}
                       src={
                         showImage?.astroMallProductImg
                           ? process.env.NEXT_PUBLIC_WEBSITE_URL +
@@ -516,8 +516,8 @@ const AstroMallShopProduct = () => {
                           <RiDeleteBin7Fill />
                         </span>
                         <Image
-                          width={100}
-                          height={100}
+                          width={233}
+                          height={233}
                           src={
                             item?.url
                               ? process.env.NEXT_PUBLIC_WEBSITE_URL + item?.url
@@ -789,8 +789,8 @@ const AstroMallShopProduct = () => {
                       <div className="details-outer">
                         <div className="product-img">
                           <Image
-                            width={100}
-                            height={100}
+                            width={233}
+                            height={233}
                             src={
                               item?.astroMallProductImg
                                 ? process.env.NEXT_PUBLIC_WEBSITE_URL +
