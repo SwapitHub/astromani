@@ -106,6 +106,7 @@ app.use(express.json());
 
 // connectMongoDb("mongodb://localhost:27017/chatting");
 
+
 connectMongoDb(
   "mongodb+srv://swapitshamsher:Eb25QUq9aEt27aSQ@astrologer.euynurr.mongodb.net/astromani?retryWrites=true&w=majority"
 );
