@@ -12,6 +12,9 @@ const astroMallShopSchema = new mongoose.Schema({
   cloudinary_id: String,
   detail_shop_information: String,
   deleteShopStatus: Boolean,
+  meta_description: String,
+  meta_title: String,
+  meta_keyword: String,
 });
 
 const astroMallShopListing = mongoose.model(

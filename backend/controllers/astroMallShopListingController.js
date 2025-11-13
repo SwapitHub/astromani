@@ -82,6 +82,9 @@ const updateAstroShopeList = async (req, res) => {
       Jewelry_product_gem,
       discount_product,
       detail_shop_information,
+      meta_description,
+      meta_title,
+      meta_keyword,
     } = req.body;
 
     const shop = await astroMallShopListing.findById(id);
@@ -113,6 +116,9 @@ const updateAstroShopeList = async (req, res) => {
         astroMallImg: updatedImagePath,
         detail_shop_information,
         deleteShopStatus: false,
+        meta_description,
+        meta_title,
+        meta_keyword,
       },
       { new: true }
     );
@@ -156,7 +162,7 @@ const getAstroShopeList = async (req, res) => {
     const { page = 1, limit = 10, search = "" } = req.query;
 
     const query = {
-      deleteShopStatus: false, 
+      deleteShopStatus: false,
     };
 
     if (search) {
@@ -191,7 +197,6 @@ const getAstroShopeList = async (req, res) => {
   }
 };
 
-
 const postAstroShopeList = async (req, res) => {
   try {
     const {
@@ -203,6 +208,9 @@ const postAstroShopeList = async (req, res) => {
       discount_product,
       Jewelry_product_gem,
       detail_shop_information,
+      meta_description,
+      meta_title,
+      meta_keyword,
     } = req.body;
 
     if (!req.file) {
@@ -232,6 +240,9 @@ const postAstroShopeList = async (req, res) => {
       Jewelry_product_gem,
       detail_shop_information,
       deleteShopStatus: false,
+      meta_description,
+      meta_title,
+      meta_keyword,
     });
 
     const saved = await newItem.save();
