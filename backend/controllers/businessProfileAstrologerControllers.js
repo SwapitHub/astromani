@@ -554,6 +554,7 @@ const postAstrologerProfile = async (req, res) => {
       requestStatus,
       aadhaarCard,
       certificate,
+      email,
     } = req.body;
 
     // Parse JSON strings if sent that way
@@ -576,7 +577,8 @@ const postAstrologerProfile = async (req, res) => {
       !country ||
       !gender ||
       !certificate ||
-      !aadhaarCard
+      !aadhaarCard ||
+      !email
     ) {
       return res
         .status(400)
@@ -608,6 +610,7 @@ const postAstrologerProfile = async (req, res) => {
       profileImage: imageURL,
       profileStatus,
       chatStatus,
+      email,
       country,
       gender,
       starRating,

@@ -21,6 +21,7 @@ const businessProfileAstrologerSchema = new mongoose.Schema(
     minute: { type: String, required: false },
     mobileNumber: { type: String, required: true, unique: true },
     profileImage: String,
+    email: { type: String },
     profileStatus: Boolean,
     chatStatus: Boolean,
     country: String,
