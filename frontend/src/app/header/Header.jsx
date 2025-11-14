@@ -170,6 +170,23 @@ const Header = () => {
             setOtpPopUpDisplayAstro={setOtpPopUpDisplayAstro}
             otpPopUpDisplayAstro={otpPopUpDisplayAstro}
           />
+          <div className="top-bar">
+            <div className="container">
+              <div className="top-bar-inner">
+                <ul>
+                  <li>
+                    <Link href="/kundli">free kundli online</Link>
+                  </li>
+                  <li>
+                    <Link href="/kundli-matching">kundli matching</Link>
+                  </li>
+                  <li>
+                    <Link href="/daily-horoscope">daily horoscope</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div className="container">
             <div className="inner-header-sec ctm-flex-row ctm-align-items-center ctm-justify-content-between">
               <div className="header-left-logo">

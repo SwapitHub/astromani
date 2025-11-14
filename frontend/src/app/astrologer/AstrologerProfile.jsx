@@ -105,6 +105,10 @@ const AstrologerProfile = ({
       "mobileNumber",
       document.getElementById("mobileNumber").value
     );
+    formData.append(
+      "email",
+      document.getElementById("email").value
+    );
     formData.append("profileStatus", true);
     formData.append("chatStatus", false);
     formData.append("freeChatStatus", false);
@@ -692,7 +696,24 @@ const AstrologerProfile = ({
                 <p className="error">{errors.mobileNumber}</p>
               )}
             </div>
-
+            <div className="inner-form-filed-sec full">
+              <div className="label-content">
+                <label for="Name">
+                  Email <span>(ईमेल)</span>
+                </label>
+              </div>
+              <input
+                type="text"
+                placeholder="Enter email"
+                id="email"
+                name="quantity"
+                value={registrationDetail?.email}
+                className="common-input-filed"
+              />
+              {/* {errors.mobileNumber && (
+                <p className="error">{errors.mobileNumber}</p>
+              )} */}
+            </div>
             <div className="inner-form-filed-sec full">
               <div className="label-content">
                 <label for="Name">

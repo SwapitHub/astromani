@@ -88,19 +88,19 @@ const WalletView = ({
             <div className="input-outer"> {astroDetailData?.dateOfBirth}</div>
           </div>
           <div className="common-profile">
-            <div className="gender">gender</div>
+            <div className="gender">Gender</div>
             <div className="input-outer"> {astroDetailData?.gender}</div>
           </div>
           <div className="common-profile">
-            <div className="language">language</div>
+            <div className="language">Language</div>
             <div className="input-outer"> {astroDetailData?.language}</div>
           </div>
           <div className="common-profile">
-            <div className="placeOfBorn">place Of Born</div>
+            <div className="placeOfBorn">Place Of Born</div>
             <div className="input-outer">{astroDetailData?.placeOfBorn}</div>
           </div>
           <div className="common-profile">
-            <div className="date-time">Date and Time</div>
+            <div className="date-time">Date And Time</div>
             <div className="input-outer">
               {" "}
               {astroDetailData?.createdAt &&

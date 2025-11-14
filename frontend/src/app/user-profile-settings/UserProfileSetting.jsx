@@ -141,7 +141,7 @@ const UserProfileSetting = () => {
           <button onClick={userLogout}>Log out</button>
           <button
             onClick={() => {
-              setSelectedUserId(userDetailData._id);
+              setSelectedUserId(userDetailData?.id);
               setShowDelete(true);
             }}
           >

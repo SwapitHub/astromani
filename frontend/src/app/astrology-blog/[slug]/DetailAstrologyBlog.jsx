@@ -3,6 +3,8 @@ import Link from "next/link";
 import React from "react";
 
 const DetailAstrologyBlog = ({ blogsDetailData }) => {
+  console.log(blogsDetailData);
+  
   return (
     <div className="blogs-detail-outer">
       <div className="container">

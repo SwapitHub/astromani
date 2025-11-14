@@ -1,7 +1,7 @@
-import React from 'react'
-import Success from './Success'
-export async function generateMetadata() {
+import React from "react";
+import Success from "./Success";
 
+export async function generateMetadata() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_WEBSITE_URL}/get-seo-meta-by-slug/success`,
     {
@@ -30,9 +30,7 @@ export async function generateMetadata() {
       siteName: data?.data?.meta_site_name || "Default Site Name",
       images: [
         {
-          url:
-            data?.data?.logo ||
-            "/astrotalk-logo.webp",
+          url: data?.data?.logo || "/astrotalk-logo.webp",
           width: 800,
           height: 600,
           alt: data?.data?.logo_alt || "Default Image Alt",
@@ -47,18 +45,12 @@ export async function generateMetadata() {
       card: "summary_large_image",
       title: data?.data?.meta_title || "Default Title",
       description: data?.data?.meta_description || "Default Description",
-      images: [
-        data?.data?.logo ||
-          "/astrotalk-logo.webp",
-      ],
+      images: [data?.data?.logo || "/astrotalk-logo.webp"],
     },
   };
-  
 }
 const SuccessServer = () => {
-  return (
-    <Success/>
-  )
-}
+  return <Success />;
+};
 
-export default SuccessServer
+export default SuccessServer;

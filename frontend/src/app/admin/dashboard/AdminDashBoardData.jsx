@@ -17,7 +17,6 @@ const AdminDashBoardData = ({ setUpdateButton }) => {
   const totalTransactionsData = secureLocalStorage.getItem(
     "totalTransactionsData"
   );
-  console.log(totalAstroPending);
 
   return (
     <div className="outer-home-dashboard">
@@ -27,14 +26,7 @@ const AdminDashBoardData = ({ setUpdateButton }) => {
           <p>Astromani Admin Panel</p>
         </div>
         <ul>
-          <li onClick={() => setUpdateButton("changePassword")}>
-            <span>
-              <RiLockPasswordLine />
-            </span>
-            <div className="inner-text">
-              <span>Change Password</span>
-            </div>
-          </li>
+         
           <li onClick={() => setUpdateButton(7)}>
             <span>
               <PiUserListDuotone />
@@ -44,15 +36,7 @@ const AdminDashBoardData = ({ setUpdateButton }) => {
               <span className="number">{totalUsersList}</span>
             </div>
           </li>
-          <li onClick={() => setUpdateButton("pending")}>
-            <span>
-              <PiUserListDuotone />
-            </span>
-            <div className="inner-text">
-              <span>AstroLoger Pending</span>
-              <span className="number">{totalAstroPending}</span>
-            </div>
-          </li>
+         
           <li onClick={() => setUpdateButton("active")}>
             <span>
               <PiUserListDuotone />
