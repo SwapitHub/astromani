@@ -403,6 +403,7 @@ const putAstrologerProfileUpdate = async (req, res) => {
       gender,
       aadhaarCard,
       certificate,
+      email
     } = req.body;
 
     // Prepare update object
@@ -422,6 +423,8 @@ const putAstrologerProfileUpdate = async (req, res) => {
 
     if (experience) updateData.experience = experience;
     if (charges) updateData.charges = charges;
+    if (email) updateData.email = email;
+
     if (aadhaarCard) updateData.aadhaarCard = aadhaarCard;
     if (certificate) updateData.certificate = certificate;
     if (Description?.trim()) updateData.Description = Description.trim();

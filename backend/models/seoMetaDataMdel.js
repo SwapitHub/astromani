@@ -7,6 +7,7 @@ const seoMetaDataSchema = new mongoose.Schema(
     meta_description:  String ,
     slug: String, 
     keywords:  String, 
+    deleteStatus: Boolean,
   },
   { timestamps: true }
 );

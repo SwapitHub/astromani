@@ -14,9 +14,7 @@ const createDefaultAdmin = async () => {
 
       await newAdmin.save();
       console.log("✅ Default admin created");
-    } else {
-      console.log("ℹ️ Admin already exists");
-    }
+    } 
   } catch (err) {
     console.error("❌ Error:", err.message);
   }

@@ -1,23 +1,7 @@
 const SaveSeoMetaData = require("../models/seoMetaDataMdel");
 
-// DELETE /delete-seo-meta-data/:id
 
-const deleteSeoMetaDataBySlug = async (req, res) => {
-  try {
-    const { _id } = req.params;
 
-    const deleted = await SaveSeoMetaData.findByIdAndDelete(_id);
-
-    if (!deleted) {
-      return res.status(404).json({ error: "SEO metadata not found" });
-    }
-
-    res.status(200).json({ message: "success", data: deleted });
-  } catch (error) {
-    console.error("Delete error:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
 
 
 
@@ -29,15 +13,7 @@ const updateSeoMetaDataBySlug = async (req, res) => {
 
     const updated = await SaveSeoMetaData.findByIdAndUpdate(
       _id,
-      {
-        $set: {
-          page: req.body.page,
-          meta_title: req.body.meta_title,
-          meta_description: req.body.meta_description,
-          slug: req.body.slug,
-          keywords: req.body.keywords,
-        },
-      },
+      { $set: req.body },   // ⭐ Update ANY field automatically
       { new: true }
     );
 
@@ -46,11 +22,13 @@ const updateSeoMetaDataBySlug = async (req, res) => {
     }
 
     res.status(200).json({ message: "success", data: updated });
+
   } catch (error) {
     console.error("Update error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 
 
@@ -61,15 +39,18 @@ const getSeoMetaData = async (req, res) => {
     page = parseInt(page);
     limit = parseInt(limit);
 
-    const totalDocuments = await SaveSeoMetaData.countDocuments();
+    // ⭐ APPLY FILTER
+    const filter = { deleteStatus: true };
+
+    const totalDocuments = await SaveSeoMetaData.countDocuments(filter);
     const totalPages = Math.ceil(totalDocuments / limit);
 
     if (page > totalPages && totalDocuments !== 0) {
       return res.status(400).json({ error: "Page out of range" });
     }
 
-    const seoData = await SaveSeoMetaData.find()
-      .sort({ createdAt: -1 }) // newest first
+    const seoData = await SaveSeoMetaData.find(filter)
+      .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit);
 
@@ -84,11 +65,13 @@ const getSeoMetaData = async (req, res) => {
     };
 
     return res.status(200).json({ message: "success", data: seoData, pagination });
+
   } catch (error) {
     console.error("Error fetching SEO metadata:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
 // GET SEO Meta by Slug
 const getSeoMetaBySlug = async (req, res) => {
   try {
@@ -154,4 +137,4 @@ const postSeoFetchData = async (req, res) => {
   }
 };
 
-module.exports = { postSeoFetchData , getSeoMetaBySlug, getSeoMetaData,updateSeoMetaDataBySlug, deleteSeoMetaDataBySlug};
+module.exports = { postSeoFetchData , getSeoMetaBySlug, getSeoMetaData,updateSeoMetaDataBySlug};
