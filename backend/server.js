@@ -114,7 +114,6 @@ connectMongoDb(
 // app.use(express.json());
 // user connect chatting socket.io
 
-// routes
 app.use("/chat", userRouter);
 app.use("/auth", AuthRoutes);
 app.use("/auth", astrologerRoutes);
