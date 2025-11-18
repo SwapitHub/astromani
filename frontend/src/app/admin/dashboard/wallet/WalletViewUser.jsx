@@ -75,6 +75,10 @@ const WalletView = ({
             <div className="name">Name</div>
             <div className="input-outer">{astroDetailData?.name}</div>
           </div>
+           <div className="common-profile">
+            <div className="name">User Email</div>
+            <div className="input-outer">{astroDetailData?.userEmail}</div>
+          </div>
           <div className="common-profile">
             <div className="mobile">Mobile Number</div>
             <div className="input-outer">{astroDetailData?.phone}</div>

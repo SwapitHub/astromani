@@ -24,7 +24,6 @@ function UserAdminWallet() {
   const [showDelete, setShowDelete] = useState(false);
   const [userToDelete, setUserToDelete] = useState();
   const [deletePermanently, setDeletePermanently] = useState(false);
-  console.log(addActiveClass);
 
   // Debounce search input
   const debounceSearch = useCallback(
@@ -97,7 +96,6 @@ function UserAdminWallet() {
     }
   };
 
-  console.log(userToDelete, deletePermanently, "ewewew");
 
   useEffect(() => {
     if (userToDelete && deletePermanently) {

@@ -3,7 +3,7 @@ import StartUserName from './FreeStart'
 
 export async function generateMetadata() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_WEBSITE_URL}/get-seo-meta-by-slug/free-chat/start`,
+    `${process.env.NEXT_PUBLIC_WEBSITE_URL}/get-seo-meta-by-slug/free-chat`,
     {
       next: { revalidate: 60 },
     }

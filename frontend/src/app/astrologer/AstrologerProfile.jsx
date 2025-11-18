@@ -105,10 +105,7 @@ const AstrologerProfile = ({
       "mobileNumber",
       document.getElementById("mobileNumber").value
     );
-    formData.append(
-      "email",
-      document.getElementById("email").value
-    );
+    formData.append("email", document.getElementById("email").value);
     formData.append("profileStatus", true);
     formData.append("chatStatus", false);
     formData.append("freeChatStatus", false);
@@ -251,7 +248,7 @@ const AstrologerProfile = ({
       "Description",
       document.getElementById("description").value
     );
-
+    formData.append("email", document.getElementById("email").value);
     // Helper to get selected checkbox values
     const getSelectedValues = (name) => {
       return Array.from(

@@ -14,7 +14,7 @@ a {text-decoration: none; transition: all 0.3s; color: var(--primary_color);}
 p:empty, .single-summary:empty {display: none;}
 li {list-style: none;}
 :focus {outline: none;}
-button, .product-right-btn a {cursor: pointer; transition: all 0.3s; font-family: var(--secondary_font); padding: 12px 40px 10px; background-color: var(--primary_color); border-radius: 50px; color: #fff; border: 1px solid var(--primary_color); font-size: 16px; display: inline-block; text-transform: capitalize;}
+button, .product-right-btn a, .new-kundali-form input[type="submit"] {cursor: pointer; transition: all 0.3s; font-family: var(--secondary_font); padding: 12px 40px 10px; background-color: var(--primary_color); border-radius: 50px; color: #fff; border: 1px solid var(--primary_color); font-size: 16px; display: inline-block; text-transform: capitalize;}
 button:hover, .product-right-btn a:hover {background-color: transparent; color: var(--primary_color);}
 .slick-slide {outline: none !important;}
 select {appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--body_content_color) 50%), linear-gradient(135deg, var(--body_content_color) 50%, transparent 50%), linear-gradient(to right, #ffffff00, #ffffff00); background-position: calc(100% - 20px) calc(1em + 6px), calc(100% - 15px) calc(1em + 6px), calc(100% - 2.5em) 0.5em; background-size: 5px 5px, 5px 5px, 1px 1.5em; background-repeat: no-repeat;}
@@ -1282,6 +1282,26 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .top-bar-inner ul {display: flex; justify-content: flex-end; gap: 20px;}
 .top-bar-inner ul a {color: var(--body_content_color); text-transform: capitalize; font-size: 14px;}
 .top-bar-inner ul a:hover {color: var(--primary_color);}
+.new-kundali, .legacies-horo {padding: 70px 0px 0px;}
+.new-kundali-header, .legacies-horo-head {text-align: center; max-width: 700px; margin: 0 auto;}
+.new-kundali-form {margin: 40px 0px 0px;}
+.kundali__details, .kundali-second {display: flex; flex-wrap: wrap; gap: 0px 25px;}
+.kundali__details > * {max-width: calc(100%/2 - 12.5px); flex: 0 0 100%;}
+.kundali-second > * {max-width: calc(100%/3 - 16.66666px); flex: 0 0 100%;}
+.legacies-horo-wrap {display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; margin: 40px 0px 0px;}
+.legacies-horo-scope {background-color: #f2f2f2;}
+.legacies-horo-wrap > * a {padding: 30px 20px; display: inline-block; width: 100%; text-align: center; color: var(--body_content_color);}
+.horo-legacyimg img {filter: brightness(0) saturate(100%) invert(68%) sepia(45%) saturate(6055%) hue-rotate(333deg) brightness(104%) contrast(101%);}
+.horo-featred-title {margin: 13px 0px 0px;}
+.horo-legacyimg img {max-width: 70px;}
+.legacy-horo-cnts {margin: 30px 0px 0px; border: 1px solid var(--primary_color); padding: 40px;}
+.new-kundali-left-right {margin: 40px 0px 0px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;}
+.new-kundali-form h3, .new-kundali-left-right h3 {font-size: 30px; text-transform: capitalize; margin: 0 0 30px; text-align: center;}
+.kundali-details-milan, .kundali-second-milan {display: flex; gap: 10px;}
+.kundali-details-milan > *, .kundali-second-milan > * {flex: 1;}
+.compatibilty-btn {text-align: center; margin: 40px 0px 0px;}
+.new-kundali-form .button {text-align: center; margin: 40px 0px 0px;}
+.kundali_horo h5 {font-size: 18px; text-transform: capitalize; margin: 10px 0 20px;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
@@ -1322,6 +1342,8 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .astro-detail {padding: 40px 50px;}
   .AstroMallShops-admin .astromall-listing {grid-template-columns: repeat(2 , 1fr);}
   .user-profile-pick-main {justify-content: space-between;}
+  .legacies-horo-wrap {grid-template-columns: repeat(5, 1fr);}
+  .new-kundali-left-right .admin-form-box {padding: 30px;}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .container {max-width: 750px; margin-inline: auto; padding: 0;}
@@ -1381,6 +1403,10 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .user-profile-picture-sec-single {order: 1;}
   .user-profile-picture-sec-single:first-child {order: 2;}
   .inner-admin-wallet {flex-direction: column-reverse; align-items: flex-start; margin: 0 0 20px;}
+  .legacies-horo-wrap {grid-template-columns: repeat(4, 1fr);}
+  .kundali-details-milan, .kundali-second-milan {flex-wrap: wrap; gap: 0px;}
+  .kundali-details-milan > *, .kundali-second-milan > * {flex: 0 0 100%; max-width: 100%;}
+  .kundal-milap > *:not(:last-child), .kundali-milap-ryt > *:not(:last-child) {margin: 0 0 20px;}
 }
 @media (max-width: 767px) {
   body {font-size: 14px;}
@@ -1531,6 +1557,12 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .wallet-edit-main-popup-inner h1 {font-size: 24px;}
   .wallet-edit-main .wallet-edit-main-popup-inner .close {right: 20px;}
   .common-profile .input-outer > .common-item:not(:last-child) {width: 100%; margin-right: 0px; padding-right: 0px; border-right: 0px; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 2px solid #ccc;}
+  .legacies-horo-wrap {grid-template-columns: repeat(3, 1fr);}
+  .new-kundali, .legacies-horo {padding: 50px 0px 0px;}
+  .top-bar-inner ul { gap: 5px 10px; flex-wrap: wrap;}
+  .top-bar-inner ul a {font-size: 12px;}
+  .new-kundali-left-right {grid-template-columns: repeat(1, 1fr);}
+  .kundali-second > * {max-width: calc(100%/2 - 12.5px);}
 }
 @media (max-width: 639px) {
   .four-col .row {grid-template-columns: repeat(1, 1fr); gap: 20px;}
@@ -1562,6 +1594,12 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .inner-order-list-data {grid-template-columns: repeat(1, 1fr);}
   .cancel-order-reason-inner {max-width: calc(100% - 30px); padding: 50px 20px 30px;}
   .cancel-order-reason h2 {font-size: 20px; line-height: 24px;}
+  .legacies-horo-wrap {grid-template-columns: repeat(2, 1fr);}
+  .kundali-second > *, .kundali__details > * {max-width: 100%};
+  .kundali_horo {margin: 20px 0px 0px;}
+  .birth_place {margin: 20px 0px 0px !important;}
+  .kundali_horo h5 {margin: 20px 0 10px;}
+  .new-kundali-form h3, .new-kundali-left-right h3 {margin: 0 0 20px;}
 }
 @media (max-width: 479px) {
   .call-link input {height: 40px; min-width: 100%;}
