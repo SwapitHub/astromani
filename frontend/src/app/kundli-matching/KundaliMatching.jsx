@@ -105,7 +105,7 @@ const KundaliMatching = () => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/post-matching-kundali`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/post-matching-kundali`,
         {
           method: "POST",
           headers: {

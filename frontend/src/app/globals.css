@@ -1294,7 +1294,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .horo-legacyimg img {filter: brightness(0) saturate(100%) invert(68%) sepia(45%) saturate(6055%) hue-rotate(333deg) brightness(104%) contrast(101%);}
 .horo-featred-title {margin: 13px 0px 0px;}
 .horo-legacyimg img {max-width: 70px;}
-.legacy-horo-cnts {margin: 30px 0px 0px; border: 1px solid var(--primary_color); padding: 40px;}
+.legacy-horo-cnts, .kundali-result {margin: 30px 0px 0px; border: 1px solid var(--primary_color); padding: 40px;}
 .new-kundali-left-right {margin: 40px 0px 0px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;}
 .new-kundali-form h3, .new-kundali-left-right h3 {font-size: 30px; text-transform: capitalize; margin: 0 0 30px; text-align: center;}
 .kundali-details-milan, .kundali-second-milan {display: flex; gap: 10px;}
@@ -1302,6 +1302,11 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .compatibilty-btn {text-align: center; margin: 40px 0px 0px;}
 .new-kundali-form .button {text-align: center; margin: 40px 0px 0px;}
 .kundali_horo h5 {font-size: 18px; text-transform: capitalize; margin: 10px 0 20px;}
+.kundali-result-head {text-align: center;}
+.kundali-result-head h3 {font-size: 20px; border: 1px solid var(--primary_color); display: inline-block; padding: 3px 50px; margin: 10px 0px 0px;}
+.common-matching-listing {margin: 40px 0px 0px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;}
+.common-matching-listing > * {background-color: #f2f2f2; padding: 20px;}
+.common-matching-listing h4 {background-color: var(--primary_color); text-align: center; padding: 5px 20px; color: #fff; margin: 0 0 15px;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
@@ -1344,6 +1349,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .user-profile-pick-main {justify-content: space-between;}
   .legacies-horo-wrap {grid-template-columns: repeat(5, 1fr);}
   .new-kundali-left-right .admin-form-box {padding: 30px;}
+  .common-matching-listing {grid-template-columns: repeat(3, 1fr);}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .container {max-width: 750px; margin-inline: auto; padding: 0;}
@@ -1563,6 +1569,8 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .top-bar-inner ul a {font-size: 12px;}
   .new-kundali-left-right {grid-template-columns: repeat(1, 1fr);}
   .kundali-second > * {max-width: calc(100%/2 - 12.5px);}
+  .common-matching-listing {grid-template-columns: repeat(2, 1fr);}
+  .legacy-horo-cnts, .kundali-result {padding: 30px;}
 }
 @media (max-width: 639px) {
   .four-col .row {grid-template-columns: repeat(1, 1fr); gap: 20px;}
@@ -1575,6 +1583,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .posts-listing > *:not(.pagination) {max-width: 100%;}
   .astro-detail {flex-direction: column; gap: 30px 0px;}
   .similar-conslt-reviews-sec, .reviews-sec {grid-template-columns: repeat(1, 1fr);}
+  
 }
 @media (max-width: 574px) {
   .chat-left-logo {gap: 10px;}
@@ -1600,6 +1609,8 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .birth_place {margin: 20px 0px 0px !important;}
   .kundali_horo h5 {margin: 20px 0 10px;}
   .new-kundali-form h3, .new-kundali-left-right h3 {margin: 0 0 20px;}
+  .common-matching-listing {grid-template-columns: repeat(1, 1fr);}
+
 }
 @media (max-width: 479px) {
   .call-link input {height: 40px; min-width: 100%;}
