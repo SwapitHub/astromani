@@ -1,4 +1,4 @@
-const KundaliMatching = require("../models/kundaliMAtchingModel");
+const kundaliMatching  = require("../models/kundaliMAtchingModel");
 
 const PostMatchingKundali = async (req, res) => {
   try {
@@ -8,7 +8,7 @@ const PostMatchingKundali = async (req, res) => {
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    const newKundaliMatch = new KundaliMatching({
+    const newKundaliMatch = new kundaliMatching ({
       girlDetail: {
         fullName: girlDetail?.fullName,
         dob: new Date(girlDetail?.dob),
