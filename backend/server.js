@@ -46,7 +46,6 @@ const { paymentWithdrawalRoutes } = require("./routes/paymentWithdrawalRouter");
 const { blockCategory } = require("./routes/blogsCategoryRouter");
 const { addBlogs } = require("./routes/addBlogsRouter");
 const path = require("path");
-const { KundaliMatching } = require("./routes/kundaliMatchingRouter");
 
 const app = express();
 // secure API use helmet call
@@ -144,7 +143,7 @@ app.use("/", userSeminar);
 app.use("/", paymentWithdrawalRoutes);
 app.use("/", blockCategory);
 app.use("/", addBlogs);
-app.use("/", KundaliMatching)
+// app.use("/", KundaliMatchingRoute)
 
 // Pass io to socketIoMessage in post chat api
 socketIoMessage(io);
