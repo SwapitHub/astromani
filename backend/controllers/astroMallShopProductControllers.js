@@ -152,6 +152,7 @@ const updateAstroShopeProduct = async (req, res) => {
       meta_description,
       meta_title,
       meta_keyword,
+      quantity,
     } = req.body;
 
     // 1. Find the existing product
@@ -222,6 +223,7 @@ const updateAstroShopeProduct = async (req, res) => {
         meta_title,
         meta_keyword,
         deleteShopProductStatus:false,
+        quantity: quantity || 0,
       },
       { new: true }
     );
@@ -374,6 +376,8 @@ const getAstroShopProductSuggestions = async (req, res) => {
   }
 };
 
+
+
 const postAstroShopeProduct = async (req, res) => {
   try {
     const {
@@ -393,6 +397,7 @@ const postAstroShopeProduct = async (req, res) => {
       meta_description,
       meta_title,
       meta_keyword,
+       quantity,
     } = req.body;
 
     if (
@@ -449,6 +454,7 @@ const postAstroShopeProduct = async (req, res) => {
       meta_title,
       meta_keyword,
       deleteShopProductStatus:false,
+       quantity: quantity || 0
     });
 
     const saved = await newItem.save();
