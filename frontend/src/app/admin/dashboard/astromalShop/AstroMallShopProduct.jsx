@@ -8,8 +8,10 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { toast } from "react-toastify";
+import AstromalProductView from "./AstromalProductView";
 
 const AstroMallShopProduct = () => {
   let showNameData = "Shop Product";
@@ -34,9 +36,10 @@ const AstroMallShopProduct = () => {
   const [limit, setLimit] = useState(4);
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState(null);
+  const [viewProductData, setViewProductData] = useState();
+  const [viewProductStatus, setViewProductStatus] = useState(false);
 
   const debouncedSearch = useDebounce(search, 1000);
-  console.log(debouncedSearch);
 
   useEffect(() => {
     if (!shopId) return;
@@ -117,6 +120,7 @@ const AstroMallShopProduct = () => {
   const handleSubmit = async () => {
     const name = document.getElementById("name_product").value;
     let slug = document.getElementById("slug_product").value;
+    let quantity = document.getElementById("quantity").value;
     let shop_id = document.getElementById("shop_id").value;
     let meta_description = document.getElementById("meta_description").value;
     let meta_title = document.getElementById("meta_title").value;
@@ -176,6 +180,7 @@ const AstroMallShopProduct = () => {
     const data = new FormData();
     data.append("name", name);
     data.append("slug", slug);
+    data.append("quantity", quantity);
     data.append("shop_id", shop_id);
     data.append("astroMallProductImg", image);
     data.append("offer_name", offer_name);
@@ -214,6 +219,7 @@ const AstroMallShopProduct = () => {
       document.getElementById("meta_title").value = "";
       document.getElementById("meta_keywords").value = "";
       document.getElementById("slug_product").value = "";
+      document.getElementById("quantity").value = "";
       document.getElementById("astroMallProductImg").value = "";
       document.getElementById("astroMallImages").value = "";
       document.getElementById("offer_name").value = "";
@@ -252,6 +258,7 @@ const AstroMallShopProduct = () => {
       document.getElementById("meta_title").value = product.meta_title;
       document.getElementById("meta_keywords").value = product.meta_keyword;
       document.getElementById("slug_product").value = product.slug;
+      document.getElementById("quantity").value = product.quantity;
       document.getElementById("offer_name").value = product.offer_name;
       document.getElementById("shop_id").value = product.shop_id;
       document.getElementById("top_selling").checked = product.top_selling;
@@ -302,6 +309,7 @@ const AstroMallShopProduct = () => {
     const meta_title = document.getElementById("meta_title").value;
     const meta_keywords = document.getElementById("meta_keywords").value;
     const slug = document.getElementById("slug_product").value;
+    const quantity = document.getElementById("quantity").value;
     const shop_id = document.getElementById("shop_id").value;
     const image = document.getElementById("astroMallProductImg").files[0];
     const offer_name = document.getElementById("offer_name").value;
@@ -325,6 +333,7 @@ const AstroMallShopProduct = () => {
     data.append("meta_title", meta_title);
     data.append("meta_keyword", meta_keywords);
     data.append("slug", slug);
+    data.append("quantity", quantity);
     data.append("shop_id", shop_id);
     data.append("offer_name", offer_name);
     data.append("description", descriptionContent);
@@ -363,6 +372,7 @@ const AstroMallShopProduct = () => {
         document.getElementById("meta_title").value = "";
         document.getElementById("meta_keywords").value = "";
         document.getElementById("slug_product").value = "";
+        document.getElementById("quantity").value = "";
         document.getElementById("shop_id").value = "";
         document.getElementById("astroMallProductImg").value = "";
         document.getElementById("astroMallImages").value = "";
@@ -451,6 +461,12 @@ const AstroMallShopProduct = () => {
           setShowDelete={setShowDelete}
           setDeletePermanently={setDeletePermanently}
           showNameData={showNameData}
+        />
+      )}
+      {viewProductStatus && (
+        <AstromalProductView
+          viewProductData={viewProductData}
+          setViewProductStatus={setViewProductStatus}
         />
       )}
 
@@ -634,6 +650,18 @@ const AstroMallShopProduct = () => {
                   </div>
                 </div>
               )}
+
+               <div className="form-field">
+                <div className="label-content remove-astrict">
+                  <label>Current Quantity</label>
+                </div>
+                <input
+                 type="number"
+                  class="common-input-filed"
+                  id="quantity"
+                />
+              </div>
+
               <div className="product-type-main form-field">
                 <div className="label-content">
                   <label>Product Type</label>
@@ -837,6 +865,14 @@ const AstroMallShopProduct = () => {
                             }}
                           >
                             <FaEdit />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setViewProductData(item);
+                              setViewProductStatus(true);
+                            }}
+                          >
+                            <MdOutlineRemoveRedEye />
                           </button>
                         </div>
                       </div>

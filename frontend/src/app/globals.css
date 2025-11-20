@@ -1194,20 +1194,20 @@ table td button:not(.delete-btn) {padding: 8px 20px 6px; min-width: 98px;}
 .head-search-outer h2, .head-search-outer h1 {font-size: 36px;}
 .head-search-outer .search-box-top-btn {margin: 0px !important;}
 .posts-listing > p {text-align: center; max-width: 100% !important; background-color: transparent !important;}
-.astro-detail-main, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {position: absolute; width: calc(100% - 54px); height: 100%; background-color: var(--body_bg); opacity: 0; visibility: hidden; display: none; transition: all 0.3s; z-index: 9; padding: 20px 0px 0px;}
+.astro-detail-main, .astro-detail-mains, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {position: absolute; width: calc(100% - 54px); height: 100%; background-color: var(--body_bg); opacity: 0; visibility: hidden; display: none; transition: all 0.3s; z-index: 9; padding: 20px 0px 0px;}
 .Edit-Order-User-detail {position: absolute; width: calc(100% - 54px); height: 100%; background-color: var(--body_bg); transition: all 0.3s; z-index: 9; padding: 20px 0px 0px;}
-.astro-detail-admin-popup .astro-detail-main, .astro-detail-admin-edit-popup .astrologer-profile-edit-table, .wallet-view-popup .astro-detail-main-view, .wallet-edit-popup .wallet-edit-main, .astro-detail-admin-popup .astro-detail-main-view, .astro-detail-main-view {opacity: 1; visibility: visible; display: block;}
+.astro-detail-mains, .astro-detail-admin-popup .astro-detail-main, .astro-detail-admin-edit-popup .astrologer-profile-edit-table, .wallet-view-popup .astro-detail-main-view, .wallet-edit-popup .wallet-edit-main, .astro-detail-admin-popup .astro-detail-main-view, .astro-detail-main-view {opacity: 1; visibility: visible; display: block;}
 .img-data-outer {display: flex; align-items: center; gap: 50px;}
 .data-astrologer p {font-weight: normal;}
 .data-astrologer p strong {font-weight: 700;}
-.astro-detail-main .close, .astrologer-profile-edit-table .close, .astro-detail-main-view .close, .wallet-edit-main .close {opacity: 1; font-size: 0; right: 0px; top: 20px;}
+.astro-detail-main .close, .astro-detail-mains .close, .astrologer-profile-edit-table .close, .astro-detail-main-view .close, .wallet-edit-main .close {opacity: 1; font-size: 0; right: 0px; top: 20px;}
 .common-profile {display: flex;}
 .common-profile > * {display: flex; align-items: center; flex-wrap: wrap; font-size: 14px;}
 .common-profile > *:first-child {background-color: #f2f2f2; min-width: 200px; padding: 20px; border-bottom: 1px solid #ffffff; font-weight: 500;}
 .common-profile > *:last-child {padding: 10px 30px; border-bottom: 1px solid #f2f2f2; flex-grow: 1;}
 .astro-detail-main .skills, .astrologer-profile-edit-table.skills {justify-content: flex-start;}
 .astro-detail-main .skills span, .astrologer-profile-edit-table .skills span {font-size: 14px;}
-.input-outer img {border-radius: 5px; margin-right: 10px; object-fit: cover; max-width: 100px; aspect-ratio: 1/1;}
+.input-outer img {border-radius: 5px; margin-right: 10px; object-fit: cover; max-width: 100px; aspect-ratio: 1/1; max-height: 100px;}
 .profile-table + button {margin: 30px 0px;}
 .parent-recharge-popups, .change-password-popup {width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: 99; background-color: rgba(0, 0, 0, .6); display: flex; align-items: center; justify-content: center;}
 .wallet-edit-popup .astrologer-registration-form {margin: 0;}
@@ -1552,7 +1552,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .head-search-outer h2, .head-search-outer h1 {font-size: 30px;}
   .pagination {gap: 15px; flex-wrap: wrap;}
   .pagination button {padding: 10px 20px 8px;}
-  .astro-detail-main, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {width: calc(100% - 30px);}
+  .astro-detail-mains, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {width: calc(100% - 30px);}
   .search-box-top-btn .available-balance {margin: 0 0 0px 0px;}
   .product-images-left {max-width: 100%;}
   .breadcrumb ul li > a::after {width: 5px; height: 5px; top: 7px;}
