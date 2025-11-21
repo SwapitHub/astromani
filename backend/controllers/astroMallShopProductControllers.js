@@ -4,7 +4,6 @@ const path = require("path");
 const astroMallProductListing = require("../models/astroMallShopProductModel");
 const cloudinary = require("../config/cloudinary");
 
-
 const getAstroShopeProductByShopId = async (req, res) => {
   try {
     const { shop_id } = req.params;
@@ -59,13 +58,14 @@ const deleteAstroShopeProduct = async (req, res) => {
     product.deleteShopProductStatus = true;
     await product.save();
 
-    return res.status(200).json({ message: "Product soft deleted successfully" });
+    return res
+      .status(200)
+      .json({ message: "Product soft deleted successfully" });
   } catch (error) {
     console.error("Error soft deleting product:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
-
 
 const deleteSingleAstroProductImage = async (req, res) => {
   try {
@@ -77,7 +77,9 @@ const deleteSingleAstroProductImage = async (req, res) => {
     });
 
     if (!product) {
-      return res.status(404).json({ message: "Image not found in any product" });
+      return res
+        .status(404)
+        .json({ message: "Image not found in any product" });
     }
 
     // Step 2: Find the exact image object
@@ -161,7 +163,7 @@ const updateAstroShopeProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-        // 2. Handle main image update
+    // 2. Handle main image update
     let updatedMainImage = existingProduct.astroMallProductImg;
 
     if (
@@ -222,8 +224,8 @@ const updateAstroShopeProduct = async (req, res) => {
         meta_description,
         meta_title,
         meta_keyword,
-        deleteShopProductStatus:false,
-        quantity: quantity || 0,
+        deleteShopProductStatus: false,
+        quantity: shop_product_type == "astrologer_puja" ? null : quantity || 0,
       },
       { new: true }
     );
@@ -376,8 +378,6 @@ const getAstroShopProductSuggestions = async (req, res) => {
   }
 };
 
-
-
 const postAstroShopeProduct = async (req, res) => {
   try {
     const {
@@ -397,7 +397,7 @@ const postAstroShopeProduct = async (req, res) => {
       meta_description,
       meta_title,
       meta_keyword,
-       quantity,
+      quantity,
     } = req.body;
 
     if (
@@ -453,8 +453,8 @@ const postAstroShopeProduct = async (req, res) => {
       meta_description,
       meta_title,
       meta_keyword,
-      deleteShopProductStatus:false,
-       quantity: quantity || 0
+      deleteShopProductStatus: false,
+      quantity: shop_product_type == "astrologer_puja" ? null : quantity || 0,
     });
 
     const saved = await newItem.save();

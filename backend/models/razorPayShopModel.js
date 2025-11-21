@@ -24,6 +24,11 @@ const PaymentShopSchema = new mongoose.Schema(
     product_order_complete: Boolean,
     product_type_gem: String,
     status: { type: String, default: "pending" },
+    product_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "astroMallProductListing",
+      required: true,
+    },
 
     addresses: [
       {

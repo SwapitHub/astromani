@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const mongoose = require("mongoose");
 const UserLogin = require("../models/userLoginModel");
 const UserPaymentShop = require("../models/razorPayShopModel");
+const astroMallProductListing = require("../models/astroMallShopProductModel");
 
 const razorpayRouter = express.Router();
 razorpayRouter.use(cors());
@@ -165,6 +166,7 @@ const postRazorpayShopOrder = async (req, res) => {
       productImg,
       address,
       product_type_gem,
+      product_id,
     } = req.body;
 
     // Validate input
@@ -224,6 +226,7 @@ const postRazorpayShopOrder = async (req, res) => {
       product_cancel_order: false,
       product_cancel_order_reason: "",
       product_type_gem,
+      product_id,
     });
 
     await newPayment.save();
@@ -295,14 +298,36 @@ const postRazorpayShopVeryFy = async (req, res) => {
     //   console.error("User not found for payment:", updatedPayment);
     // }
 
+
+
+    // --------- UPDATE QUANTITY BASED ON PRODUCT ID ----------
+    // Get product ID from payment document
+    const productId = updatedPayment.product_id;
+
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ error: "Invalid product ID" });
+    }
+
+    const product = await astroMallProductListing.findById(productId);
+   console.log(product, "product==");
+   
+    if (product) {
+      if (product.shop_product_type !== "astrologer_puja") {
+        if (product.quantity > 0) {
+          product.quantity -= 1; 
+          await product.save();
+        }
+      }
+    }
+
+    // --------------------------------------------------------
     return res.json({
       success: true,
-      message: "Payment verified and saved to DB",
+      message: "Payment verified, product quantity updated",
     });
   } catch (error) {
     console.error("Error in /verify-payment:", error);
 
-    // Additional error logging for crypto errors
     if (error.message.includes("ERR_INVALID_ARG_TYPE")) {
       console.error(
         "Crypto key error - verify RAZORPAY_KEY_SECRET is set in environment"
