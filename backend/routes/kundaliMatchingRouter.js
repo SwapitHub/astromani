@@ -1,8 +1,8 @@
-const express = require("express")
-const { postMatchingKundali } = require("../controllers/kundaliMatchingControler")
+// const express = require("express")
+// const { postMatchingKundali } = require("../controllers/kundaliMatchingControler")
 
-const kundaliMatchingRoute = express.Router()
+// const kundaliMatchingRoute = express.Router()
 
-kundaliMatchingRoute.post("/post-matching-kundali", postMatchingKundali)
+// kundaliMatchingRoute.post("/post-matching-kundali", postMatchingKundali)
 
-module.exports = {kundaliMatchingRoute}
+// module.exports = {kundaliMatchingRoute}
