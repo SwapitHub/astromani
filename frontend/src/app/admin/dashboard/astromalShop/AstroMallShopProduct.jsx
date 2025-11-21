@@ -250,6 +250,7 @@ const AstroMallShopProduct = () => {
 
   const handleEditProduct = (product) => {
     setToggleAstroCategory(true);
+    console.log(product, "product");
 
     setTimeout(() => {
       document.getElementById("name_product").value = product.name;
@@ -651,15 +652,11 @@ const AstroMallShopProduct = () => {
                 </div>
               )}
 
-               <div className="form-field">
-                <div className="label-content remove-astrict">
+              <div className="form-field">
+                <div className="label-content">
                   <label>Current Quantity</label>
                 </div>
-                <input
-                 type="number"
-                  class="common-input-filed"
-                  id="quantity"
-                />
+                <input type="number" class="common-input-filed" id="quantity" />
               </div>
 
               <div className="product-type-main form-field">

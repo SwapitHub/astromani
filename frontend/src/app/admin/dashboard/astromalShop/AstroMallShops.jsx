@@ -9,8 +9,10 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaSearch } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { toast } from "react-toastify";
+import AstromallShopView from "./AstromallShopView";
 
 const AstroMallShops = () => {
   let showNameData = "Shop";
@@ -29,7 +31,8 @@ const AstroMallShops = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [viewProductData, setViewProductData] = useState();
+  const [viewProductStatus, setViewProductStatus] = useState(false);
   const debouncedSearch = useDebounce(search, 1000);
 
   const fetchShopItems = async () => {
@@ -293,7 +296,12 @@ const AstroMallShops = () => {
           showNameData={showNameData}
         />
       )}
-
+  {viewProductStatus && (
+        <AstromallShopView
+          viewProductData={viewProductData}
+          setViewProductStatus={setViewProductStatus}
+        />
+      )}
       <div className="AddLanguage AstroMallShops-admin">
         {toggleAstroCategory && (
           <div className="change-password-popup">
@@ -498,6 +506,14 @@ const AstroMallShops = () => {
                           >
                             <FaEdit />
                           </button>
+                          <button
+                                                      onClick={() => {
+                                                        setViewProductData(item);
+                                                        setViewProductStatus(true);
+                                                      }}
+                                                    >
+                                                      <MdOutlineRemoveRedEye />
+                                                    </button>
                         </div>
                       </div>
                     </div>
