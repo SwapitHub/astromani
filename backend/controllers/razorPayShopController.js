@@ -309,7 +309,6 @@ const postRazorpayShopVeryFy = async (req, res) => {
     }
 
     const product = await astroMallProductListing.findById(productId);
-   console.log(product, "product==");
    
     if (product) {
       if (product.shop_product_type !== "astrologer_puja") {

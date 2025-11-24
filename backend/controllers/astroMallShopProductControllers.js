@@ -13,8 +13,8 @@ const getAstroShopeProductByShopId = async (req, res) => {
       return res.status(400).json({ message: "Shop ID is required" });
     }
 
-    // Base query
-    const query = { shop_id };
+     // Base query with the condition for deleteShopProductStatus = false
+    const query = { shop_id, deleteShopProductStatus: false };
 
     // Optional name filter
     if (search && search.trim() !== "") {
