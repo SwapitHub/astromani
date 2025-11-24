@@ -252,10 +252,10 @@ const ProductDetail = ({ productDetailData }) => {
                     Book Now
                   </button>
                 ) : (
-                  <span>
+                  <Link className="text-btn" href={`/shop/${productDetailData?.shop_slug}`}>
                     This product is currently unavailable. Kindly select an
                     alternative item.
-                  </span>
+                  </Link>
                 )}
               </div>
             </div>

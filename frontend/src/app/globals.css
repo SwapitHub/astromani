@@ -27,7 +27,7 @@ select {appearance: none; background-image: linear-gradient(45deg, transparent 5
 textarea {min-height: 100px; resize: none;}
 .note-fullscreen-body .change-password {z-index: 99;}
 .note-editor.note-frame .note-editing-area .note-editable {background: #fff;}
-button.text-btn {padding: 0; border-radius: 0; background-color: transparent; border: 0; color: var(--body_content_color); text-decoration: underline;}
+button.text-btn, a.text-btn {padding: 0; border-radius: 0; background-color: transparent; border: 0; color: var(--body_content_color); text-decoration: underline;}
 /*  Header Section */
 .header {position: relative; z-index: 99; background: var(--body_bg); border-bottom: 1px solid var(--light_bg);}
 .inner-header-sec {display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0px; align-items: center;}
@@ -470,7 +470,7 @@ span.banner-heading, .footer-product-name {font-weight: 600; font-size: 18px; ma
 .breadcrumb ul li > a:not(:first-child) {margin-left: 20px;}
 .breadcrumb ul li > a:has(.icon) {padding: 0px;}
 .text {display: inline-block; color: var(--primary_color); position: relative; margin: 0 0 0 20px; text-transform: capitalize; padding: 0 0.4em;}
-.profile_with_contact {padding: 0px 20px 20px; background-image: url("../../public/bg-section-forecast.jpg"); position: relative; background-size: cover; text-align: center;}
+.profile_with_contact {padding: 0px 20px 20px; background-image: url("../../public/bg-section-forecast.jpg"); position: relative; background-size: cover; text-align: center; max-width: 320px; flex: 0 0 100%;}
 .profile_with_contact::before {content: ""; position: absolute; width: 100%; height: 100%; left: 0; top: 0; background-color: var(--primary_color); opacity: .6;}
 .profile_with_contact > * {position: relative;}
 .profile_with_contact_slider {padding: 90px 0px 25px;}
@@ -867,7 +867,7 @@ td button + button {margin-left: 5px;}
 .details-cont {padding: 30px 20px; min-height: 156px; border: 1px solid #cccccc; border-top: 0px;}
 .product-name {font-weight: 600; font-size: 20px; margin: 0 0 5px; font-family: var(--secondary_font); line-height: 26px;}
 .details-cont p {font-size: 14px; -webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; color: var(--body_content_color); margin-bottom: 0; text-overflow: ellipsis; overflow: hidden;}
-.sales-tag {position: absolute; top: 12px; z-index: 1; left: 0; background-color: var(--primary_color); color: #fff; padding: 5px 10px 3px; width: max-content; max-width: calc(100% - 115px); font-size: 12px;}
+.sales-tag {position: absolute; top: 10px; z-index: 1; left: 0; background-color: var(--primary_color); color: #fff; padding: 5px 10px 3px; width: max-content; max-width: calc(100% - 80px); font-size: 13px;}
 .astromall-slider-outer {padding: 0 0 70px;}
 .astromall-slider-outer .heading-sec {text-align: center;}
 .astromall-slider-outer:last-child {padding-bottom: 0px;}
@@ -930,7 +930,7 @@ td button + button {margin-left: 5px;}
 .add-on-img img {max-height: 45px; width: auto;}
 .booked_selected_items {background-color: #ff77221a; border: 2px solid var(--primary_color); margin: 20px 0px 0px; overflow: hidden; max-width: 350px; display: inline-flex; padding: 15px; gap: 20px; align-items: center;}
 .booked_selected_items > * {display: flex; align-items: center; gap: 15px;}
-.booked_selected_items img {max-width: 60px;}
+.booked_selected_items img {max-width: 60px; height: auto;}
 .booked_selected_items .close {position: static;}
 .name {font-weight: 600;}
 .product-images-left-inner {display: flex; gap: 10px;}
@@ -1194,20 +1194,20 @@ table td button:not(.delete-btn) {padding: 8px 20px 6px; min-width: 98px;}
 .head-search-outer h2, .head-search-outer h1 {font-size: 36px;}
 .head-search-outer .search-box-top-btn {margin: 0px !important;}
 .posts-listing > p {text-align: center; max-width: 100% !important; background-color: transparent !important;}
-.astro-detail-main, .astro-detail-mains, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {position: absolute; width: calc(100% - 54px); height: 100%; background-color: var(--body_bg); opacity: 0; visibility: hidden; display: none; transition: all 0.3s; z-index: 9; padding: 20px 0px 0px;}
+.astro-detail-main, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {position: absolute; width: calc(100% - 54px); height: 100%; background-color: var(--body_bg); opacity: 0; visibility: hidden; display: none; transition: all 0.3s; z-index: 9; padding: 20px 0px 0px;}
 .Edit-Order-User-detail {position: absolute; width: calc(100% - 54px); height: 100%; background-color: var(--body_bg); transition: all 0.3s; z-index: 9; padding: 20px 0px 0px;}
-.astro-detail-mains, .astro-detail-admin-popup .astro-detail-main, .astro-detail-admin-edit-popup .astrologer-profile-edit-table, .wallet-view-popup .astro-detail-main-view, .wallet-edit-popup .wallet-edit-main, .astro-detail-admin-popup .astro-detail-main-view, .astro-detail-main-view {opacity: 1; visibility: visible; display: block;}
+.astro-detail-admin-popup .astro-detail-main, .astro-detail-admin-edit-popup .astrologer-profile-edit-table, .wallet-view-popup .astro-detail-main-view, .wallet-edit-popup .wallet-edit-main, .astro-detail-admin-popup .astro-detail-main-view, .astro-detail-main-view {opacity: 1; visibility: visible; display: block;}
 .img-data-outer {display: flex; align-items: center; gap: 50px;}
 .data-astrologer p {font-weight: normal;}
 .data-astrologer p strong {font-weight: 700;}
-.astro-detail-main .close, .astro-detail-mains .close, .astrologer-profile-edit-table .close, .astro-detail-main-view .close, .wallet-edit-main .close {opacity: 1; font-size: 0; right: 0px; top: 20px;}
+.astro-detail-main .close, .astrologer-profile-edit-table .close, .astro-detail-main-view .close, .wallet-edit-main .close {opacity: 1; font-size: 0; right: 0px; top: 20px;}
 .common-profile {display: flex;}
 .common-profile > * {display: flex; align-items: center; flex-wrap: wrap; font-size: 14px;}
 .common-profile > *:first-child {background-color: #f2f2f2; min-width: 200px; padding: 20px; border-bottom: 1px solid #ffffff; font-weight: 500;}
 .common-profile > *:last-child {padding: 10px 30px; border-bottom: 1px solid #f2f2f2; flex-grow: 1;}
 .astro-detail-main .skills, .astrologer-profile-edit-table.skills {justify-content: flex-start;}
 .astro-detail-main .skills span, .astrologer-profile-edit-table .skills span {font-size: 14px;}
-.input-outer img {border-radius: 5px; margin-right: 10px; object-fit: cover; max-width: 100px; aspect-ratio: 1/1; max-height: 100px;}
+.input-outer img {border-radius: 5px; margin-right: 10px; object-fit: cover; max-width: 100px; aspect-ratio: 1/1;}
 .profile-table + button {margin: 30px 0px;}
 .parent-recharge-popups, .change-password-popup {width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: 99; background-color: rgba(0, 0, 0, .6); display: flex; align-items: center; justify-content: center;}
 .wallet-edit-popup .astrologer-registration-form {margin: 0;}
@@ -1294,7 +1294,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .horo-legacyimg img {filter: brightness(0) saturate(100%) invert(68%) sepia(45%) saturate(6055%) hue-rotate(333deg) brightness(104%) contrast(101%);}
 .horo-featred-title {margin: 13px 0px 0px;}
 .horo-legacyimg img {max-width: 70px;}
-.legacy-horo-cnts, .kundali-result {margin: 30px 0px 0px; border: 1px solid var(--primary_color); padding: 40px;}
+.legacy-horo-cnts {margin: 30px 0px 0px; border: 1px solid var(--primary_color); padding: 40px;}
 .new-kundali-left-right {margin: 40px 0px 0px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;}
 .new-kundali-form h3, .new-kundali-left-right h3 {font-size: 30px; text-transform: capitalize; margin: 0 0 30px; text-align: center;}
 .kundali-details-milan, .kundali-second-milan {display: flex; gap: 10px;}
@@ -1302,11 +1302,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .compatibilty-btn {text-align: center; margin: 40px 0px 0px;}
 .new-kundali-form .button {text-align: center; margin: 40px 0px 0px;}
 .kundali_horo h5 {font-size: 18px; text-transform: capitalize; margin: 10px 0 20px;}
-.kundali-result-head {text-align: center;}
-.kundali-result-head h3 {font-size: 20px; border: 1px solid var(--primary_color); display: inline-block; padding: 3px 50px; margin: 10px 0px 0px;}
-.common-matching-listing {margin: 40px 0px 0px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;}
-.common-matching-listing > * {background-color: #f2f2f2; padding: 20px;}
-.common-matching-listing h4 {background-color: var(--primary_color); text-align: center; padding: 5px 20px; color: #fff; margin: 0 0 15px;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
@@ -1349,7 +1344,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .user-profile-pick-main {justify-content: space-between;}
   .legacies-horo-wrap {grid-template-columns: repeat(5, 1fr);}
   .new-kundali-left-right .admin-form-box {padding: 30px;}
-  .common-matching-listing {grid-template-columns: repeat(3, 1fr);}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .container {max-width: 750px; margin-inline: auto; padding: 0;}
@@ -1552,7 +1546,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .head-search-outer h2, .head-search-outer h1 {font-size: 30px;}
   .pagination {gap: 15px; flex-wrap: wrap;}
   .pagination button {padding: 10px 20px 8px;}
-  .astro-detail-mains, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {width: calc(100% - 30px);}
+  .astro-detail-main, .astrologer-profile-edit-table, .astro-detail-main-view, .wallet-edit-main {width: calc(100% - 30px);}
   .search-box-top-btn .available-balance {margin: 0 0 0px 0px;}
   .product-images-left {max-width: 100%;}
   .breadcrumb ul li > a::after {width: 5px; height: 5px; top: 7px;}
@@ -1569,8 +1563,8 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .top-bar-inner ul a {font-size: 12px;}
   .new-kundali-left-right {grid-template-columns: repeat(1, 1fr);}
   .kundali-second > * {max-width: calc(100%/2 - 12.5px);}
-  .common-matching-listing {grid-template-columns: repeat(2, 1fr);}
-  .legacy-horo-cnts, .kundali-result {padding: 30px;}
+  .send-otp .enter-otp + .popup-btm-content, .send-otp .number--continious-popup + .popup-btm-content {padding: 20px;}
+  .send-otp .number--continious-popup > p {padding-top: 0px;}
 }
 @media (max-width: 639px) {
   .four-col .row {grid-template-columns: repeat(1, 1fr); gap: 20px;}
@@ -1583,14 +1577,13 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .posts-listing > *:not(.pagination) {max-width: 100%;}
   .astro-detail {flex-direction: column; gap: 30px 0px;}
   .similar-conslt-reviews-sec, .reviews-sec {grid-template-columns: repeat(1, 1fr);}
-  
 }
 @media (max-width: 574px) {
   .chat-left-logo {gap: 10px;}
   .inner-chat-top-header {padding: 10px;}
   .header-chat-content h4 {font-size: 14px;}
   .send-otp {max-width: calc(100% - 30px);}
-  .send-otp .number--continious-popup, .enter-otp {padding: 0 20px 30px;}
+  .send-otp .number--continious-popup, .enter-otp {padding: 20px 20px 30px;}
   .inner-popular-recharge-sec {width: calc(100% / 2 - 10px);}
   .sharePopUp {min-width: calc(100% - 30px); max-width: calc(100% - 30px);}
   .sharePopUp > h3 {font-size: 18px;}
@@ -1609,8 +1602,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .birth_place {margin: 20px 0px 0px !important;}
   .kundali_horo h5 {margin: 20px 0 10px;}
   .new-kundali-form h3, .new-kundali-left-right h3 {margin: 0 0 20px;}
-  .common-matching-listing {grid-template-columns: repeat(1, 1fr);}
-
 }
 @media (max-width: 479px) {
   .call-link input {height: 40px; min-width: 100%;}
