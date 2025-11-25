@@ -15,7 +15,7 @@ const Astrology = () => {
             <div className="row">
               <div className="col">
                 <Link
-                  href="https://weddingbyte.com/daily-horoscope"
+                  href="/daily-horoscope"
                   target="_blank"
                 >
                   <div className="content-wrap">
@@ -29,7 +29,7 @@ const Astrology = () => {
                 </Link>
               </div>
               <div className="col">
-                <Link href="https://weddingbyte.com/kundli" target="_blank">
+                <Link href="/kundli" target="_blank">
                   <div className="content-wrap">
                     <h3>Personalized Birth Chart (Kundli)</h3>
                     <p>
@@ -57,7 +57,7 @@ const Astrology = () => {
               </div>
               <div className="col">
                 <Link
-                  href="https://weddingbyte.com/kundli-matching"
+                  href="/kundli-matching"
                   target="_blank"
                 >
                   <div className="content-wrap">

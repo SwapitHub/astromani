@@ -56,10 +56,10 @@ const Footer = () => {
                   <h3>Horoscope</h3>
                   <ul>
                     <li>
-                      <Link href="">Today's Horoscope</Link>
+                      <Link href="/daily-horoscope">Today's Horoscope</Link>
                     </li>
                     <li>
-                      <Link href=""> Today's Love Horoscope</Link>
+                      <Link href="/daily-horoscope"> Today's Love Horoscope</Link>
                     </li>
                   </ul>
                 </div>
