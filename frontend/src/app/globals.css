@@ -878,8 +878,6 @@ td button + button {margin-left: 5px;}
 .astro-mall-btn {position: absolute; right: 10px; top: 10px; display: flex; gap: 5px;}
 .astro-mall-btn button {padding: 5px 0px 0px !important; width: 30px; height: 30px;}
 .AstroMallShops-admin {flex-wrap: unset;}
-.AstroMallShops-admin .astromall-listing {margin: 20px 0px 0px;}
-.AstroMallShops-admin .astromall-listing > * {min-width: 0px;}
 .astromall-slider-outer .slider-sec {margin: 30px 0px 0px;}
 .astromall-slider-outer .slick-track {display: flex;}
 .astromall-slider-outer .slick-list {margin: 0px -10px;}
@@ -1066,7 +1064,7 @@ span.required {color: red;}
 .home-banner-outer {position: relative;  z-index: 6;}
 .banner-main::before {content: ""; position: absolute; width: 100%; height: 100%; background-color: rgba(0,0,0, .6); left: 0; top: 0;}
 .banner-main .slick-slider {z-index: 9;}
-.banner-main h1 {font-size: 64px; line-height: 1; margin: 0 0 30px;}
+.banner-main h1 {font-size: 54px; line-height: 1; margin: 0 0 30px;}
 .home-heading {text-align: center; margin: 0 0 30px;}
 .banner {padding: 50px 0; position: relative; color: #ffffff;  display: flex !important; min-height: 600px; justify-content: center;}
 .banner .row {display: flex; justify-content: space-between; align-items: center; padding: 60px 0px; margin: 0px 10px;}
@@ -1076,8 +1074,8 @@ span.required {color: red;}
   0% {transform: rotate(0deg);}
   100% {transform: rotate(359deg);}
 }
-.banner .left-col {flex: 0 0 100%; max-width: 750px; text-align: center; margin: 0 auto;}
-.banner .left-col p {max-width: 610px; margin: 0 auto;}
+.banner .left-col {flex: 0 0 100%; text-align: center; margin: 0 auto;}
+.banner .left-col p {max-width: 780px; margin: 0 auto;}
 .banner .btn-wrapper {margin-top: 40px;}
 .banner .btn-wrapper .btn {background-color: var(--primary_color); border: 1px solid var(--primary_color); color: #fff; border-radius: 50px; padding: 12px 40px 10px; font-size: 16px; display: inline-block; text-align: center; text-decoration: none; text-transform: capitalize; font-family: var(--secondary_font);}
 .banner .btn-wrapper .btn:hover {background-color: #fff; color: var(--primary_color); border-color: #ffffff;}
@@ -1305,12 +1303,10 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
-  .AstroMallShops-admin .astromall-listing {grid-template-columns: repeat(4, 1fr);}
 }
 @media (max-width: 1279px) {
 .astromall-slider-outer .slick-arrow.slick-prev {left: 0px;}
 .astromall-slider-outer .slick-arrow.slick-next {right: 0px;}
-.AstroMallShops-admin .astromall-listing {grid-template-columns: repeat(3, 1fr);}
 }
 @media (max-width: 1199px) {
   .header-user {padding: 38px 0px 40px 40px; margin-right: 40px;}
@@ -1340,7 +1336,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .astrology_seciton .row {grid-template-columns: repeat(2, 1fr); gap: 70px 25px;}
   .seminar-banner-row .right_col {max-width: 32%;}
   .astro-detail {padding: 40px 50px;}
-  .AstroMallShops-admin .astromall-listing {grid-template-columns: repeat(2 , 1fr);}
   .user-profile-pick-main {justify-content: space-between;}
   .legacies-horo-wrap {grid-template-columns: repeat(5, 1fr);}
   .new-kundali-left-right .admin-form-box {padding: 30px;}
@@ -1587,7 +1582,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
   .inner-popular-recharge-sec {width: calc(100% / 2 - 10px);}
   .sharePopUp {min-width: calc(100% - 30px); max-width: calc(100% - 30px);}
   .sharePopUp > h3 {font-size: 18px;}
-  .astromall-listing, .AstroMallShops-admin .astromall-listing {grid-template-columns: repeat(1, 1fr);}
+  .astromall-listing {grid-template-columns: repeat(1, 1fr);}
   .astromall-search input {min-width: 250px;}
   .video_call_controls, .ring-size-text {width: 100%;}
   .product-main-size {flex-wrap: wrap;}
