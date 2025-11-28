@@ -7,6 +7,7 @@ const {
   postRazorpayOrder,
   postRazorpayVeryFy,
   postRazorpayCancelOrder,
+  getAllUsersWithPaymentHistory,
 } = require("../controllers/razorpayController");
 
 const razorpayRouter = express.Router();
@@ -14,6 +15,8 @@ const razorpayRouter = express.Router();
 razorpayRouter.get("/create-order-user-list/:query", getRazorpayPayment);
 
 razorpayRouter.get("/create-order-user-list/:userMobile", getRazorpayList);
+
+razorpayRouter.get("/user-recharge-payment-history", getAllUsersWithPaymentHistory);
 
 // Create Order (temporary record)
 razorpayRouter.post("/create-order", postRazorpayOrder);

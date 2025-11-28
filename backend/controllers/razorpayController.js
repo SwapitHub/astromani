@@ -120,6 +120,69 @@ const postRazorpayOrder = async (req, res) => {
   }
 };
 
+const getAllUsersWithPaymentHistory = async (req, res) => {
+  try {
+    let page = Number(req.query.page) || 1;
+    let limit = Number(req.query.limit) || 10;
+    let search = req.query.search || "";
+
+    let skip = (page - 1) * limit;
+
+    // SEARCH FILTER
+   let searchFilter = {};
+if (search) {
+  const searchNum = Number(search);
+  searchFilter = {
+    $or: [
+      { name: { $regex: search, $options: "i" } },
+      ...(isNaN(searchNum) ? [] : [{ phone: searchNum }])
+    ]
+  };
+}
+
+
+    // Count total matched users
+    const totalUsers = await UserLogin.countDocuments(searchFilter);
+
+    const users = await UserLogin.aggregate([
+      { $match: searchFilter },
+
+      {
+        $lookup: {
+          from: "payments",
+          localField: "phone",
+          foreignField: "userMobile",
+          as: "paymentHistory"
+        }
+      },
+
+      { $sort: { createdAt: -1 } },
+      { $skip: skip },
+      { $limit: limit }
+    ]);
+
+    const totalPages = Math.ceil(totalUsers / limit);
+
+    return res.json({
+      success: true,
+      page,
+      limit,
+      search,
+      totalUsers,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
+      nextPage: page < totalPages ? page + 1 : null,
+      prevPage: page > 1 ? page - 1 : null,
+      data: users
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 const postRazorpayVeryFy = async (req, res) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
@@ -230,4 +293,5 @@ module.exports = {
   postRazorpayOrder,
   postRazorpayVeryFy,
   postRazorpayCancelOrder,
+  getAllUsersWithPaymentHistory
 };
