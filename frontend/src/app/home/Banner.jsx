@@ -23,7 +23,7 @@ const Banner = ({ homeBannerData }) => {
       <section
         className="banner-main"
         style={{
-          backgroundImage: "url('./ast-new-bg-2.png')",
+          backgroundImage: "url(/ast-new-bg-2.png)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

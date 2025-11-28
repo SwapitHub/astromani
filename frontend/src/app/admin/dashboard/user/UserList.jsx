@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 import { FaEdit, FaSearch } from "react-icons/fa";
 import { MdDelete, MdOutlineRemoveRedEye } from "react-icons/md";
 import secureLocalStorage from "react-secure-storage";
-import WalletView from "./wallet/WalletViewUser";
-import WalletEdit from "./wallet/WalletEditUser";
+import WalletView from "../wallet/WalletViewUser";
+import WalletEdit from "../wallet/WalletEditUser";
 import BlockUnblock from "@/app/component/BlockUnblock";
 
 const UserList = () => {

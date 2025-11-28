@@ -37,12 +37,13 @@ import BannerHome from "./home/BannerHome";
 import PaymentWithdrawRequest from "./PaymentWithdrawRequest";
 import SeminarRegistration from "./siteSettings/SeminarRegistration";
 import SeoMetaData from "./siteSettings/SeoMetaData";
-import UserList from "./UserList";
+import UserList from "./user/UserList";
 import UserAdminWallet from "./wallet/UserAdminWallet";
 import AstrologerAdminWallet from "./wallet/AstrologerAdminWallet";
 import AdminPujaProductWallet from "./wallet/AdminPujaProductWallet";
 import ApprovalPanel from "./astrologerData/ApprovalPanel";
 import ActiveList from "./astrologerData/ActiveList";
+import UserRechargeList from "./user/UserRechargeList";
 
 const AdminHome = () => {
   const router = useRouter();
@@ -716,18 +717,68 @@ const AdminHome = () => {
                       </SlideToggle>
                     </li>
 
-                    <li className={updateButton === 7 ? "active" : ""}>
+                    <li  className={
+                        updateButton === 7 ||
+                        updateButton === "AddBlogs" 
+                       
+                          ? "active"
+                          : ""
+                      }>
                       <a
                         href="#"
                         onClick={(e) => {
-                          e.preventDefault();
-                          setUpdateButton(7);
-                          setToggleSlideMobile(false);
+                            e.preventDefault();
+
+                          handleToggleSection("Recharge-user");
                         }}
                       >
                         <PiUserListDuotone />
                         <span className="list-text">User List</span>
+                        <span className="list-arrow">
+                          <MdOutlineKeyboardArrowRight />
+                        </span>
                       </a>
+                       <SlideToggle isOpen={openFaq == "Recharge-user"}>
+                        <ul>
+                          <li
+                            className={
+                              updateButton === 7 ? "active" : ""
+                            }
+                          >
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setUpdateButton(7);
+                                setToggleSlideMobile(false);
+                              }}
+                            >
+                              <span className="list-text">User List</span>
+                            </a>
+                          </li>
+
+                          <li
+                            className={
+                              updateButton === "userRecharge"
+                                ? "active"
+                                : ""
+                            }
+                          >
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setUpdateButton("userRecharge");
+                                setToggleSlideMobile(false);
+                              }}
+                            >
+                              <span className="list-text">
+                               User Recharge List
+                              </span>
+                            </a>
+                          </li>
+                        </ul>
+                      </SlideToggle>
                     </li>
 
                     <li>
@@ -751,6 +802,8 @@ const AdminHome = () => {
                   <PaymentWithdrawRequest setUpdateButton={setUpdateButton} />
                 )}
                 {updateButton === "activeList" && <ActiveList />}
+                {updateButton === "userRecharge" && <UserRechargeList />}
+
                 {updateButton === "approvalPanel" && <ApprovalPanel />}
                 {updateButton === 7 && <UserList />}
                 {updateButton === "Denomination" && <Denomination />}
