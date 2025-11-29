@@ -56,16 +56,20 @@ const UserRechargeList = () => {
         <h1>User Recharge List</h1>
 
         {/* Search Input */}
-        <div className="search-box">
-          <input
-            type="search"
-            placeholder="Search name or mobile..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button>
-            <FaSearch />
-          </button>
+        <div className="search-box-top-btn">
+          <div className="search-box-filed">
+            <input
+              type="search"
+              placeholder="Search name or mobile..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <div className="search-button-filed">
+            <button>
+              <FaSearch />
+            </button>
+          </div>
         </div>
 
         {/* Loader */}
@@ -110,15 +114,17 @@ const UserRechargeList = () => {
                     </td>
                     <td>
                       {/* View User */}
-                      <button
-                        onClick={() => {
-                          setViewUserDetails(user);
-                          setViewProductStatus(true);
-                        }}
-                        className="view-btn"
-                      >
-                        <MdOutlineRemoveRedEye />
-                      </button>
+                      
+                        <button
+                          onClick={() => {
+                            setViewUserDetails(user);
+                            setViewProductStatus(true);
+                          }}
+                          className="delete-btn"
+                        >
+                          <MdOutlineRemoveRedEye />
+                        </button>
+                     
                     </td>
                   </tr>
                 ))

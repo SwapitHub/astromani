@@ -70,6 +70,9 @@ export const validateAstrologerForm = (formType) => {
     if (!mobileNumber || mobileNumber.length !== 10) {
       errors.mobileNumber = "Valid 10-digit mobile number is required";
     }
+    if (!upiId) {
+      errors.upiId = "UPI ID  is required";
+    }
     if (!gender) {
       errors.gender = "Gender is required";
     }

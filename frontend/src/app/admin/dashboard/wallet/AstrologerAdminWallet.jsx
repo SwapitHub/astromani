@@ -194,7 +194,7 @@ function AstrologerAdminWallet() {
                   <th>Mobile</th>
                   <th>Charges</th>
                   <th>Total Amount</th>
-                  <th>Experience</th>
+                  <th>UPI ID</th>
                   {/* <th>Date & Time</th> */}
                   <th>Status</th>
                 </tr>
@@ -204,63 +204,63 @@ function AstrologerAdminWallet() {
                   walletAdminData.map((user) => {
                     return (
                       <>
-                        
-                          <tr key={user._id}>
-                            <td>
-                              {" "}
-                              <Image
-                                width={100}
-                                height={100}
-                                src={
-                                  user?.profileImage
-                                    ? process.env.NEXT_PUBLIC_WEBSITE_URL +
-                                      user?.profileImage
-                                    : "/user-icon-image.png"
-                                }
-                                alt="user-icon"
-                              />
-                            </td>
-                            <td>{user.name}</td>
-                            <td>{user.mobileNumber}</td>
-                            <td>₹ {user.charges}</td>
-                            <td>
-                              ₹ {Math.round(user.totalAvailableBalance) || 0}
-                            </td>
-                            <td>{user.experience} year</td>
-                            {/* <td>
+                        <tr key={user._id}>
+                          <td>
+                            {" "}
+                            <Image
+                              width={100}
+                              height={100}
+                              src={
+                                user?.profileImage
+                                  ? process.env.NEXT_PUBLIC_WEBSITE_URL +
+                                    user?.profileImage
+                                  : "/user-icon-image.png"
+                              }
+                              alt="user-icon"
+                            />
+                          </td>
+                          <td>{user.name}</td>
+                          <td>{user.mobileNumber}</td>
+                          <td>₹ {user.charges}</td>
+                          <td>
+                            ₹ {Math.round(user.totalAvailableBalance) || 0}
+                          </td>
+                          <td>{user?.upi_id}</td>
+                          {/* <td>
                               {new Date(user?.createdAt).toLocaleString()}
                             </td> */}
-                            <td>
-                              <button
-                                className="delete-btn"
-                                onClick={() => {
-                                  setAddActiveClass(true);
-                                  setMobileNumber(user.mobileNumber);
-                                }}
-                              >
-                                <MdOutlineRemoveRedEye />
-                              </button>
-                              <button
-                                className="delete-btn"
-                                onClick={() => {
-                                  setAddActiveClassEdit(true);
-                                  setMobileNumber(user.mobileNumber);
-                                }}
-                              >
-                                <FaEdit />
-                              </button>
-                              <button
-                                className="delete-btn"
-                                onClick={() => {
-                                  setUserToDelete(user?.mobileNumber);
-                                  setShowDelete(true);
-                                }}
-                              >
-                                <MdDelete />
-                              </button>
-                            </td>
-                          </tr>
-                        
+                          <td>
+                            <button
+                              className="delete-btn"
+                              onClick={() => {
+                                setAddActiveClass(true);
+                                setMobileNumber(user.mobileNumber);
+                              }}
+                            >
+                              <MdOutlineRemoveRedEye />
+                            </button>
+                            <button
+                              className="delete-btn"
+                              onClick={() => {
+                                setAddActiveClassEdit(true);
+                                setMobileNumber(user.mobileNumber);
+                              }}
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                              className="delete-btn"
+                              onClick={() => {
+                                setUserToDelete(user?.mobileNumber);
+                                setShowDelete(true);
+                              }}
+                            >
+                              <MdDelete />
+                            </button>
+                            <button className="pay-btn">Pay Astrologer</button>
+                          </td>
+                          
+                        </tr>
                       </>
                     );
                   })

@@ -28,6 +28,8 @@ const AstrologerProfile = ({
   const [editProfessions, setEditProfessions] = useState("");
   const [editLanguages, setEditLanguages] = useState("");
   const [editCharges, setEditCharges] = useState("");
+  const [editUpiId, setEditUpiId] = useState("");
+
   const [editCountry, setEditCountry] = useState("");
   const [editGender, setEditGender] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -106,6 +108,8 @@ const AstrologerProfile = ({
       document.getElementById("mobileNumber").value
     );
     formData.append("email", document.getElementById("email").value);
+    formData.append("upi_id", document.getElementById("upi_id").value);
+
     formData.append("profileStatus", true);
     formData.append("chatStatus", false);
     formData.append("freeChatStatus", false);
@@ -249,6 +253,9 @@ const AstrologerProfile = ({
       document.getElementById("description").value
     );
     formData.append("email", document.getElementById("email").value);
+    formData.append("upi_id", document.getElementById("upi_id").value);
+
+    
     // Helper to get selected checkbox values
     const getSelectedValues = (name) => {
       return Array.from(
@@ -331,6 +338,7 @@ const AstrologerProfile = ({
     setEditProfessions(astroUpdateDetail?.professions || []);
     setEditLanguages(astroUpdateDetail?.languages || []);
     setEditCharges(astroUpdateDetail?.charges || "");
+    setEditUpiId(astroUpdateDetail?.upi_id || "");
     setEditCountry(astroUpdateDetail?.country || "");
     setEditGender(astroUpdateDetail?.gender || "");
     setEditDescription(astroUpdateDetail?.Description || "");
@@ -673,6 +681,27 @@ const AstrologerProfile = ({
             <div className="inner-form-filed-sec full">
               <div className="label-content">
                 <label for="Name">
+                  UPI ID <span>(यूपीआई आईडी)</span>
+                </label>
+              </div>
+              <input
+                type="text"
+                placeholder="Enter UPI ID"
+                id="upi_id"
+                name="quantity"
+                value={editUpiId}
+                onChange={(e) => setEditUpiId(e.target.value)}
+                
+                className="common-input-filed"
+              />
+              {errors.upiId && (
+                <p className="error">{errors.upiId}</p>
+              )}
+            </div>
+
+            <div className="inner-form-filed-sec full">
+              <div className="label-content">
+                <label for="Name">
                   Mobile Number <span>(मोबाइल नंबर)</span>
                 </label>
               </div>
@@ -693,6 +722,7 @@ const AstrologerProfile = ({
                 <p className="error">{errors.mobileNumber}</p>
               )}
             </div>
+
             <div className="inner-form-filed-sec full">
               <div className="label-content">
                 <label for="Name">

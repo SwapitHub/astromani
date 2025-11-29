@@ -357,6 +357,7 @@ section.all-notifications-sec-bg {margin-top: 50px; margin-bottom: 50px;}
 /* table */
 .my-wallet-table-sec table {width: 100%; border-collapse: collapse;}
 .my-wallet-table-sec table tr th {text-align: start;padding: 10px; background-color: var(--light_bg); font-size: 13px;}
+.recharge-user-detail .my-wallet-table-sec table tr th {background-color: var(--primary_color);}
 .my-wallet-table-sec table tr td {text-align: start; font-size: 13px; padding: 10px; border-bottom: 1px solid #ccc; min-width: 140px;}
 .my-wallet-table-sec table tr td:last-child {min-width: 160px;}
 .delete-button-icon i {color: #ff0000; font-size: 12px;}
@@ -1300,6 +1301,7 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .compatibilty-btn {text-align: center; margin: 40px 0px 0px;}
 .new-kundali-form .button {text-align: center; margin: 40px 0px 0px;}
 .kundali_horo h5 {font-size: 18px; text-transform: capitalize; margin: 10px 0 20px;}
+td .pay-btn {margin: 5px 0px 0px;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}
