@@ -403,7 +403,8 @@ const putAstrologerProfileUpdate = async (req, res) => {
       gender,
       aadhaarCard,
       certificate,
-      email
+      email,
+      upi_id
     } = req.body;
 
     // Prepare update object
@@ -424,6 +425,7 @@ const putAstrologerProfileUpdate = async (req, res) => {
     if (experience) updateData.experience = experience;
     if (charges) updateData.charges = charges;
     if (email) updateData.email = email;
+    if (upi_id) updateData.upi_id = upi_id;
 
     if (aadhaarCard) updateData.aadhaarCard = aadhaarCard;
     if (certificate) updateData.certificate = certificate;
@@ -558,6 +560,7 @@ const postAstrologerProfile = async (req, res) => {
       aadhaarCard,
       certificate,
       email,
+      upi_id
     } = req.body;
 
     // Parse JSON strings if sent that way
@@ -581,7 +584,8 @@ const postAstrologerProfile = async (req, res) => {
       !gender ||
       !certificate ||
       !aadhaarCard ||
-      !email
+      !email ||
+      !upi_id
     ) {
       return res
         .status(400)
@@ -614,6 +618,7 @@ const postAstrologerProfile = async (req, res) => {
       profileStatus,
       chatStatus,
       email,
+      upi_id,
       country,
       gender,
       starRating,

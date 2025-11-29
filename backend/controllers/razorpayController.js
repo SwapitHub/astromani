@@ -18,27 +18,55 @@ const razorpay = new Razorpay({
 
 const getRazorpayPayment = async (req, res) => {
   try {
-    const { query } = req.params;
+    const query = req.params.query; // FIXED
+
+    // Pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    if (!query) {
+      return res.status(400).json({ error: "Query parameter is required" });
+    }
 
     let searchCondition = { userMobile: query };
 
+    // If query is an ObjectId, search by _id instead
     if (mongoose.Types.ObjectId.isValid(query)) {
       searchCondition = { _id: new mongoose.Types.ObjectId(query) };
     }
 
-    const loginUsers = await UserPayment.find(searchCondition); // Changed from findOne() to find()
+    // Count total documents
+    const totalCount = await UserPayment.countDocuments(searchCondition);
+
+    const loginUsers = await UserPayment.find(searchCondition)
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 }); // newest first
 
     if (!loginUsers.length) {
-      // Check if array is empty
       return res.status(404).json({ error: "No login details found" });
     }
 
-    res.json(loginUsers);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.json({
+      data: loginUsers,
+      pagination: {
+        page,
+        limit,
+        totalCount,
+        totalPages,
+        nextPage: page < totalPages ? page + 1 : null,
+        prevPage: page > 1 ? page - 1 : null,
+      },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to fetch user login details" });
   }
 };
+
 
 const getRazorpayList = async (req, res) => {
   try {
@@ -129,17 +157,16 @@ const getAllUsersWithPaymentHistory = async (req, res) => {
     let skip = (page - 1) * limit;
 
     // SEARCH FILTER
-   let searchFilter = {};
-if (search) {
-  const searchNum = Number(search);
-  searchFilter = {
-    $or: [
-      { name: { $regex: search, $options: "i" } },
-      ...(isNaN(searchNum) ? [] : [{ phone: searchNum }])
-    ]
-  };
-}
-
+    let searchFilter = {};
+    if (search) {
+      const searchNum = Number(search);
+      searchFilter = {
+        $or: [
+          { name: { $regex: search, $options: "i" } },
+          ...(isNaN(searchNum) ? [] : [{ phone: searchNum }]),
+        ],
+      };
+    }
 
     // Count total matched users
     const totalUsers = await UserLogin.countDocuments(searchFilter);
@@ -152,13 +179,13 @@ if (search) {
           from: "payments",
           localField: "phone",
           foreignField: "userMobile",
-          as: "paymentHistory"
-        }
+          as: "paymentHistory",
+        },
       },
 
       { $sort: { createdAt: -1 } },
       { $skip: skip },
-      { $limit: limit }
+      { $limit: limit },
     ]);
 
     const totalPages = Math.ceil(totalUsers / limit);
@@ -174,9 +201,8 @@ if (search) {
       hasPrevPage: page > 1,
       nextPage: page < totalPages ? page + 1 : null,
       prevPage: page > 1 ? page - 1 : null,
-      data: users
+      data: users,
     });
-
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal server error" });
@@ -206,8 +232,6 @@ const postRazorpayVeryFy = async (req, res) => {
     const isSignatureValid = expectedSignature === razorpay_signature;
 
     if (!isSignatureValid) {
-      
-
       await UserPayment.findOneAndUpdate(
         { order_id: razorpay_order_id },
         { status: "failed", error: "Invalid signature" }
@@ -293,5 +317,5 @@ module.exports = {
   postRazorpayOrder,
   postRazorpayVeryFy,
   postRazorpayCancelOrder,
-  getAllUsersWithPaymentHistory
+  getAllUsersWithPaymentHistory,
 };

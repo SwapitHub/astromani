@@ -40,6 +40,7 @@ const businessProfileAstrologerSchema = new mongoose.Schema(
     totalAvailableBalance: Number,
     aadhaarCard:String,
     certificate: String,
+    upi_id: String,
   },
   { timestamps: true }
 );
