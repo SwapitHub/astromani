@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-// const transactionAdminAstr = require("../models/TranstionAdminAstroModel");
+const transactionAdminAstr = require("../models/TranstionAdminAstroModel");
 
 const sendRegistrationSuccessEmail = async (
   email,
@@ -197,16 +197,16 @@ const sendEmailAdminTansAmountAstro = async (req, res) => {
     );
 
        // Save Transaction in DB
-    // const transactionData = new transactionAdminAstr({
-    //   paymentDate,
-    //   email,
-    //   Amount,
-    //   Payment_Method,
-    //   Transaction_id,
-    //   astrologerName
-    // });
+    const transactionData = new transactionAdminAstr({
+      paymentDate,
+      email,
+      Amount,
+      Payment_Method,
+      Transaction_id,
+      astrologerName
+    });
 
-    // await transactionData.save();
+    await transactionData.save();
 
     if (result.success) {
       console.log("✅ Email sent successfully");
