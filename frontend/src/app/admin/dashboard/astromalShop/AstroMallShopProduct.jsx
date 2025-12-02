@@ -731,15 +731,15 @@ const AstroMallShopProduct = () => {
                 <label className="remove-astrict label-content top-selling field-checkbox">
                   <input type="checkbox" id="top_selling" />
                   <span>
-                    Can you move this product to the Top Selling group?
+                    Add this product to the Top Selling group Slider.
                   </span>
-                </label>
+                </label>  
               </div>
               <div className="form-field man-input-filed-sec">
                 <label className="remove-astrict label-content top-selling field-checkbox">
                   <input type="checkbox" id="newlyLaunched" />
                   <span>
-                    Can you move this product to the Top NEWLY LAUNCHED?
+                    Add this product to the Top NEWLY LAUNCHED Slider.
                   </span>
                 </label>
               </div>

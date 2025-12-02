@@ -22,7 +22,7 @@ const ViewUserRecharge = ({ viewUserDetails, setViewProductStatus }) => {
           </div>
           <div className="common-profile">
             <div className="name">Total Amount</div>
-            <div className="input-outer">{viewUserDetails?.totalAmount}</div>
+            <div className="input-outer">₹ {viewUserDetails?.totalAmount}</div>
           </div>
 
           <div className="common-profile">

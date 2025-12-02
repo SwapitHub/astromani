@@ -102,7 +102,7 @@ const UserRechargeList = () => {
                     <td>{user.phone}</td>
                     <td>{user.gender || "-"}</td>
                     <td>{user.dateOfBirth || "-"}</td>
-                    <td>{user.totalAmount || 0}</td>
+                    <td>₹{user.totalAmount || 0}</td>
                     <td>
                       {user.paymentHistory.length === 0
                         ? "No payments"

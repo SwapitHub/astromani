@@ -382,7 +382,10 @@ const AstroMallShops = () => {
                 <label className="remove-astrict label-content field-checkbox">
                   <input id="offer_checkbox" type="checkbox" />
                   <span>
-                    Do you want to offer discounts on items in your shop?
+                    Do you want to offer discounts on items in your shop? 
+                    <br />
+                    <b>* (Discounts only apply to non-Puja Shop items)</b>
+                    
                   </span>
                 </label>
               </div>
@@ -393,6 +396,8 @@ const AstroMallShops = () => {
                   <span>
                     Are you adding a Spiritual Jewelry Product in the "Gemstone"
                     category?
+                    <br/>
+                    <b>* (Only select for Gemstone Product)</b>
                   </span>
                 </label>
               </div>

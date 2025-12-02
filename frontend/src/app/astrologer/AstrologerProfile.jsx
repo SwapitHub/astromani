@@ -18,7 +18,6 @@ const AstrologerProfile = ({
   const [astrologerPhone, setAstrologerPhone] = useState();
   const [astroUpdateDetail, setAstroUpdateDetail] = useState();
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState();
   const [professionsList, setProfessionsList] = useState([]);
   const [languageListData, setLanguageListData] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -29,7 +28,9 @@ const AstrologerProfile = ({
   const [editLanguages, setEditLanguages] = useState("");
   const [editCharges, setEditCharges] = useState("");
   const [editUpiId, setEditUpiId] = useState("");
-
+  const [editBankName, setEditBankName] = useState("");
+  const [editAccountNumber, setEditAccountNumber] = useState("");
+  const [editIFSCCode, setEditIFSCCode] = useState("");
   const [editCountry, setEditCountry] = useState("");
   const [editGender, setEditGender] = useState("");
   const [editDescription, setEditDescription] = useState("");
@@ -109,6 +110,14 @@ const AstrologerProfile = ({
     );
     formData.append("email", document.getElementById("email").value);
     formData.append("upi_id", document.getElementById("upi_id").value);
+
+    formData.append(
+      "account_number",
+      document.getElementById("account_number").value
+    );
+    formData.append("bank_name", document.getElementById("bank_name").value);
+    formData.append("IFSC_code", document.getElementById("IFSC_code").value);
+    
 
     formData.append("profileStatus", true);
     formData.append("chatStatus", false);
@@ -254,8 +263,14 @@ const AstrologerProfile = ({
     );
     formData.append("email", document.getElementById("email").value);
     formData.append("upi_id", document.getElementById("upi_id").value);
-
+    formData.append(
+      "account_number",
+      document.getElementById("account_number").value
+    );
+    formData.append("bank_name", document.getElementById("bank_name").value);
+    formData.append("IFSC_code", document.getElementById("IFSC_code").value);
     
+
     // Helper to get selected checkbox values
     const getSelectedValues = (name) => {
       return Array.from(
@@ -339,6 +354,11 @@ const AstrologerProfile = ({
     setEditLanguages(astroUpdateDetail?.languages || []);
     setEditCharges(astroUpdateDetail?.charges || "");
     setEditUpiId(astroUpdateDetail?.upi_id || "");
+
+    setEditAccountNumber(astroUpdateDetail?.account_number || "");
+    setEditBankName(astroUpdateDetail?.bank_name || "");
+    setEditIFSCCode(astroUpdateDetail?.IFSC_code || "");
+
     setEditCountry(astroUpdateDetail?.country || "");
     setEditGender(astroUpdateDetail?.gender || "");
     setEditDescription(astroUpdateDetail?.Description || "");
@@ -691,12 +711,62 @@ const AstrologerProfile = ({
                 name="quantity"
                 value={editUpiId}
                 onChange={(e) => setEditUpiId(e.target.value)}
-                
                 className="common-input-filed"
               />
-              {errors.upiId && (
-                <p className="error">{errors.upiId}</p>
-              )}
+              {errors.upiId && <p className="error">{errors.upiId}</p>}
+            </div>
+
+           
+
+            <div className="inner-form-filed-sec full">
+              <div className="label-content">
+                <label for="Name">
+                  Account Number <span>(खाता संख्या)</span>
+                </label>
+              </div>
+              <input
+                type="text"
+                placeholder="Enter Account Number"
+                id="account_number"
+                name="quantity"
+                value={editAccountNumber}
+                onChange={(e) => setEditAccountNumber(e.target.value)}
+                className="common-input-filed"
+              />
+            </div>
+
+            <div className="inner-form-filed-sec full">
+              <div className="label-content">
+                <label for="Name">
+                  Bank Name <span>(बैंक का नाम)</span>
+                </label>
+              </div>
+              <input
+                type="text"
+                placeholder="Enter Bank Name"
+                id="bank_name"
+                name="quantity"
+                value={editBankName}
+                onChange={(e) => setEditBankName(e.target.value)}
+                className="common-input-filed"
+              />
+            </div>
+
+            <div className="inner-form-filed-sec full">
+              <div className="label-content">
+                <label for="Name">
+                  IFSC Code <span>(आईएफएससी कोड)</span>
+                </label>
+              </div>
+              <input
+                type="text"
+                placeholder="Enter IFSC Code"
+                id="IFSC_code"
+                name="quantity"
+                value={editIFSCCode}
+                onChange={(e) => setEditIFSCCode(e.target.value)}
+                className="common-input-filed"
+              />
             </div>
 
             <div className="inner-form-filed-sec full">

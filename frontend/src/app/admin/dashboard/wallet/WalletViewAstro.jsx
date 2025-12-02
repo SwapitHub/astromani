@@ -145,7 +145,7 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
             <div className="mobile">Mobile Number</div>
             <div className="input-outer">{astroDetailData?.mobileNumber}</div>
           </div>
-           <div className="common-profile">
+          <div className="common-profile">
             <div className="email">Email</div>
             <div className="input-outer">{astroDetailData?.email}</div>
           </div>
@@ -162,6 +162,25 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
           <div className="common-profile">
             <div className="date-of-birth">Charges</div>
             <div className="input-outer">₹ {astroDetailData?.charges}</div>
+          </div>
+          <div className="common-profile">
+            <div className="date-of-birth">Account Number</div>
+            <div className="input-outer">
+              {" "}
+              {astroDetailData?.account_number}
+            </div>
+          </div>
+          <div className="common-profile">
+            <div className="date-of-birth">Bank Name</div>
+            <div className="input-outer"> {astroDetailData?.bank_name}</div>
+          </div>
+          <div className="common-profile">
+            <div className="date-of-birth">IFSC Code</div>
+            <div className="input-outer"> {astroDetailData?.IFSC_code}</div>
+          </div>
+          <div className="common-profile">
+            <div className="date-of-birth">Upi Id</div>
+            <div className="input-outer"> {astroDetailData?.upi_id}</div>
           </div>
           <div className="common-profile">
             <div className="date-of-birth">Country</div>
@@ -198,7 +217,10 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
             <div className="input-outer">
               {" "}
               {astroDetailData?.spiritual_services.map((item) => (
-                <div key={item?._id} className={`common-item ${item?.shop_slug}`}>
+                <div
+                  key={item?._id}
+                  className={`common-item ${item?.shop_slug}`}
+                >
                   <p>Name: {item?.shop_slug}</p>
 
                   <p>Price: {item?.service_price}</p>

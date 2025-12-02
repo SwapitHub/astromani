@@ -9,6 +9,7 @@ import DeletePopUp from "@/app/component/DeletePopUp";
 import Image from "next/image";
 import WalletView from "./WalletViewAstro";
 import WalletEditAstro from "./WalletEditAstro";
+import TransitionPaymentPopUp from "@/app/component/popup/TransitionPaymentPopUp";
 
 function AstrologerAdminWallet() {
   let showNameData = "Astrologer";
@@ -25,6 +26,8 @@ function AstrologerAdminWallet() {
   const [showDelete, setShowDelete] = useState(false);
   const [userToDelete, setUserToDelete] = useState();
   const [deletePermanently, setDeletePermanently] = useState(false);
+  const [toggleTansId, setToggleTansId] = useState(false);
+  const [astrologerData, setAstroLogerData] = useState();
 
   // Debounce search input
   const debounceSearch = useCallback(
@@ -160,7 +163,13 @@ function AstrologerAdminWallet() {
           setLoading={setLoading}
         />
       )}
-
+      {toggleTansId && (
+        <TransitionPaymentPopUp
+          setToggleTansId={setToggleTansId}
+          astrologerData={astrologerData}
+          fetchTransactions={fetchTransactions}
+        />
+      )}
       <div className="admin-wallet-main">
         <h1>Astrologer Wallet List</h1>
         <div className="search-box-top-btn">
@@ -257,9 +266,23 @@ function AstrologerAdminWallet() {
                             >
                               <MdDelete />
                             </button>
-                            <button className="pay-btn">Pay Astrologer</button>
+                            <button
+                              className="pay-btn"
+                              style={
+                                user.totalAvailableBalance < 1
+                                  ? { cursor: "not-allowed" }
+                                  : { cursor: "pointer" }
+                              }
+                              onClick={() => {
+                                if (user.totalAvailableBalance > 0) {
+                                  setToggleTansId(true);
+                                  setAstroLogerData(user);
+                                }
+                              }}
+                            >
+                              Pay Astrologer
+                            </button>
                           </td>
-                          
                         </tr>
                       </>
                     );
