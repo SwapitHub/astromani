@@ -404,7 +404,10 @@ const putAstrologerProfileUpdate = async (req, res) => {
       aadhaarCard,
       certificate,
       email,
-      upi_id
+      upi_id,
+      account_number,
+      bank_name,
+      IFSC_code,
     } = req.body;
 
     // Prepare update object
@@ -426,6 +429,9 @@ const putAstrologerProfileUpdate = async (req, res) => {
     if (charges) updateData.charges = charges;
     if (email) updateData.email = email;
     if (upi_id) updateData.upi_id = upi_id;
+    if (account_number) updateData.account_number = account_number;
+    if (bank_name) updateData.bank_name = bank_name;
+    if (IFSC_code) updateData.IFSC_code = IFSC_code;
 
     if (aadhaarCard) updateData.aadhaarCard = aadhaarCard;
     if (certificate) updateData.certificate = certificate;
@@ -560,7 +566,10 @@ const postAstrologerProfile = async (req, res) => {
       aadhaarCard,
       certificate,
       email,
-      upi_id
+      upi_id,
+      account_number,
+      bank_name,
+      IFSC_code,
     } = req.body;
 
     // Parse JSON strings if sent that way
@@ -585,7 +594,10 @@ const postAstrologerProfile = async (req, res) => {
       !certificate ||
       !aadhaarCard ||
       !email ||
-      !upi_id
+      !upi_id ||
+      !account_number ||
+      !bank_name ||
+      !IFSC_code 
     ) {
       return res
         .status(400)
@@ -619,6 +631,9 @@ const postAstrologerProfile = async (req, res) => {
       chatStatus,
       email,
       upi_id,
+      account_number,
+      bank_name,
+      IFSC_code,
       country,
       gender,
       starRating,
