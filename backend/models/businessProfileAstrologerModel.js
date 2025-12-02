@@ -41,9 +41,6 @@ const businessProfileAstrologerSchema = new mongoose.Schema(
     aadhaarCard:String,
     certificate: String,
     upi_id: String,
-    account_number: String,
-    bank_name: String,
-    IFSC_code: String,
   },
   { timestamps: true }
 );
