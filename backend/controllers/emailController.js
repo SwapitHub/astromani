@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const transactionAdminAstr = require("../models/TranstionAdminAstroModel");
+const transactionAdminAstr = require("../models/transtionAdminAstroModel");
 
 const sendRegistrationSuccessEmail = async (
   email,
