@@ -49,7 +49,6 @@ astrologerRoutes.post(
   upload.fields([
     { name: "aadhaarCard", maxCount: 1 },
     { name: "certificate", maxCount: 1 },
-    { name: "profileImage", maxCount: 1 },
   ]),
   registerAstrologer
 );
@@ -60,7 +59,6 @@ astrologerRoutes.put(
   upload.fields([
     { name: "aadhaarCard", maxCount: 1 },
     { name: "certificate", maxCount: 1 },
-    { name: "profileImage", maxCount: 1 },
   ]),
   updateAstroAnyField
 );

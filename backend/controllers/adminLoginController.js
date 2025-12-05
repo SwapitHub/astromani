@@ -1,7 +1,26 @@
 const Admin = require("../models/adminLoginModel");
 const bcrypt = require("bcrypt");
 
+// Create default admin once, never update
+const createDefaultAdmin = async () => {
+  try {
+    const existingAdmin = await Admin.findOne({ email: "admin@gmail.com" });
 
+    if (!existingAdmin) {
+      const newAdmin = new Admin({
+        email: "admin@gmail.com",
+        password: "admin123", // Plain text password
+      });
+
+      await newAdmin.save();
+      console.log("✅ Default admin created");
+    } 
+  } catch (err) {
+    console.error("❌ Error:", err.message);
+  }
+};
+
+createDefaultAdmin();
 
 
 
@@ -14,22 +33,6 @@ const getAdminData = async (req, res) => {
   }
 }
 
-const addAdmin = async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const existingAdmin = await Admin.findOne({ email });
-    if (existingAdmin) return res.status(400).json({ message: "Admin already exists" });
-
-    const newAdmin = new Admin({ email, password }); // Will be hashed
-    await newAdmin.save();
-
-    res.status(201).json({ message: "New admin added successfully" });
-  } catch (err) {
-    res.status(500).json({ message: "Error adding admin", error: err.message });
-  }
-};
-
 
 const changePassword = async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
@@ -38,12 +41,11 @@ const changePassword = async (req, res) => {
     const admin = await Admin.findOne({ email });
     if (!admin) return res.status(404).json({ message: "Admin not found" });
 
-    // Verify old password
-    const isMatch = await bcrypt.compare(oldPassword, admin.password);
-    if (!isMatch) return res.status(400).json({ message: "Old password is incorrect" });
+    if (admin.password !== oldPassword) {
+      return res.status(400).json({ message: "Old password is incorrect" });
+    }
 
-    // Hash new password before saving
-    admin.password = await bcrypt.hash(newPassword, 10);
+    admin.password = newPassword;
     await admin.save();
 
     res.status(200).json({ message: "Password changed successfully" });
@@ -52,51 +54,16 @@ const changePassword = async (req, res) => {
   }
 };
 
-const updateAdminById = async (req, res) => {
-  const { id } = req.params;   // or req.body.id
-  const updates = req.body;    // incoming fields to update
-
-  try {
-    const admin = await Admin.findById(id);
-    if (!admin) {
-      return res.status(404).json({ message: "Admin not found" });
-    }
-
-    // If password is being updated → hash it
-    if (updates.password) {
-      updates.password = await bcrypt.hash(updates.password, 10);
-    }
-
-    // Apply updates
-    Object.assign(admin, updates);
-
-    // Save updated admin
-    await admin.save();
-
-    res.status(200).json({
-      message: "Admin updated successfully",
-      admin,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Error updating admin",
-      error: err.message,
-    });
-  }
-};
-
 
 const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
-console.log(email, password,"======");
 
   try {
     const admin = await Admin.findOne({ email });
-    if (!admin) return res.status(401).json({ message: "Invalid email or password" });
 
-    // Compare password with hashed password
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) return res.status(401).json({ message: "Invalid email or password" });
+    if (!admin || admin.password !== password) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
 
     res.status(200).json({ message: "Login successful", admin });
   } catch (err) {
@@ -106,11 +73,8 @@ console.log(email, password,"======");
 
 
 
-
 module.exports = {
     getAdminData,
     changePassword,
-    loginAdmin,
-    addAdmin,
-    updateAdminById
+    loginAdmin
 }
