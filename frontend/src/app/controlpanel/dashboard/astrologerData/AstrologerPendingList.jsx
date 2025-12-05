@@ -12,7 +12,7 @@ import AstroDetailEdit from "./AstroDetailEdit";
 import useDebounce from "@/app/hook/useDebounce";
 import DeletePopUp from "@/app/component/DeletePopUp";
 
-function AstrologerPendingList() {
+function AstrologerPendingList({setUpdateButton}) {
   let showNameData = "Pending Astrologer";
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -166,6 +166,8 @@ function AstrologerPendingList() {
         <>
         <div className="main-pending-list">
           <h1>Astrologer Pending List</h1>
+            <button onClick={(()=>{setUpdateButton("astrologer")})}>Show wallet</button>
+
           <div className="search-box-top-btn">
               <div className="search-box-filed">
                 <input

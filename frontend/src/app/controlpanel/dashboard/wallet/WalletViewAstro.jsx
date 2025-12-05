@@ -6,13 +6,11 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
-  console.log(mobileNumber, "mobileNumber-12");
 
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 800);
 
-  const [astroDetailData, setAstroDetail] = useState(null);
-  console.log(astroDetailData);
+  const [astroDetailData, setAstroDetail] = useState();
 
   const [transactions, setTransactions] = useState([]);
   const [pagination, setPagination] = useState({
@@ -22,7 +20,14 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
     hasNextPage: false,
     hasPrevPage: false,
   });
-
+  const [paymentTransactions, setPaymentTransactions] = useState([]);
+  const [paymentPagination, setPaymentPagination] = useState({
+    page: 1,
+    limit: 3,
+    totalPages: 1,
+    hasNextPage: false,
+    hasPrevPage: false,
+  });
   const [chatStatusRecord, setChatStatusRecord] = useState(false);
   const fetchUserWalletDetails = async () => {
     try {
@@ -53,6 +58,32 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
       fetchUserWalletDetails(mobileNumber);
     }
   }, [mobileNumber, pagination.page, debouncedSearch]);
+
+
+ // Fetch Payment Transactions
+  const fetchPaymentTransactions = async () => {
+    if (!astroDetailData?._id) return;
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/get-payment-transition-list-astro/${astroDetailData._id}?page=${paymentPagination.page}&limit=${paymentPagination.limit}`
+      );
+
+      setPaymentTransactions(res.data.data || []);
+      setPaymentPagination((prev) => ({
+        ...prev,
+        totalPages: res.data.pagination?.totalPages || 1,
+        hasNextPage: res.data.pagination?.hasNextPage || false,
+        hasPrevPage: res.data.pagination?.hasPrevPage || false,
+      }));
+    } catch (err) {
+      console.error("Error fetching payment transactions:", err);
+    }
+  };
+
+   // Payment: Fetch on astroDetailData or page change
+  useEffect(() => {
+    fetchPaymentTransactions();
+  }, [astroDetailData, paymentPagination.page]);
 
   return (
     <div className="astro-detail-main-view">
@@ -244,19 +275,27 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
         </div>
       </div>
 
+      <div className="wallet-btn">
+        <button
+          onClick={() => {
+            setChatStatusRecord("wallet");
+          }}
+        >
+          Chatting Wallet Transactions
+        </button>
+
+        <button
+          onClick={() => {
+            setChatStatusRecord("payment");
+          }}
+        >
+          Payment Transactions
+        </button>
+      </div>
       {/* Toggle Transactions */}
-      <button
-        onClick={() => {
-          setChatStatusRecord(!chatStatusRecord);
-        }}
-      >
-        {chatStatusRecord
-          ? "Hide Wallet Transactions"
-          : "Show Wallet Transactions"}
-      </button>
 
       {/* Transactions Table */}
-      {chatStatusRecord && (
+      {chatStatusRecord == "wallet" && (
         <div className="chat-record">
           <h2 style={{ textAlign: "center", margin: "20px 0" }}>
             Astrologer Wallet Transactions
@@ -330,6 +369,87 @@ const WalletView = ({ mobileNumber, setAddActiveClass, setLoading }) => {
               disabled={!pagination.hasNextPage}
               onClick={() =>
                 setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
+              }
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
+
+      {chatStatusRecord == "payment" && (
+        <div className="chat-record">
+          <h2 style={{ textAlign: "center", margin: "20px 0" }}>
+            Astrologer Payment Transactions
+          </h2>
+          <div className="input-outer">
+            <div className="balance">AvaiLable Balance</div>
+            <div className="input-inner">
+              ₹ {Math.round(astroDetailData?.totalAvailableBalance) || 0}
+            </div>
+          </div>
+
+          {/* Search Box */}
+          {/* <input
+            type="search"
+            placeholder="Search transaction id / type / status..."
+            aria-label="Search wallet transactions"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setPagination((prev) => ({ ...prev, page: 1 })); // reset to page 1 on search
+            }}
+          /> */}
+
+          <div className="outer-table">
+            <table border="1" cellPadding="8">
+              <thead>
+                <tr>
+                  <th>Payment Method </th>
+                  <th>Transaction_id</th>
+                  <th>Transaction Amount</th>
+                  <th>Remaining Amount</th>
+                  <th>Payment Date</th>
+                </tr>
+              </thead>
+              {paymentTransactions?.length > 0 ? (
+                <tbody>
+                  {paymentTransactions.map((tx) => (
+                    <tr key={tx._id}>
+                      <td>{tx.Payment_Method}</td>{" "}
+                      <td>{tx.Transaction_id}</td>{" "}                    
+
+                      <td>₹ {Math.round(tx.Amount)}</td>{" "}
+                      <td>₹ {tx.remaining_amount}</td>{" "}
+                      <td>{tx?.paymentDate}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              ) : (
+                <p colSpan="6" style={{ textAlign: "center" }}>
+                  No Transactions Found
+                </p>
+              )}
+            </table>
+          </div>
+
+          {/* Pagination Controls */}
+          <div style={{ marginTop: "15px", textAlign: "center" }}>
+            <button
+              disabled={!paymentPagination.hasPrevPage}
+              onClick={() =>
+                setPaymentPagination((prev) => ({ ...prev, page: prev.page - 1 }))
+              }
+            >
+              Prev
+            </button>
+            <span style={{ margin: "0 10px" }}>
+               Page {paymentPagination.page} of {paymentPagination.totalPages}
+            </span>
+            <button
+              disabled={!paymentPagination.hasNextPage}
+              onClick={() =>
+                 setPaymentPagination((prev) => ({ ...prev, page: prev.page + 1 }))
               }
             >
               Next

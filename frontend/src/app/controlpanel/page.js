@@ -4,6 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import secureLocalStorage from "react-secure-storage";
 import Loader from "../component/Loader";
 import Cookies from "js-cookie";
+import bcrypt from "bcryptjs";
 
 const Admin = () => {
   const router = useRouter();
@@ -20,8 +21,8 @@ const Admin = () => {
 
   useEffect(() => {
     // Redirect to dashboard if already logged in
-    if (adminSegment === "admin" && admin_id) {
-      router.push("/admin/dashboard");
+    if (adminSegment === "controlpanel" && admin_id) {
+      router.push("/controlpanel/dashboard");
     }
   }, [adminSegment, admin_id, router]);
 
@@ -36,12 +37,21 @@ const Admin = () => {
 
       const admins = await response.json();
       const admin = admins[0];
+      // Compare plain text password with hashed password
+      if (!admin) {
+        setError("Admin not found");
+        return;
+      }
 
-      if (admin?.email === email && admin?.password === password) {
+      // Compare plain text password with hashed password
+      const isMatch = await bcrypt.compare(password, admin.password);
+console.log(admin?.email , email ,isMatch, admin.password);
+
+      if (admin?.email === email && isMatch) {
         setIsLoading(true); // Start loader
         secureLocalStorage.setItem("admin_id", admin._id);
         Cookies.set("admin_id", admin._id);
-        router.push("/admin/dashboard");
+        router.push("/controlpanel/dashboard");
         window.dispatchEvent(new Event("admin_id_updated"));
       } else {
         setError("Invalid email or password");

@@ -37,7 +37,7 @@ const AdminDashBoardData = ({ setUpdateButton }) => {
             </div>
           </li>
          
-          <li onClick={() => setUpdateButton("active")}>
+          {/* <li onClick={() => setUpdateButton("active")}>
             <span>
               <PiUserListDuotone />
             </span>
@@ -45,8 +45,8 @@ const AdminDashBoardData = ({ setUpdateButton }) => {
               <span>Astrologer Active</span>
               <span className="number">{totalAstroActive}</span>
             </div>
-          </li>
-          <li onClick={() => setUpdateButton("admin")}>
+          </li> */}
+          <li onClick={() => setUpdateButton("controlpanel")}>
             <span>
               <IoWalletSharp />
             </span>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import AstroLogerList from "./AstroLogerList";
 import AstrologerPendingList from "./AstrologerPendingList";
 
-const ApprovalPanel = () => {
+const ApprovalPanel = ({setUpdateButton}) => {
   const [approvalStatus, setApprovalStatus] = useState("confirm");
 
   return (
@@ -26,9 +26,9 @@ const ApprovalPanel = () => {
         </button>
       </div>
       {approvalStatus == "confirm" ? (
-        <AstroLogerList />
+        <AstroLogerList setUpdateButton={setUpdateButton}/>
       ) : (
-        <AstrologerPendingList />
+        <AstrologerPendingList setUpdateButton={setUpdateButton}/>
       )}
     </>
   );

@@ -62,7 +62,7 @@ const AdminHome = () => {
     secureLocalStorage.removeItem("admin_id");
     Cookies.remove("admin_id");
     window.dispatchEvent(new Event("admin_id_updated"));
-    router.push("/admin");
+    router.push("/controlpanel");
   };
 
   useEffect(() => {
@@ -157,7 +157,7 @@ const AdminHome = () => {
                       </a>
                       <SlideToggle isOpen={openFaq == "AstrologerLists"}>
                         <ul>
-                          <li
+                          {/* <li
                             className={
                               updateButton === "activeList" ? "active" : ""
                             }
@@ -172,7 +172,7 @@ const AdminHome = () => {
                             >
                               Active List
                             </a>
-                          </li>
+                          </li> */}
                           <li
                             className={
                               updateButton === "approvalPanel" ? "active" : ""
@@ -194,7 +194,7 @@ const AdminHome = () => {
                     </li>
                     <li
                       className={
-                        updateButton === "admin" ||
+                        updateButton === "controlpanel" ||
                         updateButton === "astrologer" ||
                         updateButton === "user"
                           ? "active"
@@ -217,13 +217,13 @@ const AdminHome = () => {
                       <SlideToggle isOpen={openFaq == "ChattingWallet"}>
                         <ul>
                           <li
-                            className={updateButton === "admin" ? "active" : ""}
+                            className={updateButton === "controlpanel" ? "active" : ""}
                           >
                             <a
                               href="#"
                               onClick={(e) => {
                                 e.preventDefault();
-                                setUpdateButton("admin");
+                                setUpdateButton("controlpanel");
                                 setToggleSlideMobile(false);
                               }}
                             >
@@ -804,7 +804,7 @@ const AdminHome = () => {
                 {updateButton === "activeList" && <ActiveList />}
                 {updateButton === "userRecharge" && <UserRechargeList />}
 
-                {updateButton === "approvalPanel" && <ApprovalPanel />}
+                {updateButton === "approvalPanel" && <ApprovalPanel setUpdateButton={setUpdateButton}/>}
                 {updateButton === 7 && <UserList />}
                 {updateButton === "Denomination" && <Denomination />}
                 {updateButton === "astroShop" && <AstroMallShops />}
@@ -831,7 +831,7 @@ const AdminHome = () => {
                   <AdminPujaProductWallet />
                 )}
 
-                {["admin"].includes(updateButton) && (
+                {["controlpanel"].includes(updateButton) && (
                   <AdminWallet updateButton={updateButton} />
                 )}
                 {["shop-user", "shop-admin"].includes(updateButton) && (
