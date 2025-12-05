@@ -12,12 +12,11 @@ export const validateAstrologerForm = (formType) => {
       ?.value.trim();
     // Astrologer registration specific fields
     const dateOfBirth = document.getElementById("birthday")?.value;
+    const skills = document.getElementById("Skills")?.value;
     const deviceUse = document.getElementById("deviceUse")?.value;
     const email = document.getElementById("emails")?.value.trim();
     const Password = document.getElementById("Password")?.value.trim();
-    const profileImage = document.getElementById("profileImage")?.value.trim();
-    const Experience = document.getElementById("Experience")?.value.trim();
-    const Charges = document.getElementById("Charges")?.value.trim();
+
     const gender = document.querySelector(
       'input[name="gender"]:checked'
     )?.value;
@@ -25,9 +24,6 @@ export const validateAstrologerForm = (formType) => {
 
     const selectedLanguages = Array.from(
       document.querySelectorAll('input[name="languages"]:checked')
-    ).map((input) => input.value);
-    const selectedProfessions = Array.from(
-      document.querySelectorAll('input[name="profession"]:checked')
     ).map((input) => input.value);
 
     if (!dateOfBirth) {
@@ -54,12 +50,11 @@ export const validateAstrologerForm = (formType) => {
 
     if (!firstName) errors.firstName = "Name is required";
 
-  
+    if (!skills || skills === "Please Select Option") {
+      errors.skills = "Please select a skill";
+    }
     if (!selectedLanguages || selectedLanguages.length <= 0) {
       errors.languages = "Please select at least one language";
-    }
-    if (!selectedProfessions || selectedProfessions.length <= 0) {
-      errors.profession = "Please select at least one Skill";
     }
     if (!deviceUse || deviceUse === "select device") {
       errors.deviceUse = "Please select a device";
@@ -71,18 +66,13 @@ export const validateAstrologerForm = (formType) => {
     if (!Password || Password.length !== 6) {
       errors.Password = "Valid 6-digit password is required";
     }
-    if (!Experience) {
-      errors.Experience = "Experience is required";
-    }
-    if (!Charges) {
-      errors.Charges = "Charges is required";
-    }
+
     if (!mobileNumber || mobileNumber.length !== 10) {
       errors.mobileNumber = "Valid 10-digit mobile number is required";
     }
-    // if (!upiId) {
-    //   errors.upiId = "UPI ID  is required";
-    // }
+    if (!upiId) {
+      errors.upiId = "UPI ID  is required";
+    }
     if (!gender) {
       errors.gender = "Gender is required";
     }
@@ -91,9 +81,6 @@ export const validateAstrologerForm = (formType) => {
     }
     if (!certificateFile) {
       errors.certificateFile = "Certificate is required";
-    }
-    if (!profileImage) {
-      errors.profileImage = "Image is required";
     }
   } else if (formType === "astroProfile") {
     const professions = Array.from(

@@ -8,8 +8,6 @@ const AstrologerRegistration = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const [languageListData, setLanguageListData] = useState([]);
-  const [professionsList, setProfessionsList] = useState([]);
-
   const todayDate = new Date().toISOString().split("T")[0];
 
   const handleSubmitSignup = async () => {
@@ -25,26 +23,17 @@ const AstrologerRegistration = () => {
       document.querySelectorAll('input[name="languages"]:checked')
     ).map((input) => input.value);
 
-    const selectedProfessions = Array.from(
-      document.querySelectorAll('input[name="profession"]:checked')
-    ).map((input) => input.value);
-
     // ✅ Get files
     const aadhaarFile = document.getElementById("aadhaarCard")?.files?.[0];
     const certificateFile = document.getElementById("certificate")?.files?.[0];
-    const profileImageFile =
-      document.getElementById("profileImage")?.files?.[0];
 
     // ✅ Validate required fields
     const firstName = document.getElementById("fname").value;
-    const Experiences = document.getElementById("Experience").value;
-    const Charge = document.getElementById("Charges").value;
-
     const dob = document.getElementById("birthday").value;
     const gender = document.querySelector(
       'input[name="gender"]:checked'
     )?.value;
-
+    const skills = document.getElementById("Skills").value;
     const deviceUse = document.getElementById("deviceUse").value;
     const email = document.getElementById("emails").value;
     const Password = document.getElementById("Password").value;
@@ -55,16 +44,13 @@ const AstrologerRegistration = () => {
       !dob ||
       !gender ||
       selectedLanguages.length === 0 ||
-      selectedProfessions.length === 0 ||
+      !skills ||
       !deviceUse ||
       !email ||
       !Password ||
       !mobileNumber ||
       !aadhaarFile ||
-      !certificateFile ||
-      !profileImageFile ||
-      !Experiences ||
-      !Charge
+      !certificateFile
     ) {
       console.warn("All form fields are required.");
       return;
@@ -74,12 +60,9 @@ const AstrologerRegistration = () => {
       const formData = new FormData();
 
       formData.append("name", firstName);
-      formData.append("experience", Experiences);
-      formData.append("charges", Charge);
-
       formData.append("dateOfBirth", dob);
       formData.append("gender", gender);
-
+      formData.append("skills", skills);
       formData.append("deviceUse", deviceUse);
       formData.append("email", email);
       formData.append("Password", Password);
@@ -91,13 +74,9 @@ const AstrologerRegistration = () => {
         formData.append("languages[]", lang);
       });
 
-      selectedProfessions.forEach((prof) => {
-        formData.append("professions[]", prof);
-      });
       // ✅ Append files
       if (aadhaarFile) formData.append("aadhaarCard", aadhaarFile);
       if (certificateFile) formData.append("certificate", certificateFile);
-      if (profileImageFile) formData.append("profileImage", profileImageFile);
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/astrologer-registration`,
@@ -137,19 +116,7 @@ const AstrologerRegistration = () => {
     }
   };
 
-  const fetchProfessionsList = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_WEBSITE_URL}/add-Profession-astrologer`
-      );
-      setProfessionsList(response.data);
-    } catch (error) {
-      console.error("Fetch professions list error:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchProfessionsList();
     fetchLanguageList();
   }, []);
 
@@ -224,33 +191,6 @@ const AstrologerRegistration = () => {
                       )}
                     </div>
 
-                    <div className="add-profile-content">
-                      <div className="inner-form-filed-sec full">
-                        <div className="label-content">
-                          <label htmlFor="image">
-                            Upload Image <span>(छवि अपलोड करें)</span>
-                          </label>
-                        </div>
-                        <input
-                          type="file"
-                          id="profileImage"
-                          name="profileImage"
-                          accept=".jpg, .jpeg, .png"
-                          className="common-input-filed"
-                          // onChange={() => {
-                          //   setErrors((prev) => {
-                          //     const newErrors = { ...prev };
-                          //     delete newErrors.imagePic;
-                          //     return newErrors;
-                          //   });
-                          // }}
-                        />
-                        {errors.profileImage && (
-                          <p className="error">{errors.profileImage}</p>
-                        )}
-                      </div>
-                    </div>
-
                     <div className="inner-form-filed-sec">
                       <div className="label-content">
                         <label htmlFor="certificate">
@@ -306,7 +246,6 @@ const AstrologerRegistration = () => {
                         <p className="error">{errors.dateOfBirth}</p>
                       )}
                     </div>
-
                     <div className="inner-form-filed-sec">
                       <div className="label-content">
                         <label htmlFor="gender">
@@ -373,71 +312,40 @@ const AstrologerRegistration = () => {
                         )}
                       </div>
                     </div>
+
                     <div className="inner-form-filed-sec">
                       <div className="label-content">
-                        <label>
+                        <label for="Skills">
                           Skills <span>(कौशल)</span>
                         </label>
                       </div>
-                      <div className="man-input-filed-sec">
-                        {professionsList?.map((item) => (
-                          <label key={item._id}>
-                            <input
-                              type="checkbox"
-                              name="profession"
-                              id="profession"
-                              value={item.professions}
-                              // checked={editProfessions.includes(item.professions)}
-                              // onChange={handleProfessionChange}
-                            />
-                            <span>{item.professions}</span>
-                          </label>
-                        ))}
-                        {errors.profession && (
-                          <p className="error">{errors.profession}</p>
-                        )}
-                      </div>
-                    </div>
 
-                    <div className="inner-form-filed-sec">
-                      <div className="label-content">
-                        <label for="Name">
-                          Experience <span>(अनुभव)</span>
-                        </label>
-                      </div>
-                      <input
-                        type="text"
-                        id="Experience"
-                        name="Experience"
+                      <select
+                        name="Skills"
+                        id="Skills"
                         className="common-input-filed"
-                        placeholder="Enter your Exp"
-                        // value={experience}
-                        // onChange={(e) => setExperience(e.target.value)}
-                      />
-                      {errors.Experience && (
-                        <p className="error">{errors.Experience}</p>
+                      >
+                        <option value="Please Select Option">
+                          Please Select Option
+                        </option>
+                        <option value="Love and Relationship">
+                          Love and Relationship
+                        </option>
+                        <option value="Marriage Consultant">
+                          Marriage Consultant
+                        </option>
+                        <option value="Career Consultant">
+                          Career Consultant
+                        </option>
+                        <option value="Finance Consultant">
+                          Finance Consultant
+                        </option>
+                      </select>
+                      {errors.skills && (
+                        <p className="error">{errors.skills}</p>
                       )}
                     </div>
 
-                    <div className="inner-form-filed-sec full">
-                      <div className="label-content">
-                        <label for="Name">
-                          Charges <span>(शुल्क)</span>
-                        </label>
-                      </div>
-                      <input
-                        type="text"
-                        id="Charges"
-                        name="Charges"
-                        className="common-input-filed"
-                        placeholder="enter your charge"
-                        // value={editCharges}
-                        // onChange={(e) => setEditCharges(e.target.value)}
-                      />
-                      {errors.Charges && (
-                        <p className="error">{errors.Charges}</p>
-                      )}
-                    </div>
                     <div className="inner-form-filed-sec">
                       <div className="label-content">
                         <label for="use-phone">
@@ -497,9 +405,7 @@ const AstrologerRegistration = () => {
                         placeholder="Password"
                         required
                       />
-                      {errors.Password && (
-                        <p className="error">{errors.Password}</p>
-                      )}
+                      {errors.Password && <p className="error">{errors.Password}</p>}
                     </div>
 
                     <div className="inner-form-filed-sec">

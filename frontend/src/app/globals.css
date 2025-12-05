@@ -1303,8 +1303,6 @@ span.text-before-btn {margin-right: 10px; text-transform: capitalize;}
 .new-kundali-form .button {text-align: center; margin: 40px 0px 0px;}
 .kundali_horo h5 {font-size: 18px; text-transform: capitalize; margin: 10px 0 20px;}
 td .pay-btn {margin: 5px 0px 0px;}
-.wallet-btn {display: flex; gap: 10px; margin: 20px 0px 0px;}
-.form-field + button + span {display:block; margin: 15px 0px 0px;}
 /* ================== @ media css start here ================== */
 @media (max-width: 1600px) {
   .outer-home-dashboard ul {grid-template-columns: repeat(3, 1fr);}

@@ -11,7 +11,7 @@ import useDebounce from "@/app/hook/useDebounce";
 import DeletePopUp from "@/app/component/DeletePopUp";
 import BlockUnblock from "@/app/component/BlockUnblock";
 
-function AstroLogerList({setUpdateButton}) {
+function AstroLogerList() {
   let showNameData = "Astrologer";
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -200,7 +200,6 @@ function AstroLogerList({setUpdateButton}) {
         <>
           <div className="main-pending-list">
             <h1>Astrologer Active List</h1>
-            <button onClick={(()=>{setUpdateButton("astrologer")})}>Show wallet</button>
             <div className="search-box-top-btn">
               <div className="search-box-filed">
                 <input
