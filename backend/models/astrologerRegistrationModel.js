@@ -6,7 +6,7 @@ const astrologerSignUpSchema = new mongoose.Schema(
     dateOfBirth: { type: String, required: true },
     gender: { type: String, required: true },
     languages: [{ type: String, required: true }],
-    skills: { type: String, required: true },
+    professions: [{ type: String }],
     deviceUse: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     Password: { type: String, required: true },
@@ -18,6 +18,8 @@ const astrologerSignUpSchema = new mongoose.Schema(
     aadhaarCard: { type: String },
     certificate: { type: String },
     charges: { type: String },
+    experience: String,
+    profileImage: String,
   },
   { timestamps: true }
 );
