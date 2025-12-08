@@ -18,11 +18,17 @@ const TransitionPaymentPopUp = ({
   const deductUpdateAmount = astrologerData?.totalAvailableBalance - amount;
 
   const handleSubmit = async () => {
-    if (!amount || !paymentMethod || !transactionId || !astrologerData?.email || !astrologerData?.name) {
+    if (
+      !amount ||
+      !paymentMethod ||
+      !transactionId ||
+      !astrologerData?.email ||
+      !astrologerData?.name
+    ) {
       setError("Required all field");
 
       return;
-    } else if (astrologerData?.totalAvailableBalance <= amount) {
+    } else if (amount > astrologerData?.totalAvailableBalance) {
       setError("Amount is grater then current amount");
       return;
     }
@@ -35,6 +41,8 @@ const TransitionPaymentPopUp = ({
         Amount: amount,
         Payment_Method: paymentMethod,
         Transaction_id: transactionId,
+        remaining_amount: deductUpdateAmount,
+        astrologer_id: astrologerData?._id,
       };
 
       const res = await axios.post(

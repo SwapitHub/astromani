@@ -157,13 +157,9 @@ const PaymentWithdrawRequest = () => {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>UPI ID</th>
-                    <th>Account Number</th>
-                    <th>Bank Name</th>
-                    {/* <th>Total AC Balance</th> */}
+                    <th>Total AC Balance</th>
                     {/* <th>Remarks</th> */}
                     {/* <th>Balance Remaining</th> */}
-                    <th>IFSC code</th>
                     {/* <th>WithDraw Request Status</th> */}
                     {/* <th>Astrologer Email id</th> */}
                     <th>Date</th>
@@ -179,15 +175,7 @@ const PaymentWithdrawRequest = () => {
                     withdrawals.map((w) => (
                       <tr key={w._id}>
                         <td>{w.name}</td>
-                        <td>{w.upiId}</td>
-                        <td>{w.accountNumber}</td>
-                        <td>{w.bankName}</td>
-                        {/* <td>{w.totalACBalance}</td> */}
-                        {/* <td>{w.remarks}</td> */}
-                        {/* <td>{w.balanceRemaining}</td> */}
-                        <td>{w.ifscCode}</td>
-                        {/* <td>{w.status}</td> */}
-                        {/* <td>{w.AstrologerEmail}</td> */}
+                        <td>₹{w.totalACBalance}</td>
                         <td>{new Date(w.createdAt).toLocaleString()}</td>
                         <td>
                           <div className="edit-delete-btn">
