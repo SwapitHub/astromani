@@ -172,14 +172,16 @@ const setSendRegistration = async (req, res) => {
 
 const sendEmailAdminTansAmountAstro = async (req, res) => {
   try {
-    const { Amount, Payment_Method, Transaction_id, email, astrologerName } =
+    const { Amount, Payment_Method, Transaction_id, email, astrologerName, remaining_amount,
+      astrologer_id } =
       req.body;
 
     // Payment date generate
     const paymentDate = new Date().toISOString().slice(0, 10);
 
     // Validation
-    if (!email || !astrologerName || !Amount || !Transaction_id) {
+    if (!email || !astrologerName || !Amount || !Transaction_id  ||
+      !astrologer_id) {
       return res.status(400).json({
         message:
           "Email, astrologer name, amount and transaction ID are required.",
@@ -203,7 +205,9 @@ const sendEmailAdminTansAmountAstro = async (req, res) => {
       Amount,
       Payment_Method,
       Transaction_id,
-      astrologerName
+      astrologerName,
+      remaining_amount,
+      astrologer_id
     });
 
     await transactionData.save();
@@ -229,4 +233,55 @@ const sendEmailAdminTansAmountAstro = async (req, res) => {
   }
 };
 
-module.exports = { setSendRegistration, sendEmailAdminTansAmountAstro };
+
+const getTransactionsByAstrologerId = async (req, res) => {
+  const { astrologer_id } = req.params;
+
+  // Default values → page = 1, limit = 10
+  let { page = 1, limit = 10 } = req.query;
+
+  page = parseInt(page);
+  limit = parseInt(limit);
+
+  try {
+    const skip = (page - 1) * limit;
+
+    // Fetch paginated transactions
+    const transactions = await transactionAdminAstr
+      .find({ astrologer_id })
+      .skip(skip)
+      .limit(limit)
+      .sort({ _id: -1 });
+
+    // Count total documents
+    const total = await transactionAdminAstr.countDocuments({ astrologer_id });
+
+    const totalPages = Math.ceil(total / limit);
+
+    if (!transactions.length) {
+      return res.status(404).json({ message: "No transactions found" });
+    }
+
+    res.status(200).json({
+      message: "Transactions fetched successfully",
+      data: transactions,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalItems: total,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+        nextPage: page < totalPages ? page + 1 : null,
+        prevPage: page > 1 ? page - 1 : null,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Error fetching transactions",
+      error: err.message,
+    });
+  }
+};
+
+
+module.exports = { setSendRegistration, sendEmailAdminTansAmountAstro, getTransactionsByAstrologerId };

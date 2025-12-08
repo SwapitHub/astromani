@@ -7,6 +7,8 @@ const transactionAdminAstroSchema = new mongoose.Schema({
   Payment_Method: { type: String, required: true },
   Transaction_id: { type: String, required: true },
   astrologerName: { type: String, required: true },
+  astrologer_id: String,
+  remaining_amount: String,
 });
 
 const transactionAdminAstr = mongoose.model(

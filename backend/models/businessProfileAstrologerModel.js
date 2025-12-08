@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const businessProfileAstrologerSchema = new mongoose.Schema(
   {
-    name: String,
-    professions: [{ type: String }],
-    languages: [{ type: String, required: true }],
+    astrologer_id: { type: mongoose.Schema.Types.ObjectId, ref: "AstrologerRegistration" },
     spiritual_services: [
       {
         service: { type: String, required: false },
@@ -15,17 +13,12 @@ const businessProfileAstrologerSchema = new mongoose.Schema(
         shop_name: { type: String, required: false },
       },
     ],
-    experience: String,
-    charges: String,
+
     Description: String,
     minute: { type: String, required: false },
-    mobileNumber: { type: String, required: true, unique: true },
-    profileImage: String,
-    email: { type: String },
     profileStatus: Boolean,
     chatStatus: Boolean,
     country: String,
-    gender: String,
     starRating: String,
     totalOrders: { type: Number, default: 0 },
     offers: String,
@@ -33,13 +26,8 @@ const businessProfileAstrologerSchema = new mongoose.Schema(
     requestStatus: Boolean,
     astroTotalChatTime: Number,
     topAstrologer: String,
-    completeProfile: Boolean,
-    blockUnblockAstro: Boolean,
-    deleteAstroLoger: Boolean,
     cloudinary_id: String,
     totalAvailableBalance: Number,
-    aadhaarCard:String,
-    certificate: String,
     upi_id: String,
     account_number: String,
     bank_name: String,

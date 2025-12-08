@@ -377,25 +377,31 @@ const registerAstrologer = async (req, res, next) => {
       dateOfBirth,
       gender,
       languages,
-      skills,
+      professions,
       deviceUse,
       email,
       Password,
       astroStatus,
       mobileNumber,
+      experience,
+      charges
     } = req.body;
+
+
 
     if (
       !name ||
       !dateOfBirth ||
       !gender ||
       !languages ||
-      !skills ||
+      !professions ||
       !deviceUse ||
       !email ||
       !Password ||
       astroStatus === undefined ||
-      !mobileNumber
+      !mobileNumber ||
+      !experience ||
+      !charges 
     ) {
       return res
         .status(400)
@@ -420,6 +426,10 @@ const registerAstrologer = async (req, res, next) => {
       ? `/public/uploads/${req.files.certificate[0].filename}`
       : null;
 
+       const profileImage = req.files?.profileImage?.[0]?.filename
+      ? `/public/uploads/${req.files.profileImage[0].filename}`
+      : null;
+
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(Password, saltRounds);
 
@@ -428,7 +438,7 @@ const registerAstrologer = async (req, res, next) => {
       dateOfBirth,
       gender,
       languages,
-      skills,
+      professions,
       deviceUse,
       email,
       Password: hashedPassword,
@@ -439,9 +449,21 @@ const registerAstrologer = async (req, res, next) => {
       completeProfile: false,
       aadhaarCard,
       certificate,
+      experience,
+      profileImage,
+      charges
     });
 
     await newAstrologer.save();
+
+       // 2️⃣ Save astrologer_id to businessProfileAstrologer
+    await businessProfileAstrologer.create({
+      astrologer_id: newAstrologer._id,   // important
+      profileStatus: false,
+      chatStatus: false,
+      freeChatStatus: false,
+      requestStatus: false,
+    });
 
     res.status(201).json({
       message: "success",
