@@ -156,7 +156,7 @@ const Header = () => {
 
   return (
     <>
-      {parts[1] == "controlpanel" ||
+      {parts[1] == "admin" ||
       parts[1] == "astrologer" ||
       (parts[1] == "chat-with-astrologer" && parts[2] == "astrologer") ? (
         ""
